@@ -17,20 +17,30 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool down;
     [SerializeField] bool left;
     [SerializeField] bool right;
-    ///Input
+    private dir direction; 
+    private Ray2D debugRay;
+    private void Start()
+    {
+        debugRay = new Ray2D(transform.position, transform.up);
+        direction = dir.none; 
+    }
     private void Update()
     {
         if (Input.GetKeyDown(upKey))
         {
             Debug.Log("Up"); 
             up = true;
-            down = false; 
+            down = false;
+            direction = dir.up;
+            transform.rotation = Quaternion.Euler(0f, 0f, 90); 
         }
         else if (Input.GetKeyDown(downKey))
         {
             Debug.Log("down"); 
             down = true;
-            up = false; 
+            up = false;
+            direction = dir.down;
+            transform.rotation = Quaternion.Euler(0f, 0f, -90);
         }
         else
         {
@@ -41,25 +51,41 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(leftKey))
         {
             left = true;
-            right = false; 
+            right = false;
+            direction = dir.left;
+            transform.rotation = Quaternion.Euler(0f, 0f, 180);
         }
         else if (Input.GetKeyDown(rightKey)) 
         {
             right = true;
-            left = false; 
+            left = false;
+            direction = dir.right;
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
         else
         {
             left = false;
-            right = false; 
+            right = false;
         }
-        movePlayer(up, down, left, right);
+        if(!up && !down && !left && !right)
+        {
+            direction = dir.none; 
+        }
+        debugRay.origin = transform.position; 
+        Debug.DrawRay(debugRay.origin, debugRay.direction * moveIncrement, Color.red);
+        if (checkForValidPath(direction))
+        {
+            movePlayer(up, down, left, right);
+        }
+        
+
     }
     private void movePlayer(bool up, bool down, bool left, bool right)
     {
         if (up)
         {
             transform.position = new Vector2(transform.position.x, transform.position.y + moveIncrement);
+            
         }
         if (down)
         {
@@ -73,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x + moveIncrement, transform.position.y);
         }
+       
     }
     bool checkForValidPath(dir direction)
     {
@@ -81,8 +108,18 @@ public class PlayerMovement : MonoBehaviour
             case dir.up:
                 //RaycastHit2D[] results
                 //TODO: raycast collision detection
-                Physics2D.Raycast(transform.position, new Vector2(transform.position.x, transform.position.y + moveIncrement),moveIncrement); 
-                break; 
+                debugRay.direction = transform.right; 
+                return !Physics2D.Raycast(transform.position,debugRay.direction, moveIncrement,LayerMask.GetMask("Collideable")) || !Physics2D.Raycast(transform.position, debugRay.direction, moveIncrement, LayerMask.GetMask("Enemy"));
+            case dir.down:
+                debugRay.direction = transform.right;
+                return !Physics2D.Raycast(transform.position, debugRay.direction, moveIncrement, LayerMask.GetMask("Collideable")) || !Physics2D.Raycast(transform.position, debugRay.direction, moveIncrement, LayerMask.GetMask("Enemy"));                //debugRay.direction = new Vector2(transform.position.x, transform.position.y - moveIncrement);
+            case dir.left:
+                debugRay.direction = transform.right;
+                return !Physics2D.Raycast(transform.position, debugRay.direction, moveIncrement, LayerMask.GetMask("Collideable")) || !Physics2D.Raycast(transform.position, debugRay.direction, moveIncrement, LayerMask.GetMask("Enemy"));
+            case dir.right:
+                debugRay.direction = transform.right;
+                return !Physics2D.Raycast(transform.position, debugRay.direction, moveIncrement, LayerMask.GetMask("Collideable")) || !Physics2D.Raycast(transform.position, debugRay.direction, moveIncrement, LayerMask.GetMask("Enemy"));
+
         }
         return true; 
     }
@@ -91,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
         up,
         down,
         left,
-        right
+        right,
+        none 
     }
 }
