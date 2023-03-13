@@ -12,9 +12,9 @@ public class PlayerCombat : MonoBehaviour
     public float angle;
     public Vector2 direction; 
     [Header("Weapon Range Checks")]
-    public Transform meleeCheck; 
-    
-    // Update is called once per frame
+    public Transform meleeCheck;
+
+   
     void Update()
     {
         angle = transform.rotation.eulerAngles.z; 
