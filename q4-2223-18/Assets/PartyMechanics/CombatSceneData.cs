@@ -17,6 +17,7 @@ public class CombatSceneData : ScriptableObject
                 return; 
             }
         }
+
         for(int i = 0; i < goodGuySprites.Length; i++)
         {
             if(goodGuySprites[i] == null)
@@ -25,6 +26,14 @@ public class CombatSceneData : ScriptableObject
                 return; 
             }
         }
+    }
+    public Sprite[] getGoodGuySprites()
+    {
+        return goodGuySprites; 
+    }
+    public Sprite[] getBadGuySprites()
+    {
+        return badGuySprites; 
     }
 
 }

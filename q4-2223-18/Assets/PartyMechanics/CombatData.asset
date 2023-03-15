@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26618370cf02f742827c790899fb037, type: 3}
+  m_Name: CombatData
+  m_EditorClassIdentifier: 
+  goodGuySprites:
+  - {fileID: 21300000, guid: 0f0887104c71b7d4b81452d44e1d3656, type: 3}
+  - {fileID: 21300000, guid: 0f0887104c71b7d4b81452d44e1d3656, type: 3}
+  - {fileID: 21300000, guid: 0f0887104c71b7d4b81452d44e1d3656, type: 3}
+  badGuySprites:
+  - {fileID: 21300000, guid: 0f0887104c71b7d4b81452d44e1d3656, type: 3}
+  - {fileID: 21300000, guid: 0f0887104c71b7d4b81452d44e1d3656, type: 3}
+  - {fileID: 21300000, guid: 0f0887104c71b7d4b81452d44e1d3656, type: 3}
