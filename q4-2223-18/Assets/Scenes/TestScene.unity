@@ -290,6 +290,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f366447e0312c5d49a3aa0397317f4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: -1
+  parent: {fileID: 1939532045}
+  cData: {fileID: 11400000, guid: 66563528156fe0c479b91b4019e08658, type: 2}
+  pData: {fileID: 11400000, guid: 60d85625856b93146a20f7652dc7aa5a, type: 2}
+  eData: {fileID: 11400000, guid: 0fe43040625e8ee42a056f1247e45ace, type: 2}
 --- !u!1 &1085560289
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +307,7 @@ GameObject:
   - component: {fileID: 1085560292}
   - component: {fileID: 1085560291}
   - component: {fileID: 1085560290}
+  - component: {fileID: 1085560294}
   - component: {fileID: 1085560295}
   m_Layer: 0
   m_Name: Player
@@ -322,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088ebd9778962d34085f13721565d73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partyData: {fileID: 11400000, guid: 60d85625856b93146a20f7652dc7aa5a, type: 2}
   upKey: 119
   downKey: 115
   leftKey: 97
@@ -422,6 +429,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1085560294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085560289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0651fd854d2c410418ebcf091b4f7c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatSprite: {fileID: 21300000, guid: f9161c6c9e06dc445ada3ee16d991f90, type: 3}
 --- !u!50 &1085560295
 Rigidbody2D:
   serializedVersion: 4
@@ -552,36 +572,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1635809681
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1635809682}
-  m_Layer: 0
-  m_Name: PartyData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1635809682
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635809681}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6641039, y: 0.026233735, z: -0.30843216}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1939532045
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +584,7 @@ GameObject:
   - component: {fileID: 1939532047}
   - component: {fileID: 1939532046}
   - component: {fileID: 1939532049}
+  - component: {fileID: 1939532050}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -696,3 +687,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1939532050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939532045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0651fd854d2c410418ebcf091b4f7c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatSprite: {fileID: 21300000, guid: f09eae8c0ea04254b90c5386a034a225, type: 3}

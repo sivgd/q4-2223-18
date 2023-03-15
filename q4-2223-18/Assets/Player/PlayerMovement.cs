@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("External References")]
+    public PersistantPartyData partyData; 
     [Header("Preferences")]
     public KeyCode upKey;
     public KeyCode downKey; 
@@ -13,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 3f; 
    // public int moveIncrement = 1;
 
+    
     [Header("Debug")]
     [SerializeField] bool up;
     [SerializeField] bool down;
@@ -26,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     {
         /* debugRay = new Ray2D(transform.position, transform.up);
          direction = dir.none; */
+        transform.position = partyData.PlayerPosition; 
         rb = GetComponent<Rigidbody2D>(); 
     }
     private void Update()
@@ -86,7 +90,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        movePlayer(up, down, left, right); 
+        movePlayer(up, down, left, right);
+        //partyData.PlayerPosition = transform.position; 
     }
     private void movePlayer(bool up, bool down, bool left, bool right)
     {

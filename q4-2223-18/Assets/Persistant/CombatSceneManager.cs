@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class CombatSceneManager : MonoBehaviour
 {
@@ -22,6 +23,13 @@ public class CombatSceneManager : MonoBehaviour
         for (int i = 0; i < badGuySprites.Length; i++) badGuyRenderers[i].sprite = badGuySprites[i]; 
 
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene("TestScene"); 
+        }
+    }
 
-    
+
 }
