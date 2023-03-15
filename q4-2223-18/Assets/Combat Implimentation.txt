@@ -1,0 +1,8 @@
+so this is how combat is going to be implimented, step by step 
+
+1. First start with HEALTH VALUES, PLAYER AND ENEMY
+2. Then move onto DEPLETING HEALTH VALUES AND DEATH
+3. Add in ATTACK TYPES AND SPELLS
+4. finally add in CLASSES
+
+Also, focus on the player character first before moving onto the party members. 
