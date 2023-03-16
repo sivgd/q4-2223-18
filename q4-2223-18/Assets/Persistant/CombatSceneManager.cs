@@ -8,7 +8,8 @@ public class CombatSceneManager : MonoBehaviour
     [Header("Scene References")]
     public SpriteRenderer[] goodGuyRenderers;
     public SpriteRenderer[] badGuyRenderers;
-    public CombatSceneData combatSceneData; 
+    public CombatSceneData combatSceneData;
+    private Combat combatObject; 
 
     //[Header("External References")]
     private Sprite[] goodGuySprites;
@@ -17,19 +18,21 @@ public class CombatSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        combatObject = GetComponent<Combat>(); 
         goodGuySprites = combatSceneData.getGoodGuySprites();
         badGuySprites = combatSceneData.getBadGuySprites(); 
         for(int i = 0; i < goodGuySprites.Length; i++) goodGuyRenderers[i].sprite = goodGuySprites[i];
         for (int i = 0; i < badGuySprites.Length; i++) badGuyRenderers[i].sprite = badGuySprites[i]; 
-
+        
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            SceneManager.LoadScene("TestScene"); 
+            combatObject.exitCombat();
+            SceneManager.LoadScene("TestScene");
         }
     }
-
+    
 
 }

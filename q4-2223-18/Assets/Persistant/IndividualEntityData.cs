@@ -5,5 +5,8 @@ using UnityEngine;
 public class IndividualEntityData : MonoBehaviour
 {
     public Sprite combatSprite;
+    public int health;
+    public float attack;
+    public int level; 
     
 }
