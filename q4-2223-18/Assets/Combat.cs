@@ -11,7 +11,8 @@ public class Combat : MonoBehaviour
     private int[] enemyHealthValues = new int[3]; 
 
     [Header("External References")]
-    public CombatSceneData combatData;
+    public Player[] party = new Player[3];
+    public Enemy[] enemies = new Enemy[3]; 
     public GameObject selectionCursor;
     public Transform[] playerPartyTransforms = new Transform[3]; 
     [Header("UI References")]
@@ -25,23 +26,24 @@ public class Combat : MonoBehaviour
     
     private void Start()
     {
-        playerHealthValues[0] = combatData.PlayerHealth;
-        playerHealthValues[1] = combatData.Player2Health;
-        playerHealthValues[2] = combatData.Player3Health;
-        enemyHealthValues[0] = combatData.Enemy1Health; 
-        enemyHealthValues[1] = combatData.Enemy2Health;
-        enemyHealthValues[2] = combatData.Enemy3Health;
+        for(int i = 0; i < playerHealthValues.Length; i++)
+        {
+            playerHealthValues[i] = party[i].Health; 
+        }
+       for(int i = 0; i < enemyHealthValues.Length; i++)
+        {
+            enemyHealthValues[i] = enemies[i].Health; 
+        }
 
         // enemyHealthValues[0] = 
     }
     public void exitCombat()
     {
-        combatData.Enemy1Health = 0; 
-        combatData.Enemy2Health = 0;
-        combatData.Enemy3Health = 0;
-        combatData.Enemy1Attack = 0;
-        combatData.Enemy2Attack = 0;
-        combatData.Enemy3Attack = 0;
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].BaseAttack= 0;
+            enemies[i].Health = 0; 
+        }
     }
     private void Update()
     {
@@ -49,18 +51,22 @@ public class Combat : MonoBehaviour
         enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}"; 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            playerHealthValues[0] -= EnemyAttack.getPhysicalDamageFromAttack((int)combatData.Enemy1Attack,combatData.Enemy1Level);
+            playerHealthValues[0] -= EnemyAttack.getPhysicalDamageFromAttack((int)enemies[0].BaseAttack,enemies[0].Level);
         }
         if (playerSelection)
         {
             selectionCursor.SetActive(true);
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                playerPosSelected = Mathf.Clamp(playerPosSelected + 1, 1, 3); 
+                playerPosSelected = Mathf.Clamp(playerPosSelected + 1, 1, 3);
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 playerPosSelected = Mathf.Clamp(playerPosSelected - 1, 1, 3);
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                //display combat menu
             }
         }
         switch (playerPosSelected){
@@ -78,7 +84,11 @@ public class Combat : MonoBehaviour
 }
 public class PlayerAttack
 {
-
+    public static void attackWithStats(int attack,Player player, Enemy enemy)
+    {
+        int damage = player.Attacks[attack].Damage; 
+        enemy.Health -= damage; 
+    }
 }
 public class EnemyAttack
 {

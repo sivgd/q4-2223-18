@@ -7,7 +7,8 @@ public class EnterSingleCombatTrigger : MonoBehaviour
 {
     public int id;
     public GameObject parent; 
-    public CombatSceneData cData;
+    public Player[] party = new Player[3];
+    public Enemy[] enemies = new Enemy[3]; 
     public PersistantPartyData pData;
     public PersistantEntityData eData;
    
@@ -27,11 +28,10 @@ public class EnterSingleCombatTrigger : MonoBehaviour
             Sprite playerSprite = collision.GetComponent<IndividualEntityData>().combatSprite;
             Sprite enemySprite = parentData.combatSprite; 
             Debug.Log("adding combat sprites to combat data"); 
-            cData.addGoodGuySprite(playerSprite);
-            cData.addBadGuySprite(enemySprite);
-            cData.PlayerHealth = collision.GetComponent<IndividualEntityData>().health; 
-            cData.Enemy1Health = parentData.health;
-            cData.Enemy1Attack = parentData.attack; 
+            party[0] = new Player( collision.GetComponent<IndividualEntityData>().health,null);
+            enemies[0] = new Enemy(parentData.health, 1, (int)parentData.attack);
+            party[0].sprite = playerSprite;
+            enemies[0].sprite = (enemySprite);
             //TODO: find a way to set enemy health
             Debug.Log("Saving party data");
             pData.PlayerPosition = collision.transform.position; 
