@@ -10,8 +10,9 @@ public class Enemy : ScriptableObject
     [SerializeField] private Attack[] attacks;
     [SerializeField] private int baseAttack; 
     [SerializeField] private int level;
-    public Sprite sprite; 
-
+    [SerializeField] private string name; 
+    public Sprite sprite;
+    private void OnEnable() => hideFlags = HideFlags.DontUnloadUnusedAsset;
     public Enemy(int health, int level ,int baseAttack)
     {
         this.health = health;
@@ -23,4 +24,5 @@ public class Enemy : ScriptableObject
     public Attack[] Attacks { get => attacks; set => attacks = value; }
     public int Level { get => level; set => level = value; }
     public int BaseAttack { get => baseAttack; set => baseAttack = value; }
+    public string Name { get => name; set => name = value; }
 }

@@ -20,6 +20,8 @@ public class CombatSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        goodGuySprites = new Sprite[party.Length];
+        badGuySprites = new Sprite[enemies.Length];      
         combatObject = GetComponent<Combat>();
         for (int i = 0; i < party.Length; i++) goodGuySprites[i] = party[i].sprite;
         for (int i = 0; i < enemies.Length; i++) badGuySprites[i] = enemies[i].sprite;
