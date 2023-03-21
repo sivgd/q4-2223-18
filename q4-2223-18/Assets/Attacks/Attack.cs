@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    public Sprite defaultIcon;
+    public Sprite selectedIcon;
+    public int maxCoolDown; 
     [SerializeField] private AttackType attackType;
     [SerializeField] private int damage;
     [SerializeField] private string name;
@@ -16,7 +19,10 @@ public class Attack : MonoBehaviour
         this.name = name;
         this.cooldown = cooldown; 
     }
-
+    public void resetCoolDown()
+    {
+        cooldown = maxCoolDown; 
+    }
     public AttackType AttackType { get => attackType; set => attackType = value; }
     public int Damage { get => damage; set => damage = value; }
     public string Name { get => name; set => name = value; }

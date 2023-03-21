@@ -21,6 +21,7 @@ public class Combat : MonoBehaviour
     public TMP_Text playerHealth;
     public TMP_Text enemyHealth;
     public GameObject[] combatButtons;
+    public Image[] attackCards; 
  
 
 
@@ -28,24 +29,37 @@ public class Combat : MonoBehaviour
    // [SerializeField] private int turn = 1;
     [SerializeField] private bool playerSelection = false;
     [SerializeField] private int playerPosSelected = 2;
+    [SerializeField] private int playerSelected = 0; 
     [SerializeField] private int combatButtonSelected = 2;
-    [SerializeField] private int action = 1; 
-    [SerializeField] private AttackMode attackMode = AttackMode.none;
+    [SerializeField] private int enemySelected = 0; 
+    [SerializeField] private int enemyPosSelected = 0; 
+    [SerializeField] private int attackSelected = 0;
+    [SerializeField] private Turn turn = Turn.player; 
+    [SerializeField] private UIMODE uiMode = UIMODE.none;
     
     private void Start()
     {
-        playerHealthValues = new int[party.Length];
-        enemyHealthValues = new int[enemies.Length]; 
-        for(int i = 0; i < playerHealthValues.Length; i++)
-        {
-            playerHealthValues[i] = party[i].Health; 
-        }
-       for(int i = 0; i < enemyHealthValues.Length; i++)
-        {
-            enemyHealthValues[i] = enemies[i].Health; 
-        }
+        updateHealthValues(); 
 
         // enemyHealthValues[0] = 
+    }
+    private void updateHealthValues()
+    {
+        playerHealthValues = new int[party.Length];
+        enemyHealthValues = new int[enemies.Length];
+        for (int i = 0; i < playerHealthValues.Length; i++)
+        {
+            playerHealthValues[i] = party[i].Health;
+        }
+        for (int i = 0; i < enemyHealthValues.Length; i++)
+        {
+            enemyHealthValues[i] = enemies[i].Health;
+        }
+    }
+    private void progressTurn()
+    {
+        turn = (turn == Turn.player) ? Turn.enemy : Turn.player;
+        for (int i = 0; i < party.Length; i++) party[i].HasGoneDuringTurn = false;
     }
     public void exitCombat()
     {
@@ -57,25 +71,66 @@ public class Combat : MonoBehaviour
     }
     private void Update()
     {
-        playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
-        enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}"; 
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
             playerHealthValues[0] -= EnemyAttack.getPhysicalDamageFromAttack((int)enemies[0].BaseAttack,enemies[0].Level);
         }
-        if (playerSelection)
-        {
-            PlayerSelectionMode(); 
+        if(turn == Turn.player)
+        {   
+            if(party[0].HasGoneDuringTurn && party[1].HasGoneDuringTurn && party[2].HasGoneDuringTurn) /// if all players have gone during the turn then progress the turn
+            {
+                progressTurn();
+                Update(); 
+            }
+            if (playerSelection)
+            {
+                PlayerSelectionMode();
+            }
+            else
+            {
+                switch (uiMode)
+                {
+                    case UIMODE.playerActionSelection:
+                        playerActionSelectionMode();
+                        break;
+                    case UIMODE.playerAttackSelection:
+                        playerAttackSelectionMode(playerSelected);
+                        break;
+                    case UIMODE.playerAttackEnemy:
+                        playerAttackEnemyMode(playerSelected, attackSelected);
+                        updateHealthValues();
+                        break;
+                }
+            }
         }
-        else if(attackMode == AttackMode.player)
+        else if(turn == Turn.enemy)
         {
-            //Select Enemy; 
-            // PlayerAttack.attackWithStats(); 
-            //selectionCursor.SetActive(true);
-            PlayerAttackMode(playerPosSelected); 
+            Debug.Log("enemy turn"); 
+            foreach(Enemy enemy in enemies){
+                if (enemy.Health > 0)
+                {
+                    //EnemyAttack.getRandomPlayerToAttack(); TODO: impliment enemy attack
+                }
+            }
         }
+        playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
+        enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
+        /*  else if(uiMode == UIMODE.playerActionSelection)
+          {
+              //Select Enemy; 
+              // PlayerAttack.attackWithStats(); 
+              //selectionCursor.SetActive(true);
+              playerActionSelectionMode(); 
+          }
+          else if(uiMode == UIMODE.playerAttackSelection)
+          {
+              playerAttackSelectionMode(playerSelected);
+          }
+          else if*/
     }
-    private void PlayerAttackMode(int playerIndex)
+    #region playerAttackLogic
+    private void playerActionSelectionMode()
     {
         bool button1Active = false, button2Active = false;
         Debug.Log("Player Attack Mode"); 
@@ -103,18 +158,108 @@ public class Combat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             Debug.Log($"Entering menu {combatButtonSelected}");
+            if (combatButtonSelected == 1)
+            {
+                uiMode = UIMODE.playerAttackSelection; 
+                foreach(GameObject button in combatButtons)
+                {
+                    button.SetActive(false); 
+                }
+            }
             
         }
     }
 
-    private void attackEnemyWithAttack(int playerIndex)
+    private void playerAttackSelectionMode(int playerIndex)
     {
+       // Debug.Log($"{party[playerIndex].name}"); 
+        Debug.Log($"{Mathf.Min(attackCards.Length, party[playerIndex].Attacks.Length)}");
+        int maxCardIndex = Mathf.Min(attackCards.Length, party[playerIndex].Attacks.Length); 
+        for (int i = 0; i < maxCardIndex; i++)
+        {
+            attackCards[i].sprite = party[playerIndex].Attacks[i].defaultIcon;
+            Debug.Log($"{attackCards[i].name}"); 
+            attackCards[i].gameObject.SetActive(true); 
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            attackSelected = Mathf.Clamp(attackSelected - 1,0, maxCardIndex - 1); 
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            attackSelected = Mathf.Clamp(attackSelected + 1, 0, maxCardIndex - 1);
+        }
+        for(int i = 0; i < maxCardIndex; i++)
+        {
+            if(i == attackSelected)
+            {
+                attackCards[i].sprite = party[playerIndex].Attacks[i].selectedIcon; 
+            }
+            else
+            {
+                attackCards[i].sprite = party[playerIndex].Attacks[i].defaultIcon;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (party[playerIndex].Attacks[attackSelected].Cooldown > 0)
+            {
+                Debug.Log("Attack needs to cooldown!"); 
+            }
+            else
+            {
+                uiMode = UIMODE.playerAttackEnemy;
+                for (int i = 0; i < maxCardIndex; i++) attackCards[i].gameObject.SetActive(false);
+            }
 
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            uiMode = UIMODE.none;
+            playerSelection = true;
+            for (int i = 0; i < maxCardIndex; i++) attackCards[i].gameObject.SetActive(false);
+        }
     }
-        
+    private void playerAttackEnemyMode(int playerIndex, int attackIndex)
+    {
+        selectionCursor.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            enemyPosSelected = Mathf.Clamp(enemyPosSelected - 1, 0, 2); 
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            enemyPosSelected = Mathf.Clamp(enemyPosSelected + 1, 0, 2);
+        }
+        switch (enemyPosSelected)
+        {
+            case 0:
+                selectionCursor.transform.position = enemyPartyTransforms[0].position;
+                enemySelected = 1; 
+                break;
+            case 1:
+                selectionCursor.transform.position = enemyPartyTransforms[1].position;
+                enemySelected = 0; 
+                break;
+            case 2:
+                selectionCursor.transform.position = enemyPartyTransforms[2].position;
+                enemySelected = 2; 
+                break; 
+        }
+        if (Input.GetKeyDown(KeyCode.Return)){
+            PlayerAttack.attackWithStats(attackSelected, party[playerIndex], enemies[enemySelected]);
+            party[playerIndex].Attacks[attackIndex].resetCoolDown();
+            Debug.Log($"{party[playerIndex].name} attacked {enemies[enemySelected].name}");
+            uiMode = UIMODE.none;
+            playerSelection = true;
+            party[playerIndex].HasGoneDuringTurn = true; 
+
+        }
+
+    }  
     private void PlayerSelectionMode()
     {
-        attackMode = AttackMode.none;
+        uiMode = UIMODE.none;
         selectionCursor.SetActive(true);
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -140,26 +285,45 @@ public class Combat : MonoBehaviour
             }
             playerSelection = false;
             selectionCursor.SetActive(false);
-            attackMode = AttackMode.player;
+            uiMode = UIMODE.playerActionSelection;
         }
         switch (playerPosSelected)
         {
             case 1:
                 selectionCursor.transform.position = playerPartyTransforms[2].position;
+                playerSelected = 1; 
                 break;
             case 2:
                 selectionCursor.transform.position = playerPartyTransforms[1].position;
+                playerSelected = 0; 
                 break;
             case 3:
                 selectionCursor.transform.position = playerPartyTransforms[0].position;
+                playerSelected = 2; 
                 break;
         }
     }
-    enum AttackMode
+    #endregion playerAttackLogic
+    enum UIMODE
+    {
+        /// <summary>
+        /// player selects what action they want to do in this mode
+        /// </summary>
+        playerActionSelection,
+        /// <summary>
+        /// Player selects what attack they want to use in this mode
+        /// </summary>
+        playerAttackSelection,
+        /// <summary>
+        /// Player selects what enemy they want to attack in this mode 
+        /// </summary>
+        playerAttackEnemy, 
+        none
+    }
+    enum Turn
     {
         player,
-        enemy,
-        none
+        enemy
     }
 }
 public class PlayerAttack
@@ -173,10 +337,23 @@ public class PlayerAttack
 }
 public class EnemyAttack
 {
+    public static int getRandomPlayerToAttack(int numPlayers)
+    {
+        if(numPlayers == 1) return 0;
+        return Random.Range(0, numPlayers);
+        
+    }
+    /// <summary>
+    /// [Debug]
+    /// </summary>
+    /// <param name="attack"></param>
+    /// <param name="level"></param>
+    /// <returns></returns>
     public static int getPhysicalDamageFromAttack(int attack, int level)
     {
         int output = attack + (attack * Random.Range(0, Mathf.Max(1,level)));
         Debug.Log($"Damage: {output}");
         return output; 
     }
+
 }
