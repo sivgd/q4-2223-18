@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   attacks: []
+  items: []
+  baseAttack: 1
   sprite: {fileID: 21300000, guid: 0f0887104c71b7d4b81452d44e1d3656, type: 3}
   name: 
+  tempAttackBoost: 0
   hasGoneDuringTurn: 0

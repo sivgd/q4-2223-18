@@ -21,7 +21,8 @@ public class Combat : MonoBehaviour
     public TMP_Text playerHealth;
     public TMP_Text enemyHealth;
     public GameObject[] combatButtons;
-    public Image[] attackCards; 
+    public Image[] attackCards;
+    public Image[] itemCards; 
  
 
 
@@ -31,6 +32,7 @@ public class Combat : MonoBehaviour
     [SerializeField] private int playerPosSelected = 2;
     [SerializeField] private int playerSelected = 0; 
     [SerializeField] private int combatButtonSelected = 2;
+    [SerializeField] private int itemSelected = 0; 
     [SerializeField] private int enemySelected = 0; 
     [SerializeField] private int enemyPosSelected = 0; 
     [SerializeField] private int attackSelected = 0;
@@ -62,6 +64,7 @@ public class Combat : MonoBehaviour
         for (int i = 0; i < party.Length; i++)
         {
             party[i].HasGoneDuringTurn = false;
+            party[i].TempAttackBoost = 0; 
             for(int a = 0; a < party[i].Attacks.Length; a++)
             {
                 party[i].Attacks[a].Cooldown -= 1; 
@@ -78,7 +81,7 @@ public class Combat : MonoBehaviour
     }
     private void Update()
     {
-        
+        updateHealthValues(); 
         if (Input.GetKeyDown(KeyCode.R))
         {
             playerHealthValues[0] -= EnemyAttack.getPhysicalDamageFromAttack((int)enemies[0].BaseAttack,enemies[0].Level);
@@ -108,6 +111,11 @@ public class Combat : MonoBehaviour
                         playerAttackEnemyMode(playerSelected, attackSelected);
                         updateHealthValues();
                         break;
+                    case UIMODE.playerItemSelection:
+                        playerItemSelectionMode(playerSelected);
+                        updateHealthValues(); 
+                        break; 
+
                 }
             }
         }
@@ -126,8 +134,7 @@ public class Combat : MonoBehaviour
             playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
             enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
         }
-        playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
-        enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
+        updateHealthValues(); 
         /*  else if(uiMode == UIMODE.playerActionSelection)
           {
               //Select Enemy; 
@@ -142,6 +149,64 @@ public class Combat : MonoBehaviour
           else if*/
     }
     #region playerAttackLogic
+    private void playerItemSelectionMode(int playerIndex)
+    {
+       // bool card1Selected = false,card2Selected = false,card3Selected = false; 
+        int maxIndex = Mathf.Min(party[playerIndex].Items.Count, itemCards.Length); 
+        for(int i = 0; i< maxIndex; i++)
+        {
+            if (!itemCards[i].gameObject.activeInHierarchy)
+            {
+                itemCards[i].sprite = party[playerIndex].Items[i].defaultIcon;
+                itemCards[i].gameObject.SetActive(true);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            itemSelected = Mathf.Clamp(itemSelected - 1,0,maxIndex - 1);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            itemSelected = Mathf.Clamp(itemSelected + 1, 0, maxIndex - 1);
+        }
+        for(int i = 0; i < maxIndex; i++)
+        {
+            if(i == itemSelected)
+            {
+                itemCards[i].sprite = party[playerIndex].Items[itemSelected].selectedIcon; 
+            }
+            else
+            {
+                itemCards[i].sprite = party[playerIndex].Items[i].defaultIcon;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Return)) // use the item and delete it from the player's list of items 
+        {
+            ItemFunction itemFunction = party[playerIndex].Items[itemSelected].function;
+            switch (itemFunction)
+            {
+                case ItemFunction.healing:
+                    party[playerIndex].Health += party[playerIndex].Items[itemSelected].boost;
+                    party[playerIndex].Items.RemoveAt(itemSelected);
+                    party[playerIndex].Items.TrimExcess(); 
+                    break;
+                case ItemFunction.attackBoost:
+                    party[playerIndex].TempAttackBoost += party[playerIndex].Items[itemSelected].boost;
+                    party[playerIndex].Items.RemoveAt(itemSelected);
+                    party[playerIndex].Items.TrimExcess();
+                    break;
+            }
+            uiMode = UIMODE.none;
+            playerSelection = true;
+            for (int i = 0; i < maxIndex; i++) itemCards[i].gameObject.SetActive(false);
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            uiMode = UIMODE.none;
+            playerSelection = true;
+            for (int i = 0; i < maxIndex; i++) itemCards[i].gameObject.SetActive(false);
+        }
+    }
     private void playerActionSelectionMode()
     {
         bool button1Active = false, button2Active = false;
@@ -178,8 +243,23 @@ public class Combat : MonoBehaviour
                     button.SetActive(false); 
                 }
             }
+            else if(combatButtonSelected == 2)
+            {
+                uiMode = UIMODE.playerItemSelection;
+                foreach (GameObject button in combatButtons)
+                {
+                    button.SetActive(false);
+                }
+            }
             
         }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            uiMode = UIMODE.none;
+            playerSelection = true;
+            for (int i = 0; i < combatButtons.Length; i++) combatButtons[i].gameObject.SetActive(false);
+        }
+
     }
 
     private void playerAttackSelectionMode(int playerIndex)
@@ -189,9 +269,12 @@ public class Combat : MonoBehaviour
         int maxCardIndex = Mathf.Min(attackCards.Length, party[playerIndex].Attacks.Length); 
         for (int i = 0; i < maxCardIndex; i++)
         {
-            attackCards[i].sprite = party[playerIndex].Attacks[i].defaultIcon;
-            Debug.Log($"{attackCards[i].name}"); 
-            attackCards[i].gameObject.SetActive(true); 
+            if (!attackCards[i].gameObject.activeInHierarchy)
+            {
+                attackCards[i].sprite = party[playerIndex].Attacks[i].defaultIcon;
+                Debug.Log($"{attackCards[i].name}");
+                attackCards[i].gameObject.SetActive(true);
+            }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -267,6 +350,11 @@ public class Combat : MonoBehaviour
             party[playerIndex].HasGoneDuringTurn = true; 
 
         }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            uiMode = UIMODE.none;
+            playerSelection = true;
+        }
 
     }  
     private void PlayerSelectionMode()
@@ -331,6 +419,7 @@ public class Combat : MonoBehaviour
         /// Player selects what enemy they want to attack in this mode 
         /// </summary>
         playerAttackEnemy, 
+        playerItemSelection,
         none
     }
     enum Turn
@@ -344,7 +433,7 @@ public class PlayerAttack
     public static void attackWithStats(int attack,Player player, Enemy enemy)
     {
         Debug.Log(player.Attacks[attack].Name); 
-        int damage = player.Attacks[attack].Damage; 
+        int damage = (player.Attacks[attack].Damage + player.TempAttackBoost)  * player.BaseAttack; 
         enemy.Health -= damage; 
     }
 }
@@ -374,7 +463,8 @@ public class EnemyAttack
     public static void attackRandomPlayer(Player[] players, int damage, int enemyLevel)
     {
         int playerToAttack = getRandomPlayerToAttack(players);
-        players[playerToAttack].Health -= getPhysicalDamageFromAttack(damage, enemyLevel); 
+        //TODO: Add defense 
+       // if(getPhysicalDamageFromAttack)
         Debug.Log($"Attacked player: {players[playerToAttack].Name}");
     }
     /// <summary>
