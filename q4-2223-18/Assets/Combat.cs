@@ -59,7 +59,14 @@ public class Combat : MonoBehaviour
     private void progressTurn()
     {
         turn = (turn == Turn.player) ? Turn.enemy : Turn.player;
-        for (int i = 0; i < party.Length; i++) party[i].HasGoneDuringTurn = false;
+        for (int i = 0; i < party.Length; i++)
+        {
+            party[i].HasGoneDuringTurn = false;
+            for(int a = 0; a < party[i].Attacks.Length; a++)
+            {
+                party[i].Attacks[a].Cooldown -= 1; 
+            }
+        }
     }
     public void exitCombat()
     {
@@ -78,7 +85,7 @@ public class Combat : MonoBehaviour
         }
         if(turn == Turn.player)
         {   
-            if(party[0].HasGoneDuringTurn && party[1].HasGoneDuringTurn && party[2].HasGoneDuringTurn) /// if all players have gone during the turn then progress the turn
+            if((party[0].HasGoneDuringTurn || party[0].Health <= 0) && (party[1].HasGoneDuringTurn || party[1].Health <= 0) && (party[2].HasGoneDuringTurn || party[2].Health <= 0)) /// if all players have gone during the turn then progress the turn
             {
                 progressTurn();
                 Update(); 
@@ -111,8 +118,13 @@ public class Combat : MonoBehaviour
                 if (enemy.Health > 0)
                 {
                     //EnemyAttack.getRandomPlayerToAttack(); TODO: impliment enemy attack
+                    EnemyAttack.attackRandomPlayer(party, enemy.BaseAttack, enemy.Level); 
                 }
             }
+            turn = Turn.player;
+            playerSelection = true;
+            playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
+            enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
         }
         playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
         enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
@@ -304,6 +316,7 @@ public class Combat : MonoBehaviour
         }
     }
     #endregion playerAttackLogic
+    
     enum UIMODE
     {
         /// <summary>
@@ -337,11 +350,32 @@ public class PlayerAttack
 }
 public class EnemyAttack
 {
-    public static int getRandomPlayerToAttack(int numPlayers)
+    private static int getRandomPlayerToAttack(Player[] players)
     {
-        if(numPlayers == 1) return 0;
-        return Random.Range(0, numPlayers);
+        bool playerAttack = false; 
+       if(players.Length == 1)
+       {
+            return 0; 
+       }
+       else
+       {
+            int rand = 0; 
+            while (!playerAttack)
+            {
+                rand = Random.Range(0, players.Length - 1);
+                if (players[rand].Health > 0) playerAttack = true;
+                else playerAttack = false; 
+            }
+            return rand; 
+           
+       }
         
+    }
+    public static void attackRandomPlayer(Player[] players, int damage, int enemyLevel)
+    {
+        int playerToAttack = getRandomPlayerToAttack(players);
+        players[playerToAttack].Health -= getPhysicalDamageFromAttack(damage, enemyLevel); 
+        Debug.Log($"Attacked player: {players[playerToAttack].Name}");
     }
     /// <summary>
     /// [Debug]
