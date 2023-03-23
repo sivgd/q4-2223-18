@@ -11,8 +11,9 @@ public class CombatSceneManager : MonoBehaviour
 
     public Player[] party = new Player[3];
     public Enemy[] enemies = new Enemy[3]; 
-    private Combat combatObject; 
-
+    private Combat combatObject;
+    [Header("Outside References")]
+    public PersistantPartyData partyData; 
     //[Header("External References")]
     private Sprite[] goodGuySprites;
     private Sprite[] badGuySprites; 
@@ -23,7 +24,7 @@ public class CombatSceneManager : MonoBehaviour
         goodGuySprites = new Sprite[party.Length];
         badGuySprites = new Sprite[enemies.Length];      
         combatObject = GetComponent<Combat>();
-        for (int i = 0; i < party.Length; i++) goodGuySprites[i] = party[i].sprite;
+        for (int i = 0; i < party.Length; i++) goodGuySprites[i] = party[i].combatSprite;
         for (int i = 0; i < enemies.Length; i++) badGuySprites[i] = enemies[i].sprite;
         for(int i = 0; i < goodGuySprites.Length; i++) goodGuyRenderers[i].sprite = goodGuySprites[i];
         for (int i = 0; i < badGuySprites.Length; i++) badGuyRenderers[i].sprite = badGuySprites[i]; 
@@ -34,9 +35,13 @@ public class CombatSceneManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             combatObject.exitCombat();
-            SceneManager.LoadScene("TestScene");
+            SceneManager.LoadScene(partyData.PreviousSceneName);
         }
     }
-    
+    private void OnLevelWasLoaded(int level)
+    {
+        
+    }
+
 
 }

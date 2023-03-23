@@ -10,7 +10,8 @@ public class Player : ScriptableObject
     [SerializeField] private Attack[] attacks;
     [SerializeField] private List<Item> items; 
     [SerializeField] private int baseAttack = 1; 
-    public Sprite sprite;
+    public Sprite combatSprite;
+    public Sprite topDownSprite; 
     [SerializeField] private int baseDefense;
     [SerializeField] private int tempDefenseBoost; 
     [SerializeField] private string name;

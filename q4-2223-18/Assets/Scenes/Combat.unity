@@ -244,6 +244,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 762e2d0e817e0ee47b0a3fc204a9087e, type: 2}
   - {fileID: 11400000, guid: fc505eb361c47cd46ac5a1165b6ca6ef, type: 2}
   - {fileID: 11400000, guid: 44e9228f072e08844aae586b6579be24, type: 2}
+  partyData: {fileID: 11400000, guid: 60d85625856b93146a20f7652dc7aa5a, type: 2}
 --- !u!4 &68840206
 Transform:
   m_ObjectHideFlags: 0

@@ -1,0 +1,6 @@
+This is how the game world is going to be implimented, step by step
+
+1. First start with player interaction and combat transition
+2. then move onto adding new party members and inventory 
+3. then move onto dialouge and level up spots
+4. then move onto levels and level design
