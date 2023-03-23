@@ -460,11 +460,30 @@ public class EnemyAttack
        }
         
     }
-    public static void attackRandomPlayer(Player[] players, int damage, int enemyLevel)
+    public static void attackRandomPlayer(Player[] players, int baseDamage, int enemyLevel)
     {
         int playerToAttack = getRandomPlayerToAttack(players);
         //TODO: Add defense 
-       // if(getPhysicalDamageFromAttack)
+        int damage = getPhysicalDamageFromAttack(baseDamage, enemyLevel); 
+        if(damage <= players[playerToAttack].BaseDefense + players[playerToAttack].TempDefenseBoost)
+        {
+            Debug.Log($"{players[playerToAttack].Name}'s armor deflected the blow!");
+            return; 
+        }
+        else
+        {
+            double defenseRoll = (double)(players[playerToAttack].BaseDefense + players[playerToAttack].TempDefenseBoost) / (double)damage;
+            if (Random.value <= defenseRoll)
+            {
+                Debug.Log($"{players[playerToAttack].Name}'s armor deflected the blow! {defenseRoll} {damage}");
+                return; 
+            }
+            else
+            {
+                players[playerToAttack].Health -= damage;
+                Debug.Log($"{players[playerToAttack].Name} took damage! {damage}");
+            }
+        }
         Debug.Log($"Attacked player: {players[playerToAttack].Name}");
     }
     /// <summary>
