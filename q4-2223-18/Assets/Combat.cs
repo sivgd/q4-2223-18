@@ -79,16 +79,20 @@ public class Combat : MonoBehaviour
             enemies[i].Health = 0; 
         }
     }
+    /// <summary>
+    /// The update method is where the combat logic is organized and calls are made
+    /// </summary>
     private void Update()
     {
         updateHealthValues(); 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            playerHealthValues[0] -= EnemyAttack.getPhysicalDamageFromAttack((int)enemies[0].BaseAttack,enemies[0].Level);
+            playerHealthValues[0] -= EnemyAttack.getPhysicalDamageFromAttack(enemies[0].BaseAttack,enemies[0].Level);
         }
         if(turn == Turn.player)
         {   
-            if((party[0].HasGoneDuringTurn || party[0].Health <= 0) && (party[1].HasGoneDuringTurn || party[1].Health <= 0) && (party[2].HasGoneDuringTurn || party[2].Health <= 0)) /// if all players have gone during the turn then progress the turn
+            /// if all players have gone during the turn then progress the turn
+            if ((party[0].HasGoneDuringTurn || party[0].Health <= 0) && (party[1].HasGoneDuringTurn || party[1].Health <= 0) && (party[2].HasGoneDuringTurn || party[2].Health <= 0)) 
             {
                 progressTurn();
                 Update(); 
@@ -113,6 +117,10 @@ public class Combat : MonoBehaviour
                         break;
                     case UIMODE.playerItemSelection:
                         playerItemSelectionMode(playerSelected);
+                        updateHealthValues(); 
+                        break;
+                    case UIMODE.playerPartySupport:
+                        playerSupportMode(playerSelected, attackSelected);
                         updateHealthValues(); 
                         break; 
 
@@ -149,10 +157,51 @@ public class Combat : MonoBehaviour
           else if*/
     }
     #region playerAttackLogic
+    private void playerSupportMode(int playerIndex, int attackIndex)
+    {
+        selectionCursor.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            playerPosSelected = Mathf.Clamp(playerPosSelected + 1, 1, 3);
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            playerPosSelected = Mathf.Clamp(playerPosSelected - 1, 1, 3);
+        }
+        switch (playerPosSelected) /// visual cursor selection stuff
+        {
+            case 1:
+                selectionCursor.transform.position = playerPartyTransforms[2].position;
+                playerSelected = 1;
+                break;
+            case 2:
+                selectionCursor.transform.position = playerPartyTransforms[1].position;
+                playerSelected = 0;
+                break;
+            case 3:
+                selectionCursor.transform.position = playerPartyTransforms[0].position;
+                playerSelected = 2;
+                break;
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            party[playerSelected].Health += party[playerIndex].Attacks[attackIndex].Damage;
+            party[playerIndex].Attacks[attackIndex].resetCoolDown();
+            Debug.Log($"{party[playerSelected].Name} was healed by {party[playerIndex].Name}");
+            uiMode = UIMODE.none;
+            playerSelection = true;
+            party[playerIndex].HasGoneDuringTurn = true;
+        }
+
+    }
+    /// <summary>
+    /// playerItemSelectionMode allows the player to select items 
+    /// </summary>
+    /// <param name="playerIndex"></param> the index of the selected player 
     private void playerItemSelectionMode(int playerIndex)
     {
        // bool card1Selected = false,card2Selected = false,card3Selected = false; 
-        int maxIndex = Mathf.Min(party[playerIndex].Items.Count, itemCards.Length); 
+        int maxIndex = Mathf.Min(party[playerIndex].Items.Count, itemCards.Length); /// initializes and activates the item cards 
         for(int i = 0; i< maxIndex; i++)
         {
             if (!itemCards[i].gameObject.activeInHierarchy)
@@ -169,7 +218,7 @@ public class Combat : MonoBehaviour
         {
             itemSelected = Mathf.Clamp(itemSelected + 1, 0, maxIndex - 1);
         }
-        for(int i = 0; i < maxIndex; i++)
+        for(int i = 0; i < maxIndex; i++) /// changes the sprite of the item cards based on selection 
         {
             if(i == itemSelected)
             {
@@ -180,7 +229,7 @@ public class Combat : MonoBehaviour
                 itemCards[i].sprite = party[playerIndex].Items[i].defaultIcon;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Return)) // use the item and delete it from the player's list of items 
+        if (Input.GetKeyDown(KeyCode.Return)) /// use the item and delete it from the player's list of items 
         {
             ItemFunction itemFunction = party[playerIndex].Items[itemSelected].function;
             switch (itemFunction)
@@ -261,7 +310,10 @@ public class Combat : MonoBehaviour
         }
 
     }
-
+    /// <summary>
+    /// playerAttackSelectionMode is pretty self explanitory, allows for the player to select an attack before actually performing it 
+    /// </summary>
+    /// <param name="playerIndex"></param>
     private void playerAttackSelectionMode(int playerIndex)
     {
        // Debug.Log($"{party[playerIndex].name}"); 
@@ -269,7 +321,7 @@ public class Combat : MonoBehaviour
         int maxCardIndex = Mathf.Min(attackCards.Length, party[playerIndex].Attacks.Length); 
         for (int i = 0; i < maxCardIndex; i++)
         {
-            if (!attackCards[i].gameObject.activeInHierarchy)
+            if (!attackCards[i].gameObject.activeInHierarchy) ///Initializes the attack cards, the menu can only show 3 cards at a time
             {
                 attackCards[i].sprite = party[playerIndex].Attacks[i].defaultIcon;
                 Debug.Log($"{attackCards[i].name}");
@@ -284,7 +336,7 @@ public class Combat : MonoBehaviour
         {
             attackSelected = Mathf.Clamp(attackSelected + 1, 0, maxCardIndex - 1);
         }
-        for(int i = 0; i < maxCardIndex; i++)
+        for(int i = 0; i < maxCardIndex; i++) /// changes the sprite of the card based on selection 
         {
             if(i == attackSelected)
             {
@@ -295,13 +347,18 @@ public class Combat : MonoBehaviour
                 attackCards[i].sprite = party[playerIndex].Attacks[i].defaultIcon;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return)) /// if the player hits enter, check if the attack can be used, and then change modes to either select a enemy to attack or a player to heal
         {
             if (party[playerIndex].Attacks[attackSelected].Cooldown > 0)
             {
                 Debug.Log("Attack needs to cooldown!"); 
             }
-            else
+            else if(party[playerIndex].Attacks[attackSelected].AttackType == AttackType.Healing)
+            {
+                uiMode = UIMODE.playerPartySupport;
+                for (int i = 0; i < maxCardIndex; i++) attackCards[i].gameObject.SetActive(false);
+            }
+            else 
             {
                 uiMode = UIMODE.playerAttackEnemy;
                 for (int i = 0; i < maxCardIndex; i++) attackCards[i].gameObject.SetActive(false);
@@ -315,6 +372,11 @@ public class Combat : MonoBehaviour
             for (int i = 0; i < maxCardIndex; i++) attackCards[i].gameObject.SetActive(false);
         }
     }
+    /// <summary>
+    /// playerAttackEnemyMode is what allows the player to apply damage to an enemy
+    /// </summary>
+    /// <param name="playerIndex"></param> the index of the player that is attacking in the partys
+    /// <param name="attackIndex"></param> the index of the attack that the player is performing 
     private void playerAttackEnemyMode(int playerIndex, int attackIndex)
     {
         selectionCursor.SetActive(true);
@@ -341,6 +403,7 @@ public class Combat : MonoBehaviour
                 enemySelected = 2; 
                 break; 
         }
+        /// if the enter button is pressed, attack the enemy, reset attack cooldowns, and change mode back to player selection 
         if (Input.GetKeyDown(KeyCode.Return)){
             PlayerAttack.attackWithStats(attackSelected, party[playerIndex], enemies[enemySelected]);
             party[playerIndex].Attacks[attackIndex].resetCoolDown();
@@ -357,6 +420,9 @@ public class Combat : MonoBehaviour
         }
 
     }  
+    /// <summary>
+    /// Player selection mode moves impliments the logic behind the UI selection cursor and actually selecting a player
+    /// </summary>
     private void PlayerSelectionMode()
     {
         uiMode = UIMODE.none;
@@ -371,7 +437,7 @@ public class Combat : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Return) && !party[playerPosSelected - 1].HasGoneDuringTurn)
         {
-           for(int i = 0; i < combatButtons.Length; i++)
+           for(int i = 0; i < combatButtons.Length; i++) /// Buttons change sprites based on activation 
             {
                 if(i % 2 == 0)
                 {
@@ -387,7 +453,7 @@ public class Combat : MonoBehaviour
             selectionCursor.SetActive(false);
             uiMode = UIMODE.playerActionSelection;
         }
-        switch (playerPosSelected)
+        switch (playerPosSelected) /// visual cursor selection stuff
         {
             case 1:
                 selectionCursor.transform.position = playerPartyTransforms[2].position;
@@ -420,6 +486,7 @@ public class Combat : MonoBehaviour
         /// </summary>
         playerAttackEnemy, 
         playerItemSelection,
+        playerPartySupport,
         none
     }
     enum Turn

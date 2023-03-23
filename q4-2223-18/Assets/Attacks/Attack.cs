@@ -31,5 +31,6 @@ public class Attack : MonoBehaviour
 public enum AttackType
 {
     Physical,
-    Magic
+    Magic,
+    Healing
 }
