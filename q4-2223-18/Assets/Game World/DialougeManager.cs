@@ -8,7 +8,7 @@ public class DialougeManager : MonoBehaviour
     public TMP_Text nameBox;
     public TMP_Text dialougeBox;
     [Header("Preferences")]
-    public float tipeWriterDelay = 0.09f;
+    public float typeWriterDelay = 0.09f;
     [Header("Debug")]
     [SerializeField] private bool runDialouge;
     [SerializeField] private bool updateDialouge; 
@@ -25,7 +25,7 @@ public class DialougeManager : MonoBehaviour
         dialouge = DialougeManifest.dialougeDatabase[id];
         runDialouge = true;
         updateDialouge = true; 
-        currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString],tipeWriterDelay);
+        currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString],typeWriterDelay);
     }
     private IEnumerator scrollingDialouge(string dialougeString, float charDelaySeconds)
     {
@@ -56,7 +56,7 @@ public class DialougeManager : MonoBehaviour
             currentDialougeString++;
             currentDialougeFinished = false;
             StopCoroutine(currentDialougeRoutine);
-            currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString], tipeWriterDelay);
+            currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString], typeWriterDelay);
         }
         if (runDialouge)
         {
