@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0050661b224c6724bb0944feb0a930e0, type: 3}
   m_Name: Player1
   m_EditorClassIdentifier: 
-  health: 100
+  health: 110
   attacks:
   - {fileID: 4939346911045058305, guid: f42cf68cc9806be4998f7fce9cc91db4, type: 3}
   - {fileID: 5000619179442224325, guid: ff80378790838fc49a51daa5174dc037, type: 3}
@@ -20,8 +20,8 @@ MonoBehaviour:
   items:
   - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
   - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
-  - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
   baseAttack: 1
+  maxHealth: 100
   combatSprite: {fileID: 21300000, guid: f9161c6c9e06dc445ada3ee16d991f90, type: 3}
   topDownSprite: {fileID: 21300000, guid: 0f0887104c71b7d4b81452d44e1d3656, type: 3}
   baseDefense: 5

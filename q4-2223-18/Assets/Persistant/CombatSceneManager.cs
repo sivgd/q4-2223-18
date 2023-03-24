@@ -38,10 +38,4 @@ public class CombatSceneManager : MonoBehaviour
             SceneManager.LoadScene(partyData.PreviousSceneName);
         }
     }
-    private void OnLevelWasLoaded(int level)
-    {
-        
-    }
-
-
 }

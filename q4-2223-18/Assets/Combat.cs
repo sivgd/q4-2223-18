@@ -185,8 +185,13 @@ public class Combat : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            party[playerSelected].Health += party[playerIndex].Attacks[attackIndex].Damage;
-            party[playerIndex].Attacks[attackIndex].resetCoolDown();
+            switch (party[playerIndex].Attacks[attackIndex].AttackType)
+            {
+                case AttackType.Healing:
+                    party[playerSelected].Health = Mathf.Clamp(party[playerSelected].Health + party[playerIndex].Attacks[attackIndex].Damage, 0, party[playerSelected].maxHealth); /// say goodbye to overheal :(
+                    party[playerIndex].Attacks[attackIndex].resetCoolDown();
+                    break; 
+            }
             Debug.Log($"{party[playerSelected].Name} was healed by {party[playerIndex].Name}");
             uiMode = UIMODE.none;
             playerSelection = true;

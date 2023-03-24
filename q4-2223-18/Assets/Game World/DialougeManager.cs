@@ -28,9 +28,10 @@ public class DialougeManager : MonoBehaviour
         updateDialouge = true; 
         currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString],typeWriterDelay);
     }
-    public void changeCurrentDialouge(string[] dialougeList)
+    public void changeCurrentDialouge(string[] dialougeList,float charDelay)
     {
-        currentDialougeString = 0; 
+        currentDialougeString = 0;
+        typeWriterDelay = charDelay; 
         dialouge = dialougeList;
         runDialouge = true;
         updateDialouge = true;
@@ -48,7 +49,7 @@ public class DialougeManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(charDelaySeconds); 
             }
         }
-        currentDialougeFinished = true; 
+        currentDialougeFinished = true;
          
     }
     private void Update()
@@ -59,7 +60,7 @@ public class DialougeManager : MonoBehaviour
             updateDialouge = false;
             gameObject.SetActive(false); 
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Return))
+        if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Return)) && currentDialougeString < dialouge.Length)
         {
             updateDialouge = true;
             currentDialougeString++;
