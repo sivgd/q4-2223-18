@@ -5,6 +5,7 @@ using TMPro;
 
 public class EnterDialouge : MonoBehaviour
 {
+    public string[] dialouge = { "Heloo!", "this is a test.", "this dialouge was stored outside of the Dialouge Manager >:D" }; 
     private IndividualEntityData entityData; 
     public GameObject dialougeUI;
     public DialougeManager dm; 
@@ -19,7 +20,7 @@ public class EnterDialouge : MonoBehaviour
         {
             dialougeUI.SetActive(true);
             dm.nameBox.text = entityData.name; 
-            dm.changeCurrentDialouge(0);
+            dm.changeCurrentDialouge(dialouge);
         }
     }
 }

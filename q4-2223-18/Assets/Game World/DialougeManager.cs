@@ -23,9 +23,18 @@ public class DialougeManager : MonoBehaviour
             id = DialougeManifest.dialougeDatabase.Length - 1;
         }
         dialouge = DialougeManifest.dialougeDatabase[id];
+        currentDialougeString = 0; 
         runDialouge = true;
         updateDialouge = true; 
         currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString],typeWriterDelay);
+    }
+    public void changeCurrentDialouge(string[] dialougeList)
+    {
+        currentDialougeString = 0; 
+        dialouge = dialougeList;
+        runDialouge = true;
+        updateDialouge = true;
+        currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString], typeWriterDelay);
     }
     private IEnumerator scrollingDialouge(string dialougeString, float charDelaySeconds)
     {
