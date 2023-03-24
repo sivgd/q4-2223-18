@@ -5,15 +5,21 @@ using TMPro;
 
 public class EnterDialouge : MonoBehaviour
 {
-    public bool finishedDialouge = false;
+    private IndividualEntityData entityData; 
     public GameObject dialougeUI;
+    public DialougeManager dm; 
     public TMP_Text dialougeBox;
-    public string[] dialouge; 
+    private void Start()
+    {
+        entityData = GetComponentInParent<IndividualEntityData>(); 
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            dialougeUI.SetActive(true); 
+            dialougeUI.SetActive(true);
+            dm.nameBox.text = entityData.name; 
+            dm.changeCurrentDialouge(0);
         }
     }
 }

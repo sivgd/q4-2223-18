@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PartyData
   m_EditorClassIdentifier: 
   numMembers: 0
+  previousSceneName: TestScene
   playerMoveSpeed: 0
   playerPosition: {x: 0, y: 0}
   playerRotation: {x: 0, y: 0, z: 0, w: 1}
