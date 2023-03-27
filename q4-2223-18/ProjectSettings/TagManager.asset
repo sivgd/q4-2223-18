@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Collideable
   - Enemy
-  - 
+  - Floors
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floors
+    uniqueID: 556591327
+    locked: 0
+  - name: Entities
+    uniqueID: 1626569087
+    locked: 0
+  - name: Walls
+    uniqueID: 3674167157
+    locked: 0
+  - name: Walls2
+    uniqueID: 1900158089
     locked: 0
