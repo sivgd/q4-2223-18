@@ -504,9 +504,15 @@ public class PlayerAttack
 {
     public static void attackWithStats(int attack,Player player, Enemy enemy)
     {
+        AttackType aType = player.Attacks[attack].AttackType;
+        HabitType pHabit = player.habit.habitType; 
         Debug.Log(player.Attacks[attack].Name); 
-        int damage = (player.Attacks[attack].Damage + player.TempAttackBoost)  * player.BaseAttack; 
-        enemy.Health -= damage; 
+        double damage = (player.Attacks[attack].Damage + player.TempAttackBoost)  * player.BaseAttack;
+        if (aType.ToString().Equals(pHabit.ToString()))
+        {
+            damage = (damage * (1.0 + player.habit.Boost)); 
+        }
+        enemy.Health -= (int)Mathf.Ceil((float)damage); 
     }
 }
 public class EnemyAttack
@@ -545,6 +551,7 @@ public class EnemyAttack
         else
         {
             double defenseRoll = (double)(players[playerToAttack].BaseDefense + players[playerToAttack].TempDefenseBoost) / (double)damage;
+            if (players[playerToAttack].habit.habitType == HabitType.Defender) defenseRoll *= (1 + players[playerToAttack].habit.Boost); 
             if (Random.value <= defenseRoll)
             {
                 Debug.Log($"{players[playerToAttack].Name}'s armor deflected the blow! {defenseRoll} {damage}");

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System; 
+using System;
+using TMPro; 
 
 public class SceneEventManager : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class SceneEventManager : MonoBehaviour
 
     [Header("Ref")]
     public CameraFollow cameraFollow;
-    public DialougeManager dManager; 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public DialougeManager dManager;
+    public GameObject dObj;
 
+    private void Start()
+    {
+        firstCutscene = true; 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -29,10 +30,14 @@ public class SceneEventManager : MonoBehaviour
     private IEnumerator FirstCutscene()
     {
         cameraFollow.cameraShake = true;
-        yield return new WaitForSecondsRealtime(0.3f);
-        cameraFollow.cameraShake = false;
-        dManager.nameBox.text = "";
-        dManager.gameObject.SetActive(true);
-        dManager.changeCurrentDialouge(new string[] { "TED TRIANGLE!", "ITS THE FIRST OF THE MONTH!", "PAY YOUR MANDATORY TITHE" }, 0.05f); 
+        yield return new WaitForSecondsRealtime(1f);
+        cameraFollow.cameraShake = false; 
+       // dManager.nameBox.text = "???";
+        //dManager.dialougeBox.text = ""; 
+        dObj.SetActive(true);
+        yield return new WaitUntil(()=>dObj.activeInHierarchy);
+        dManager.nameBox.text = "???";
+        dManager.changeCurrentDialouge(new string[] { "TED TRIANGLE!", "ITS THE FIRST OF THE MONTH!", "PAY YOUR MANDATORY TITHE" }, 0.03f);
+
     }
 }

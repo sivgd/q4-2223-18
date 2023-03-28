@@ -10,6 +10,7 @@ public class Player : ScriptableObject
     [SerializeField] private Attack[] attacks;
     [SerializeField] private List<Item> items; 
     [SerializeField] private int baseAttack = 1;
+    public Habit habit; 
     public int maxHealth; 
     public Sprite combatSprite;
     public Sprite topDownSprite; 
@@ -35,3 +36,4 @@ public class Player : ScriptableObject
     public int BaseDefense { get => baseDefense; set => baseDefense = value; }
     public int TempDefenseBoost { get => tempDefenseBoost; set => tempDefenseBoost = value; }
 }
+
