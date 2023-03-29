@@ -20,7 +20,7 @@ public class EnterDialouge : MonoBehaviour
         {
             dialougeUI.SetActive(true);
             dm.nameBox.text = entityData.name; 
-            dm.changeCurrentDialouge(dialouge,0.05f);
+            dm.changeCurrentDialouge(dialouge,0.05f,true);
         }
     }
 }

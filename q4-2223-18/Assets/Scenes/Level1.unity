@@ -2984,7 +2984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c1536aa125765a4ca9d2018acf2c6d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstCutscene: 0
+  firstCutscene: 1
   cameraFollow: {fileID: 351076455}
   dManager: {fileID: 9174791533000124016, guid: a574ac119444b55479a0417aea6dd88e, type: 3}
   dObj: {fileID: 1892092687}

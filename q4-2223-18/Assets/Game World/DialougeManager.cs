@@ -11,11 +11,15 @@ public class DialougeManager : MonoBehaviour
     public float typeWriterDelay = 0.09f;
     [Header("Debug")]
     [SerializeField] private bool runDialouge;
+    [SerializeField] private bool freezePlayer = false; 
     [SerializeField] private bool updateDialouge; 
     [SerializeField] private string[] dialouge;
     [SerializeField] private int currentDialougeString = 0;
     public bool currentDialougeFinished;
-    [SerializeField] private IEnumerator currentDialougeRoutine; 
+    [SerializeField] private IEnumerator currentDialougeRoutine;
+
+    
+
     public void changeCurrentDialouge(int id)
     {
         if(id >= DialougeManifest.dialougeDatabase.Length)
@@ -28,8 +32,9 @@ public class DialougeManager : MonoBehaviour
         updateDialouge = true; 
         currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString],typeWriterDelay);
     }
-    public void changeCurrentDialouge(string[] dialougeList,float charDelay)
+    public void changeCurrentDialouge(string[] dialougeList,float charDelay,bool freezePlayer)
     {
+        this.freezePlayer = freezePlayer; 
         Debug.Log(string.Join(", ",dialougeList)); 
         currentDialougeString = 0;
         Debug.Log("Reset the dialouge string"); 
@@ -43,12 +48,13 @@ public class DialougeManager : MonoBehaviour
        // currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString], typeWriterDelay);
         Debug.Log("Running the dialouge routine");
     }
+
     private IEnumerator scrollingDialouge(string dialougeString, float charDelaySeconds)
     {
         Debug.Log("Coroutine Start"); 
         updateDialouge = false;
         dialougeBox.text = "";
-      
+        //Debug.Log
         while (!dialougeString.Equals(dialougeBox.text))
         {
             
@@ -67,7 +73,9 @@ public class DialougeManager : MonoBehaviour
         {
             currentDialougeString = 0;
             updateDialouge = false;
-            gameObject.SetActive(false); 
+            runDialouge = false;
+            freezePlayer = false;
+            gameObject.SetActive(false);
         }
         if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Return)) && currentDialougeString < dialouge.Length)
         {
@@ -84,13 +92,13 @@ public class DialougeManager : MonoBehaviour
                 currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString], typeWriterDelay);
                 StartCoroutine(currentDialougeRoutine);
             }
+
         }
         
 
     }
-
-
-
+    public bool FreezePlayer { get => freezePlayer; set => freezePlayer = value; }
+    public int CurrentDialougeString { get => currentDialougeString; set => currentDialougeString = value; }
 }
 class DialougeManifest
 {

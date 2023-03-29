@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("External References")]
-    public PersistantPartyData partyData; 
+    public PersistantPartyData partyData;
+    public DialougeManager dm; 
     [Header("Preferences")]
     public KeyCode upKey;
     public KeyCode downKey; 
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
             up = true;
             down = false;
             //direction = dir.up;
-           transform.rotation = Quaternion.Euler(0f, 0f, 90); 
+           //transform.rotation = Quaternion.Euler(0f, 0f, 90); 
         }
         else if (Input.GetKey(downKey))
         {
@@ -48,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
             down = true;
             up = false;
             //direction = dir.down;
-            transform.rotation = Quaternion.Euler(0f, 0f, -90);
+            //transform.rotation = Quaternion.Euler(0f, 0f, -90);
         }
         else
         {
@@ -61,14 +62,14 @@ public class PlayerMovement : MonoBehaviour
             left = true;
             right = false;
            //direction = dir.left;
-            transform.rotation = Quaternion.Euler(0f, 0f, 180);
+            //transform.rotation = Quaternion.Euler(0f, 0f, 180);
         }
         else if (Input.GetKey(rightKey)) 
         {
             right = true;
             left = false;
             //direction = dir.right;
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            //transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
         else
         {
@@ -79,17 +80,25 @@ public class PlayerMovement : MonoBehaviour
         {
             //direction = dir.none; 
         }
-       /* debugRay.origin = transform.position; 
-        Debug.DrawRay(debugRay.origin, debugRay.direction * moveIncrement, Color.red);
-        if (checkForValidPath(direction))
-        {
-            movePlayer(up, down, left, right);
-        }*/
+        /* debugRay.origin = transform.position; 
+         Debug.DrawRay(debugRay.origin, debugRay.direction * moveIncrement, Color.red);
+         if (checkForValidPath(direction))
+         {
+             movePlayer(up, down, left, right);
+         }*/
+       
         
 
     }
     public void FixedUpdate()
     {
+        if (dm.FreezePlayer)
+        {
+            up = false;
+            down = false;
+            left = false;
+            right = false;
+        }
         movePlayer(up, down, left, right);
         //partyData.PlayerPosition = transform.position; 
     }
