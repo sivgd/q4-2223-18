@@ -4811,6 +4811,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &457935128 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6762172084116054459, guid: 582395838d836d84a9f80580fc4e2342, type: 3}
+  m_PrefabInstance: {fileID: 1432414981}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b24e137060a74547ae4b85073097dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &469358687
 GameObject:
   m_ObjectHideFlags: 0
@@ -4829,7 +4840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &469358688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5031,6 +5042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052958035}
   - component: {fileID: 1052958034}
+  - component: {fileID: 1052958036}
   m_Layer: 0
   m_Name: TaxMan
   m_TagString: Untagged
@@ -5103,6 +5115,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1052958036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052958033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0651fd854d2c410418ebcf091b4f7c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatSprite: {fileID: 21300000, guid: 0ce9a5bc3ac8aa34f865b35ea3e39e71, type: 3}
+  eData: {fileID: 11400000, guid: 0fe43040625e8ee42a056f1247e45ace, type: 2}
+  name: RA Rookie
+  id: -1
+  health: 100
+  attack: 10
+  level: 1
 --- !u!1 &1114176889
 GameObject:
   m_ObjectHideFlags: 0
@@ -5450,6 +5481,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Party
       objectReference: {fileID: 0}
+    - target: {fileID: 6762172084116054459, guid: 582395838d836d84a9f80580fc4e2342, type: 3}
+      propertyPath: combatSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762172084116054459, guid: 582395838d836d84a9f80580fc4e2342, type: 3}
+      propertyPath: combatSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762172084116054459, guid: 582395838d836d84a9f80580fc4e2342, type: 3}
+      propertyPath: topDownSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762172084116054459, guid: 582395838d836d84a9f80580fc4e2342, type: 3}
+      propertyPath: topDownSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 582395838d836d84a9f80580fc4e2342, type: 3}
 --- !u!4 &1432414982 stripped
@@ -5592,6 +5639,60 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1486522897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1486522898}
+  - component: {fileID: 1486522899}
+  m_Layer: 0
+  m_Name: EnterCombatManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1486522898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486522897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 967.8263, y: 775.64105, z: -118.004776}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1486522899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486522897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63dd781a539cebb438f4b8037b5ea091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pData: {fileID: 11400000, guid: 60d85625856b93146a20f7652dc7aa5a, type: 2}
+  eData: {fileID: 11400000, guid: 0fe43040625e8ee42a056f1247e45ace, type: 2}
+  tPartyData: {fileID: 457935128}
+  party:
+  - {fileID: 11400000, guid: d4f89e7c3789f8b4fbb597c0cbb6176f, type: 2}
+  - {fileID: 11400000, guid: d94f1465ad0872f4a8bf0ee4aaec818b, type: 2}
+  - {fileID: 11400000, guid: c4f36b4ce42cfeb4f833db84d7c2a593, type: 2}
+  enemies:
+  - {fileID: 11400000, guid: 762e2d0e817e0ee47b0a3fc204a9087e, type: 2}
+  - {fileID: 11400000, guid: fc505eb361c47cd46ac5a1165b6ca6ef, type: 2}
+  - {fileID: 11400000, guid: 44e9228f072e08844aae586b6579be24, type: 2}
 --- !u!1001 &1973272910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5721,17 +5822,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1973272912}
     - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
+      propertyPath: pData
+      value: 
+      objectReference: {fileID: 11400000, guid: 60d85625856b93146a20f7652dc7aa5a, type: 2}
+    - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
       propertyPath: dManager
       value: 
       objectReference: {fileID: 1973272911}
+    - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
+      propertyPath: taxManData
+      value: 
+      objectReference: {fileID: 1052958036}
     - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 1479372946}
     - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
+      propertyPath: combatManager
+      value: 
+      objectReference: {fileID: 1486522899}
+    - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
       propertyPath: secondCutscene
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
+      propertyPath: secondCutscenePrompt
+      value: 
+      objectReference: {fileID: 469358687}
     - target: {fileID: 5381736575430788654, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
       propertyPath: m_Name
       value: Event Manager

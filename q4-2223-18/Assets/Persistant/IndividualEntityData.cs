@@ -5,9 +5,18 @@ using UnityEngine;
 public class IndividualEntityData : MonoBehaviour
 {
     public Sprite combatSprite;
-    public string name; 
+    public PersistantEntityData eData; 
+    public string name;
+    public int id = -1;
     public int health;
     public float attack;
-    public int level; 
-    
+    public int level;
+    private void Start()
+    {
+        if (eData.hasEntity(id))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }

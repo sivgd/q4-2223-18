@@ -7,7 +7,7 @@ public class DialougeManager : MonoBehaviour
 {
     public TMP_Text nameBox;
     public TMP_Text dialougeBox;
-    [Header("Preferences")]
+    
     public float typeWriterDelay = 0.09f;
     [Header("Debug")]
     [SerializeField] private bool runDialouge;

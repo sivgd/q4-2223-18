@@ -14,6 +14,13 @@ public class SceneEventManager : MonoBehaviour
     public CameraFollow cameraFollow;
     public DialougeManager dManager;
     public GameObject dObj;
+    
+
+    [Header("Second Cutscene")]
+    public IndividualEntityData taxManData;
+    public GameObject secondCutscenePrompt;
+    public EnterCombatManager combatManager;
+    public PersistantPartyData pData;
 
     // Update is called once per frame
     void Update()
@@ -49,6 +56,15 @@ public class SceneEventManager : MonoBehaviour
         dManager.nameBox.text = "Right Angle Rookie";
         dManager.changeCurrentDialouge(new string[] { "Ahhh, so you finally decided to be reasonable!", "As you know, the monthly tithe compunds daily.", "So, with an interest rate of 1.5, according to my paper here...", "You owe around ten thousand gold pieces", "Now, pay up!" }, 0.03f,true);
         yield return new WaitUntil(() => !dManager.isActiveAndEnabled);
-        
+        secondCutscenePrompt.SetActive(true);
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.P));
+        secondCutscenePrompt.SetActive(false); 
+        dObj.SetActive(true);
+        dManager.changeCurrentDialouge(new string[] { "Did you just hit me!?!", "Very well...", "Put up your fists!" }, 0.03f, true);
+        yield return new WaitUntil(() => !dManager.isActiveAndEnabled);
+        Debug.Log("Enter combat tutorial");
+        pData.isCombatTutorial = true;
+        combatManager.enterCombat(new IndividualEntityData[] { taxManData }, true); 
+
     }
 }

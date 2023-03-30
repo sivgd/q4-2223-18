@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d9bff22a744b34f8a41384e22aefac, type: 3}
   m_Name: EntityData
   m_EditorClassIdentifier: 
-  entitysToDelete: 
+  entitysToDelete: ffffffff

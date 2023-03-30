@@ -4,8 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PartyData", menuName = "Persistant/PersistantPartyData", order = 1)]
 public class PersistantPartyData : ScriptableObject
 {
-     //for the future, when creating party members, have seperate template prefabs for each party member, then load data from this script to modify said templates 
-    [SerializeField] private int numMembers;
+    //for the future, when creating party members, have seperate template prefabs for each party member, then load data from this script to modify said templates 
+    // [SerializeField] private int numMembers;
+    public bool isCombatTutorial; 
     [SerializeField] private string previousSceneName; 
     [Header("Player Data")]
     [SerializeField] private float playerMoveSpeed;
@@ -14,7 +15,7 @@ public class PersistantPartyData : ScriptableObject
     [SerializeField] private Quaternion playerRotation; 
 
     private void OnEnable() => hideFlags = HideFlags.DontUnloadUnusedAsset;
-    public int NumMembers { get => numMembers; set => numMembers = value; }
+   // public int NumMembers { get => numMembers; set => numMembers = value; }
     public float PlayerMoveSpeed { get => playerMoveSpeed; set => playerMoveSpeed = value; }
     public Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
     public Quaternion PlayerRotation { get => playerRotation; set => playerRotation = value; }
@@ -26,10 +27,10 @@ public class PersistantPartyData : ScriptableObject
      {
          playerPosition = Vector2.zero; 
      }*/
-    public void addNumMembers(int num)
+  /*  public void addNumMembers(int num)
     {
         numMembers += num;
-    }
+    }*/
 
 
 }

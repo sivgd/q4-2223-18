@@ -19,7 +19,8 @@ public class Combat : MonoBehaviour
     
     [Header("UI References")]
     public TMP_Text playerHealth;
-    public TMP_Text enemyHealth;
+    public TMP_Text playerName;
+    public TMP_Text playerHabit; 
     public GameObject[] combatButtons;
     public Image[] attackCards;
     public Image[] itemCards; 
@@ -139,8 +140,8 @@ public class Combat : MonoBehaviour
             }
             turn = Turn.player;
             playerSelection = true;
-            playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
-            enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
+            //playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
+            //enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
         }
         updateHealthValues(); 
         /*  else if(uiMode == UIMODE.playerActionSelection)
@@ -408,6 +409,15 @@ public class Combat : MonoBehaviour
                 enemySelected = 2; 
                 break; 
         }
+        if(enemies[enemySelected].sprite != null)
+        {
+            playerHealth.text = "Health: " + enemies[enemySelected].Health;
+            playerName.text = "Name: " + enemies[enemySelected].Name;
+            if (playerHabit.gameObject.activeInHierarchy)
+            {
+                playerHabit.gameObject.SetActive(false);
+            }
+        }
         /// if the enter button is pressed, attack the enemy, reset attack cooldowns, and change mode back to player selection 
         if (Input.GetKeyDown(KeyCode.Return)){
             PlayerAttack.attackWithStats(attackSelected, party[playerIndex], enemies[enemySelected]);
@@ -435,6 +445,7 @@ public class Combat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             playerPosSelected = Mathf.Clamp(playerPosSelected + 1, 1, 3);
+           
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -472,6 +483,16 @@ public class Combat : MonoBehaviour
                 selectionCursor.transform.position = playerPartyTransforms[0].position;
                 playerSelected = 2; 
                 break;
+        }
+       if(party[playerSelected].combatSprite != null)
+        {
+            if (!playerHabit.gameObject.activeInHierarchy)
+            {
+                playerHabit.gameObject.SetActive(true);
+            }
+            playerHealth.text = "Health: " + party[playerSelected].Health;
+            playerName.text = "Name: " + party[playerSelected].Name;
+            playerHabit.text = "Habit: " + party[playerSelected].habit.name;
         }
     }
     #endregion playerAttackLogic

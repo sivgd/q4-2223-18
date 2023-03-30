@@ -22,18 +22,21 @@ public class TrackPartyData : MonoBehaviour
         partyData.PreviousSceneName = SceneManager.GetActiveScene().name; 
         transform.position = partyData.PlayerPosition;
         transform.rotation = partyData.PlayerRotation; 
-        for(int i = 0; i < party.Length; i++)
+        /*for(int i = 0; i < party.Length; i++)
         {
-            topDownSprites[i] = party[i].topDownSprite;
-            combatSprites[i] = party[i].combatSprite; 
-        }
+           // topDownSprites[i] = party[i].topDownSprite;
+           // combatSprites[i] = party[i].combatSprite; 
+        }*/
     }
     public void savePartyData()
     {
+        Debug.Log("Saving party Data"); 
         for (int i = 0; i < party.Length; i++)
         {
             party[i].topDownSprite = topDownSprites[i];
+            Debug.Log("saving top down sprites"); 
             party[i].combatSprite = combatSprites[i];
+            Debug.Log("Saving combat Sprites"); 
         }
         worldPos = transform.position;
         wordRot = transform.rotation;
