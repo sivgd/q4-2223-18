@@ -486,6 +486,9 @@ MonoBehaviour:
   attackSelected: 0
   turn: 0
   uiMode: 4
+  playerHasBeenSelected: 0
+  hasAttackBeenSelected: 0
+  hasEnemyBeenSelected: 0
 --- !u!1 &160114031
 GameObject:
   m_ObjectHideFlags: 0

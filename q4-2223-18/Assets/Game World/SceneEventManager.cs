@@ -30,7 +30,7 @@ public class SceneEventManager : MonoBehaviour
             StartCoroutine(FirstCutscene());
             firstCutscene = false; 
         }
-        if (secondCutscene)
+        if (secondCutscene && taxManData !=null)
         {
             StartCoroutine(SecondCutscene());
             secondCutscene = false; 

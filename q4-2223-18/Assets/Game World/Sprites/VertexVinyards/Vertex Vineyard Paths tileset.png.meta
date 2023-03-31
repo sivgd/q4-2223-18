@@ -107,9 +107,6 @@ TextureImporter:
   - first:
       213: 8284039506102415274
     second: Vertex Vineyard Paths tileset_34
-  - first:
-      213: -2589521158901675828
-    second: Vertex Vineyard Paths tileset_35
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -835,8 +832,8 @@ TextureImporter:
       name: Vertex Vineyard Paths tileset_29
       rect:
         serializedVersion: 2
-        x: 160
-        y: 32
+        x: 0
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -856,7 +853,7 @@ TextureImporter:
       name: Vertex Vineyard Paths tileset_30
       rect:
         serializedVersion: 2
-        x: 0
+        x: 32
         y: 0
         width: 32
         height: 32
@@ -877,7 +874,7 @@ TextureImporter:
       name: Vertex Vineyard Paths tileset_31
       rect:
         serializedVersion: 2
-        x: 32
+        x: 64
         y: 0
         width: 32
         height: 32
@@ -898,7 +895,7 @@ TextureImporter:
       name: Vertex Vineyard Paths tileset_32
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
         width: 32
         height: 32
@@ -919,7 +916,7 @@ TextureImporter:
       name: Vertex Vineyard Paths tileset_33
       rect:
         serializedVersion: 2
-        x: 96
+        x: 128
         y: 0
         width: 32
         height: 32
@@ -940,7 +937,7 @@ TextureImporter:
       name: Vertex Vineyard Paths tileset_34
       rect:
         serializedVersion: 2
-        x: 128
+        x: 160
         y: 0
         width: 32
         height: 32
@@ -953,27 +950,6 @@ TextureImporter:
       bones: []
       spriteID: aaf69824a02d6f270800000000000000
       internalID: 8284039506102415274
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Vertex Vineyard Paths tileset_35
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cc8ce41d93c201cd0800000000000000
-      internalID: -2589521158901675828
       vertices: []
       indices: 
       edges: []

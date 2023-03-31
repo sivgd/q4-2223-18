@@ -39,6 +39,9 @@ public class Combat : MonoBehaviour
     [SerializeField] private int attackSelected = 0;
     [SerializeField] private Turn turn = Turn.player; 
     [SerializeField] private UIMODE uiMode = UIMODE.none;
+    public bool playerHasBeenSelected = false;
+    public bool hasAttackBeenSelected = false;
+    public bool hasEnemyBeenSelected = false; 
 
     public UIMODE UiMode { get => uiMode; set => uiMode = value; }
     public int PlayerSelected { get => playerSelected; set => playerSelected = value; }
@@ -93,60 +96,71 @@ public class Combat : MonoBehaviour
         {
             playerHealthValues[0] -= EnemyAttack.getPhysicalDamageFromAttack(enemies[0].BaseAttack,enemies[0].Level);
         }
-        if(turn == Turn.player)
-        {   
-            /// if all players have gone during the turn then progress the turn
-            if ((party[0].HasGoneDuringTurn || party[0].Health <= 0) && (party[1].HasGoneDuringTurn || party[1].Health <= 0) && (party[2].HasGoneDuringTurn || party[2].Health <= 0)) 
-            {
-                progressTurn();
-                Update(); 
-            }
-            if (playerSelection)
-            {
-                PlayerSelectionMode();
-            }
-            else
-            {
-                switch (uiMode)
-                {
-                    case UIMODE.playerActionSelection:
-                        playerActionSelectionMode();
-                        break;
-                    case UIMODE.playerAttackSelection:
-                        playerAttackSelectionMode(playerSelected);
-                        break;
-                    case UIMODE.playerAttackEnemy:
-                        playerAttackEnemyMode(playerSelected, attackSelected);
-                        updateHealthValues();
-                        break;
-                    case UIMODE.playerItemSelection:
-                        playerItemSelectionMode(playerSelected);
-                        updateHealthValues(); 
-                        break;
-                    case UIMODE.playerPartySupport:
-                        playerSupportMode(playerSelected, attackSelected);
-                        updateHealthValues(); 
-                        break; 
-
-                }
-            }
-        }
-        else if(turn == Turn.enemy)
+        if(enemyHealthValues[0] > 0 || enemyHealthValues[1] > 0 || enemyHealthValues[2] > 0)
         {
-            Debug.Log("enemy turn"); 
-            foreach(Enemy enemy in enemies){
-                if (enemy.Health > 0)
+            if (turn == Turn.player)
+            {
+                /// if all players have gone during the turn then progress the turn
+                if ((party[0].HasGoneDuringTurn || party[0].Health <= 0) && (party[1].HasGoneDuringTurn || party[1].Health <= 0) && (party[2].HasGoneDuringTurn || party[2].Health <= 0))
                 {
-                    //EnemyAttack.getRandomPlayerToAttack(); TODO: impliment enemy attack
-                    EnemyAttack.attackRandomPlayer(party, enemy.BaseAttack, enemy.Level); 
+                    progressTurn();
+                    Update();
+                }
+                if (playerSelection)
+                {
+                    PlayerSelectionMode();
+                }
+                else
+                {
+                    switch (uiMode)
+                    {
+                        case UIMODE.playerActionSelection:
+                            playerActionSelectionMode();
+                            break;
+                        case UIMODE.playerAttackSelection:
+                            playerAttackSelectionMode(playerSelected);
+                            break;
+                        case UIMODE.playerAttackEnemy:
+                            playerAttackEnemyMode(playerSelected, attackSelected);
+                            updateHealthValues();
+                            break;
+                        case UIMODE.playerItemSelection:
+                            playerItemSelectionMode(playerSelected);
+                            updateHealthValues();
+                            break;
+                        case UIMODE.playerPartySupport:
+                            playerSupportMode(playerSelected, attackSelected);
+                            updateHealthValues();
+                            break;
+
+                    }
                 }
             }
-            turn = Turn.player;
-            playerSelection = true;
-            //playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
-            //enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
+            else if (turn == Turn.enemy)
+            {
+                Debug.Log("enemy turn");
+                foreach (Enemy enemy in enemies)
+                {
+                    if (enemy.Health > 0)
+                    {
+                        //EnemyAttack.getRandomPlayerToAttack(); TODO: impliment enemy attack
+                        EnemyAttack.attackRandomPlayer(party, enemy.BaseAttack, enemy.Level);
+                    }
+                }
+                turn = Turn.player;
+                playerSelection = true;
+                //playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
+                //enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
+            }
+            updateHealthValues();
         }
-        updateHealthValues(); 
+        else
+        {
+            StartCoroutine( GetComponent<CombatSceneManager>().exitCombat());
+            return; 
+        }
+       
+        
         /*  else if(uiMode == UIMODE.playerActionSelection)
           {
               //Select Enemy; 
@@ -325,6 +339,7 @@ public class Combat : MonoBehaviour
     /// <param name="playerIndex"></param>
     private void playerAttackSelectionMode(int playerIndex)
     {
+        hasAttackBeenSelected = false; 
        // Debug.Log($"{party[playerIndex].name}"); 
         Debug.Log($"{Mathf.Min(attackCards.Length, party[playerIndex].Attacks.Length)}");
         int maxCardIndex = Mathf.Min(attackCards.Length, party[playerIndex].Attacks.Length); 
@@ -371,6 +386,7 @@ public class Combat : MonoBehaviour
             {
                 uiMode = UIMODE.playerAttackEnemy;
                 for (int i = 0; i < maxCardIndex; i++) attackCards[i].gameObject.SetActive(false);
+                hasAttackBeenSelected = true;
             }
 
         }
@@ -388,6 +404,7 @@ public class Combat : MonoBehaviour
     /// <param name="attackIndex"></param> the index of the attack that the player is performing 
     private void playerAttackEnemyMode(int playerIndex, int attackIndex)
     {
+        hasEnemyBeenSelected = false; 
         selectionCursor.SetActive(true);
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -423,6 +440,7 @@ public class Combat : MonoBehaviour
         }
         /// if the enter button is pressed, attack the enemy, reset attack cooldowns, and change mode back to player selection 
         if (Input.GetKeyDown(KeyCode.Return)){
+            hasEnemyBeenSelected = true; 
             PlayerAttack.attackWithStats(attackSelected, party[playerIndex], enemies[enemySelected]);
             party[playerIndex].Attacks[attackIndex].resetCoolDown();
             Debug.Log($"{party[playerIndex].name} attacked {enemies[enemySelected].name}");
@@ -443,6 +461,7 @@ public class Combat : MonoBehaviour
     /// </summary>
     private void PlayerSelectionMode()
     {
+        playerHasBeenSelected = false; 
         uiMode = UIMODE.none;
         selectionCursor.SetActive(true);
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -468,6 +487,7 @@ public class Combat : MonoBehaviour
                     combatButtons[i].SetActive(false); 
                 }
             }
+            playerHasBeenSelected = true; 
             playerSelection = false;
             selectionCursor.SetActive(false);
             uiMode = UIMODE.playerActionSelection;

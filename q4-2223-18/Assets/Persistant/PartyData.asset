@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PartyData
   m_EditorClassIdentifier: 
   isCombatTutorial: 1
-  previousSceneName: TestScene
+  previousSceneName: VertextVinyards
   playerMoveSpeed: 0
   playerPosition: {x: 0, y: 0}
   playerRotation: {x: 0, y: 0, z: 0, w: 1}

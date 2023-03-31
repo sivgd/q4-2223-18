@@ -117,6 +117,7 @@ MonoBehaviour:
   dialougeBox: {fileID: 9174791533788072553}
   typeWriterDelay: 0.05
   runDialouge: 1
+  freezePlayer: 0
   updateDialouge: 1
   dialouge: []
   currentDialougeString: 0
@@ -188,8 +189,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ab10a89d99d859747b669bf6b241f50a, type: 2}
+  m_sharedMaterial: {fileID: 5251931052933997881, guid: ab10a89d99d859747b669bf6b241f50a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -322,8 +323,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ab10a89d99d859747b669bf6b241f50a, type: 2}
+  m_sharedMaterial: {fileID: 5251931052933997881, guid: ab10a89d99d859747b669bf6b241f50a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

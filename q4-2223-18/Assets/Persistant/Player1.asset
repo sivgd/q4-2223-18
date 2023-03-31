@@ -17,7 +17,8 @@ MonoBehaviour:
   - {fileID: 4939346911045058305, guid: f42cf68cc9806be4998f7fce9cc91db4, type: 3}
   - {fileID: 5000619179442224325, guid: ff80378790838fc49a51daa5174dc037, type: 3}
   - {fileID: 5724574516401145780, guid: 14198c8996d5acc49aa34cdb4e75965c, type: 3}
-  items: []
+  items:
+  - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
   baseAttack: 1
   habit: {fileID: 8303190023911595340, guid: 6e8ebdf2a5025d0468d2710d12b9a5d3, type: 3}
   maxHealth: 100
@@ -27,4 +28,4 @@ MonoBehaviour:
   tempDefenseBoost: 0
   name: Ted Triangle
   tempAttackBoost: 0
-  hasGoneDuringTurn: 0
+  hasGoneDuringTurn: 1
