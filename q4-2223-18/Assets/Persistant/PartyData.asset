@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafa0873d21014d4ba361b675eb3832e, type: 3}
   m_Name: PartyData
   m_EditorClassIdentifier: 
-  numMembers: 0
+  isCombatTutorial: 1
   previousSceneName: TestScene
   playerMoveSpeed: 0
   playerPosition: {x: 0, y: 0}

@@ -39,7 +39,10 @@ public class Combat : MonoBehaviour
     [SerializeField] private int attackSelected = 0;
     [SerializeField] private Turn turn = Turn.player; 
     [SerializeField] private UIMODE uiMode = UIMODE.none;
-    
+
+    public UIMODE UiMode { get => uiMode; set => uiMode = value; }
+    public int PlayerSelected { get => playerSelected; set => playerSelected = value; }
+
     private void Start()
     {
         updateHealthValues(); 
@@ -497,29 +500,30 @@ public class Combat : MonoBehaviour
     }
     #endregion playerAttackLogic
     
-    enum UIMODE
-    {
-        /// <summary>
-        /// player selects what action they want to do in this mode
-        /// </summary>
-        playerActionSelection,
-        /// <summary>
-        /// Player selects what attack they want to use in this mode
-        /// </summary>
-        playerAttackSelection,
-        /// <summary>
-        /// Player selects what enemy they want to attack in this mode 
-        /// </summary>
-        playerAttackEnemy, 
-        playerItemSelection,
-        playerPartySupport,
-        none
-    }
+    
     enum Turn
     {
         player,
         enemy
     }
+}
+public enum UIMODE
+{
+    /// <summary>
+    /// player selects what action they want to do in this mode
+    /// </summary>
+    playerActionSelection,
+    /// <summary>
+    /// Player selects what attack they want to use in this mode
+    /// </summary>
+    playerAttackSelection,
+    /// <summary>
+    /// Player selects what enemy they want to attack in this mode 
+    /// </summary>
+    playerAttackEnemy,
+    playerItemSelection,
+    playerPartySupport,
+    none
 }
 public class PlayerAttack
 {

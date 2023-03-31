@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.043205, y: 0}
-  m_SizeDelta: {x: 179.9136, y: 50}
+  m_AnchoredPosition: {x: -0.000011444, y: 140}
+  m_SizeDelta: {x: 253.5272, y: 54.7188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1790616
 MonoBehaviour:
@@ -182,8 +182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Welcome to Combat!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ab10a89d99d859747b669bf6b241f50a, type: 2}
+  m_sharedMaterial: {fileID: 5251931052933997881, guid: ab10a89d99d859747b669bf6b241f50a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -414,6 +414,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 762e2d0e817e0ee47b0a3fc204a9087e, type: 2}
   - {fileID: 11400000, guid: fc505eb361c47cd46ac5a1165b6ca6ef, type: 2}
   - {fileID: 11400000, guid: 44e9228f072e08844aae586b6579be24, type: 2}
+  tutorialText: {fileID: 1790616}
+  textNum: 0
   partyData: {fileID: 11400000, guid: 60d85625856b93146a20f7652dc7aa5a, type: 2}
 --- !u!4 &68840206
 Transform:
