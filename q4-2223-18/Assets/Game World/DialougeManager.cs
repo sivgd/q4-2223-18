@@ -50,19 +50,17 @@ public class DialougeManager : MonoBehaviour
     }
 
     private IEnumerator scrollingDialouge(string dialougeString, float charDelaySeconds)
-    {
+    {   
         Debug.Log("Coroutine Start"); 
         updateDialouge = false;
-        dialougeBox.text = "";
+        dialougeBox.text = dialougeString;
+        dialougeBox.maxVisibleCharacters = 0; 
         //Debug.Log
-        while (!dialougeString.Equals(dialougeBox.text))
+        while (dialougeBox.maxVisibleCharacters != dialougeString.Length)
         {
-            
-            for(int i = 0; i < dialougeString.Length; i++)
-            {
-                dialougeBox.text += dialougeString[i];
-                yield return new WaitForSecondsRealtime(charDelaySeconds); 
-            }
+
+            dialougeBox.maxVisibleCharacters++;
+            yield return new WaitForSecondsRealtime(charDelaySeconds); 
         }
         currentDialougeFinished = true;
          

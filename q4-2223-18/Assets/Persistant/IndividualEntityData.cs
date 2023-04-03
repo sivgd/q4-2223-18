@@ -11,6 +11,18 @@ public class IndividualEntityData : MonoBehaviour
     public int health;
     public float attack;
     public int level;
+
+    public IndividualEntityData(Sprite combatSprite, PersistantEntityData eData, string name, int id, int health, float attack, int level)
+    {
+        this.combatSprite = combatSprite;
+        this.eData = eData;
+        this.name = name;
+        this.id = id;
+        this.health = health;
+        this.attack = attack;
+        this.level = level;
+    }
+
     private void Start()
     {
         if (eData.hasEntity(id))
@@ -18,5 +30,6 @@ public class IndividualEntityData : MonoBehaviour
             Destroy(gameObject);
         }
     }
+  
 
 }
