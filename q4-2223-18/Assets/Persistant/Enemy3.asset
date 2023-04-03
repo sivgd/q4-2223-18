@@ -17,4 +17,4 @@ MonoBehaviour:
   baseAttack: 0
   level: 0
   name: 
-  sprite: {fileID: 21300000, guid: b73aca6542595474f84cbe67a3b6cb35, type: 3}
+  sprite: {fileID: 0}

@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: Player2
   m_EditorClassIdentifier: 
   health: 0
-  attacks:
-  - {fileID: 3112459210943103028, guid: d7522e3cbd42c9b4daa476af5bb66ed8, type: 3}
-  - {fileID: 2782049883510846192, guid: 74aca3c4334d22449a37e9f0b9f7af49, type: 3}
-  - {fileID: 939227001099353645, guid: 41d0c64a07a89ac4181cfe18a8670f66, type: 3}
+  attacks: []
   items: []
   baseAttack: 0
   habit: {fileID: 0}

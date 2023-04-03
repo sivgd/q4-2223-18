@@ -9,8 +9,9 @@ public class EnterDialouge : MonoBehaviour
     public string[] secondDialouge; 
     public GameObject dialougeUI;
     [SerializeField] private bool hasSecondaryDialouge = false;
+    [SerializeField] private bool hasAdditionalDestroyables = true; 
     public GameObject[] additionalDestroyables;
-    public bool[] additionalBooleans; 
+   // public bool[] additionalBooleans; 
     public int currentDialouge = 1; 
     public DialougeManager dm;
     public string name; 
@@ -25,6 +26,7 @@ public class EnterDialouge : MonoBehaviour
                     dialougeUI.SetActive(true);
                     dm.nameBox.text = name;
                     dm.changeCurrentDialouge(dialouge, 0.03f, true);
+                    if (hasSecondaryDialouge == false) StartCoroutine(destoryGameObjects());
                     //currentDialouge++;
                     break;
                 case 2:
@@ -38,14 +40,17 @@ public class EnterDialouge : MonoBehaviour
     }
     private IEnumerator destoryGameObjects()
     {
-        yield return new WaitUntil(() => (dm.CurrentDialougeString >= secondDialouge.Length - 1));
-        for(int i = 0; i < additionalDestroyables.Length; i++)
+        yield return new WaitUntil(() => (dm.CurrentDialougeString >= secondDialouge.Length - 1 || !dialougeUI.activeInHierarchy));
+        if (hasAdditionalDestroyables)
         {
-            if (additionalDestroyables[i].GetComponent<AddToParty>())
+            for (int i = 0; i < additionalDestroyables.Length; i++)
             {
-                additionalDestroyables[i].GetComponent<AddToParty>().addToParty = true; 
+                if (additionalDestroyables[i].GetComponent<AddToParty>())
+                {
+                    additionalDestroyables[i].GetComponent<AddToParty>().addToParty = true;
+                }
+                Destroy(additionalDestroyables[i]);
             }
-            Destroy(additionalDestroyables[i]); 
         }
         Destroy(gameObject);
     }
