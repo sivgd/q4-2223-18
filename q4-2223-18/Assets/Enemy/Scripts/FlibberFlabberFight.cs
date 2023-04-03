@@ -12,6 +12,7 @@ public class FlibberFlabberFight : MonoBehaviour
     public GameObject parent;
     public EnterCombatManager ecm;
     public PersistantEntityData eData;
+    public EnterDialouge ed;
 
     private void Start()
     {
@@ -25,12 +26,13 @@ public class FlibberFlabberFight : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //eData.addEntity(id); 
+            eData.addEntity(id); 
             ecm.enterCombat(enemies,false);
         }
     }
     private void OnDestroy()
     {
-        Destroy(parent); 
+        ed.currentDialouge = 2;
+        Destroy(parent);
     }
 }

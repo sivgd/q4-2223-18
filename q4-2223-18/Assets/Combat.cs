@@ -63,6 +63,10 @@ public class Combat : MonoBehaviour
         for (int i = 0; i < enemyHealthValues.Length; i++)
         {
             enemyHealthValues[i] = enemies[i].Health;
+            if(enemyHealthValues[i] <= 0)
+            {
+                GetComponent<CombatSceneManager>().badGuyRenderers[i].sprite = null; 
+            }
         }
     }
     private void progressTurn()
@@ -473,7 +477,7 @@ public class Combat : MonoBehaviour
         {
             playerPosSelected = Mathf.Clamp(playerPosSelected - 1, 1, 3);
         }
-        if (Input.GetKeyDown(KeyCode.Return) && !party[playerPosSelected - 1].HasGoneDuringTurn)
+        if (Input.GetKeyDown(KeyCode.Return) && !party[PlayerSelected].HasGoneDuringTurn)
         {
            for(int i = 0; i < combatButtons.Length; i++) /// Buttons change sprites based on activation 
             {

@@ -12,6 +12,30 @@ public class AddToParty : MonoBehaviour
     [Header("Unique identifiers")]
     public Sprite sprite;
     public Habit habit;
-    public string name; 
+    public string name;
+    [Header("External References")]
+    public Player[] party; 
 
+    private void OnDestroy()
+    {
+       foreach(Player player in party)
+        {
+            if(player.Name == null || player.Name == "")
+            {
+                player.maxHealth = maxHealth;
+                player.BaseDefense = baseDefense;
+                player.Attacks = attacks;
+                player.topDownSprite = sprite;
+                player.combatSprite = sprite;
+                player.habit = habit;
+                player.Name = name;
+                Debug.Log($"Say hello to {name}"); 
+                return; 
+            }
+            else if(player.Name == name)
+            {
+                return; 
+            }
+        } 
+    }
 }
