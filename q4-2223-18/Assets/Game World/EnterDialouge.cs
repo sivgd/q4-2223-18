@@ -9,7 +9,8 @@ public class EnterDialouge : MonoBehaviour
     public string[] secondDialouge; 
     public GameObject dialougeUI;
     [SerializeField] private bool hasSecondaryDialouge = false;
-    public GameObject[] additionalDestroyables; 
+    public GameObject[] additionalDestroyables;
+    public bool[] additionalBooleans; 
     public int currentDialouge = 1; 
     public DialougeManager dm;
     public string name; 
@@ -30,10 +31,22 @@ public class EnterDialouge : MonoBehaviour
                     dialougeUI.SetActive(true);
                     dm.nameBox.text = "";
                     dm.changeCurrentDialouge(secondDialouge, 0.03f, true);
-                    foreach(GameObject dest in additionalDestroyables) Destroy(dest);
-                    Destroy(gameObject);
+                    StartCoroutine(destoryGameObjects()); 
                     break; 
             }
         }
+    }
+    private IEnumerator destoryGameObjects()
+    {
+        yield return new WaitUntil(() => (dm.CurrentDialougeString >= secondDialouge.Length - 1));
+        for(int i = 0; i < additionalDestroyables.Length; i++)
+        {
+            if (additionalDestroyables[i].GetComponent<AddToParty>())
+            {
+                additionalDestroyables[i].GetComponent<AddToParty>().addToParty = true; 
+            }
+            Destroy(additionalDestroyables[i]); 
+        }
+        Destroy(gameObject);
     }
 }

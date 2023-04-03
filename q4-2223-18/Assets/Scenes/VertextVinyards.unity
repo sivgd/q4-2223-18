@@ -9242,6 +9242,7 @@ MonoBehaviour:
   - What do you say?
   - '[you cannot say no as you have no mouth] '
   - Excellent! Let me pack my things and ill be on my way
+  - '[Tangent Terrance has been added to the party]'
   dialougeUI: {fileID: 1973272912}
   hasSecondaryDialouge: 1
   additionalDestroyables:

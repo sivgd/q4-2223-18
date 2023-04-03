@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AddToParty : MonoBehaviour
 {
+    [Header("Public Logic")]
+    public bool addToParty = false; 
     [Header("Combat Stats")]
     public int maxHealth;
     public int baseDefense;
@@ -18,24 +20,29 @@ public class AddToParty : MonoBehaviour
 
     private void OnDestroy()
     {
-       foreach(Player player in party)
+        if (addToParty)
         {
-            if(player.Name == null || player.Name == "")
+            foreach (Player player in party)
             {
-                player.maxHealth = maxHealth;
-                player.BaseDefense = baseDefense;
-                player.Attacks = attacks;
-                player.topDownSprite = sprite;
-                player.combatSprite = sprite;
-                player.habit = habit;
-                player.Name = name;
-                Debug.Log($"Say hello to {name}"); 
-                return; 
+                if (player.Name == null || player.Name == "")
+                {
+                    player.maxHealth = maxHealth;
+                    player.Health = maxHealth; 
+                    player.BaseDefense = baseDefense;
+                    player.BaseAttack = baseAttack; 
+                    player.Attacks = attacks;
+                    player.topDownSprite = sprite;
+                    player.combatSprite = sprite;
+                    player.habit = habit;
+                    player.Name = name;
+                    Debug.Log($"Say hello to {name}");
+                    return;
+                }
+                else if (player.Name == name)
+                {
+                    return;
+                }
             }
-            else if(player.Name == name)
-            {
-                return; 
-            }
-        } 
+        }
     }
 }
