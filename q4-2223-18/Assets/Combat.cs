@@ -212,7 +212,11 @@ public class Combat : MonoBehaviour
                 case AttackType.Healing:
                     party[playerSelected].Health = Mathf.Clamp(party[playerSelected].Health + party[playerIndex].Attacks[attackIndex].Damage, 0, party[playerSelected].maxHealth); /// say goodbye to overheal :(
                     party[playerIndex].Attacks[attackIndex].resetCoolDown();
-                    break; 
+                    break;
+                case AttackType.AttackBoost:
+                    party[playerSelected].TempAttackBoost = Mathf.Clamp(party[playerSelected].Health + party[playerIndex].Attacks[attackIndex].Damage, 0, party[playerSelected].maxHealth); /// say goodbye to overheal :(
+                    party[playerIndex].Attacks[attackIndex].resetCoolDown();
+                    break;
             }
             Debug.Log($"{party[playerSelected].Name} was healed by {party[playerIndex].Name}");
             uiMode = UIMODE.none;

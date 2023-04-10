@@ -26,5 +26,5 @@ MonoBehaviour:
   baseDefense: 5
   tempDefenseBoost: 0
   name: Ted Triangle
-  tempAttackBoost: 0
-  hasGoneDuringTurn: 0
+  tempAttackBoost: 300
+  hasGoneDuringTurn: 1

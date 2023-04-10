@@ -15,7 +15,8 @@ public class PersistantPartyData : ScriptableObject
     [SerializeField] private Quaternion playerRotation; 
 
     private void OnEnable() => hideFlags = HideFlags.DontUnloadUnusedAsset;
-   // public int NumMembers { get => numMembers; set => numMembers = value; }
+    private void OnValidate() => playerPosition = Vector2.zero; 
+    // public int NumMembers { get => numMembers; set => numMembers = value; }
     public float PlayerMoveSpeed { get => playerMoveSpeed; set => playerMoveSpeed = value; }
     public Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
     public Quaternion PlayerRotation { get => playerRotation; set => playerRotation = value; }

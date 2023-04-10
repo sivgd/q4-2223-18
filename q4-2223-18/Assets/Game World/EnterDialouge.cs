@@ -5,7 +5,9 @@ using TMPro;
 
 public class EnterDialouge : MonoBehaviour
 {
+    [TextArea]
     public string[] dialouge = { "Heloo!", "this is a test.", "this dialouge was stored outside of the Dialouge Manager >:D" };
+    [TextArea]
     public string[] secondDialouge; 
     public GameObject dialougeUI;
     [SerializeField] private bool hasSecondaryDialouge = false;
