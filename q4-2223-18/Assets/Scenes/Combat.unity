@@ -415,7 +415,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fc505eb361c47cd46ac5a1165b6ca6ef, type: 2}
   - {fileID: 11400000, guid: 44e9228f072e08844aae586b6579be24, type: 2}
   tutorialText: {fileID: 1790616}
+  tutorialParent: {fileID: 21371235}
   textNum: 0
+  isWriting: 0
+  isWritingFinished: 0
+  hasSelectedPlayer: 0
+  hasSelectedAttack: 0
+  hasSelectedEnemy: 0
   partyData: {fileID: 11400000, guid: 60d85625856b93146a20f7652dc7aa5a, type: 2}
 --- !u!4 &68840206
 Transform:

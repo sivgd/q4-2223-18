@@ -44,6 +44,7 @@ public class SceneEventManager : MonoBehaviour
         // dManager.nameBox.text = "???";
         //dManager.dialougeBox.text = ""; 
         dObj.SetActive(true);
+      //  yield return new WaitForEndOfFrame(); 
         dManager.nameBox.text = "???";
         dManager.changeCurrentDialouge(new string[] { "TED TRIANGLE!", "ITS THE FIRST OF THE MONTH!", "PAY YOUR MANDATORY TITHE" }, 0.03f, true);
 

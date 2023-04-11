@@ -115,11 +115,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameBox: {fileID: 9174791533246235288}
   dialougeBox: {fileID: 9174791533788072553}
-  typeWriterDelay: 0.05
+  typeWriterDelay: 0.03
   runDialouge: 1
-  freezePlayer: 0
+  freezePlayer: 1
   updateDialouge: 1
-  dialouge: []
+  dialouge:
+  - 
+  - 
+  - 
   currentDialougeString: 0
   currentDialougeFinished: 0
 --- !u!1 &9174791533246235290
@@ -187,7 +190,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: ???
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ab10a89d99d859747b669bf6b241f50a, type: 2}
   m_sharedMaterial: {fileID: 5251931052933997881, guid: ab10a89d99d859747b669bf6b241f50a, type: 2}

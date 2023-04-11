@@ -15,12 +15,13 @@ public class CombatSceneManager : MonoBehaviour
     private Combat combatObject;
     [Header("UI Stuff")]
     public TMP_Text tutorialText;
+    public GameObject tutorialParent; 
     [SerializeField] private int textNum = 0;
-    private bool isWriting = false;
-    private bool isWritingFinished = false;
-    private bool hasSelectedPlayer = false;
-    private bool hasSelectedAttack = false;
-    private bool hasSelectedEnemy = false; 
+   [SerializeField] private bool isWriting = false;
+    [SerializeField] private bool isWritingFinished = false;
+    [SerializeField] private bool hasSelectedPlayer = false;
+    [SerializeField] private bool hasSelectedAttack = false;
+    [SerializeField] private bool hasSelectedEnemy = false; 
     [Header("Outside References")]
     public PersistantPartyData partyData; 
     //[Header("External References")]
@@ -49,7 +50,9 @@ public class CombatSceneManager : MonoBehaviour
         }
         if (partyData.isCombatTutorial)
         {
-            tutorialText.gameObject.SetActive(true);
+            tutorialParent.SetActive(true); 
+            tutorialText.gameObject.SetActive(true); 
+            Debug.Log("combat tutorial");
             CombatTutorial(); 
         }
     }

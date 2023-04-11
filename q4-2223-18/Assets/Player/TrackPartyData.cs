@@ -19,9 +19,17 @@ public class TrackPartyData : MonoBehaviour
     public Sprite[] combatSprites; 
     private void Start()
     {
-        partyData.PreviousSceneName = SceneManager.GetActiveScene().name; 
-        transform.position = partyData.PlayerPosition;
-        transform.rotation = partyData.PlayerRotation; 
+        if (!partyData.PreviousSceneName.Equals(SceneManager.GetActiveScene().name))
+        {
+            partyData.PlayerPosition = Vector2.zero;
+            partyData.PreviousSceneName = SceneManager.GetActiveScene().name;
+        }
+        else
+        {
+            partyData.PreviousSceneName = SceneManager.GetActiveScene().name;
+            transform.position = partyData.PlayerPosition;
+            transform.rotation = partyData.PlayerRotation;
+        }
         /*for(int i = 0; i < party.Length; i++)
         {
            // topDownSprites[i] = party[i].topDownSprite;
