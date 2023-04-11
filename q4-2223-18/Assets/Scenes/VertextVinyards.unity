@@ -24555,6 +24555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01875c573bf2110448da8db9aac28b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  closedDoor: {fileID: 0}
+  openDoor: {fileID: 0}
   keyGiver: {fileID: 1333808191}
   dm: {fileID: 1973272911}
   errorDialouge:
@@ -25175,7 +25177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1052958034
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -29397,7 +29399,7 @@ PrefabInstance:
       objectReference: {fileID: 1486522899}
     - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
       propertyPath: secondCutscene
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
       propertyPath: secondCutscenePrompt

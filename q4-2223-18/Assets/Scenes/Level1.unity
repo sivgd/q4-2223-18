@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa10807c31c70e34eb6498b915481451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: TitleCard
+  nextScene: VertextVinyards
   playerTag: Player
 --- !u!4 &16904277
 Transform:
@@ -2775,7 +2775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9174791533000124015, guid: a574ac119444b55479a0417aea6dd88e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9174791533000124019, guid: a574ac119444b55479a0417aea6dd88e, type: 3}
       propertyPath: m_Pivot.x

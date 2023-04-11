@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class IndividualEntityData : MonoBehaviour
 {
@@ -27,9 +28,23 @@ public class IndividualEntityData : MonoBehaviour
     {
         if (eData.hasEntity(id))
         {
-            Destroy(gameObject);
+            if (!name.Contains("Prince"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
-  
+    private IEnumerator prologueCutscene()
+    {
+        DialougeManager dm = FindObjectOfType<DialougeManager>(); 
+        dm.gameObject.SetActive(true);
+        dm.nameBox.text = "Prince Parallelogram";
+        dm.changeCurrentDialouge(new string[] { "Thus concludes the life and times of Prince Parallelogram", "A fitting end, to reign defined by overbearing tyranny.", "Doomed, from the very start.", "And I don't regret a SECOND of it!" }, 0.03f, true);
+        yield return new WaitUntil(() => dm.gameObject.activeInHierarchy);
+        yield return new WaitWhile(() => dm.gameObject.activeInHierarchy);
+        SceneManager.LoadScene("TitleCard"); 
+
+    }
+
 
 }
