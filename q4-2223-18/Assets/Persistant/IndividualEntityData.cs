@@ -30,6 +30,7 @@ public class IndividualEntityData : MonoBehaviour
         {
             if (!name.Contains("Prince"))
             {
+                Debug.Log($"destroyed {name}"); 
                 Destroy(gameObject);
             }
         }

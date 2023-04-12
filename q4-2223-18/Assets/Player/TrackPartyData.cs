@@ -30,6 +30,10 @@ public class TrackPartyData : MonoBehaviour
             transform.position = partyData.PlayerPosition;
             transform.rotation = partyData.PlayerRotation;
         }
+        for(int i = 0; i < party.Length; i++)
+        {
+            party[i].HasGoneDuringTurn = false; 
+        }
         /*for(int i = 0; i < party.Length; i++)
         {
            // topDownSprites[i] = party[i].topDownSprite;
