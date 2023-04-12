@@ -5,17 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class MenuFunctions : MonoBehaviour
 {
+
+    [SerializeField] private GameObject nonCreditButtons;
+    [SerializeField] private GameObject creditStuff; 
+
     public void LoadL1()
     {
         SceneManager.LoadScene("Level1"); 
-    }
-    public void LoadCredits()
-    {
-        Debug.Log("Credits"); 
     }
     public void ExitGame()
     {
         Debug.Log("Goodbye!"); 
         Application.Quit(); 
+    }
+    public void ActivateCredits()
+    {
+        nonCreditButtons.SetActive(false); 
+        creditStuff.SetActive(true); 
+    }
+    public void HideCredits()
+    {
+        creditStuff.SetActive(false);
+        nonCreditButtons.SetActive(true); 
     }
 }

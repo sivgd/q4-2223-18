@@ -630,5 +630,4 @@ public class EnemyAttack
         Debug.Log($"Damage: {output}");
         return output; 
     }
-
 }
