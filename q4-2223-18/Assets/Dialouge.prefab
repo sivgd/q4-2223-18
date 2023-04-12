@@ -119,10 +119,7 @@ MonoBehaviour:
   runDialouge: 1
   freezePlayer: 1
   updateDialouge: 1
-  dialouge:
-  - 
-  - 
-  - 
+  dialouge: []
   currentDialougeString: 0
   currentDialougeFinished: 0
 --- !u!1 &9174791533246235290

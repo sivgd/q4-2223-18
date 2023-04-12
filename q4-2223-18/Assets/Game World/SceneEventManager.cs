@@ -28,6 +28,9 @@ public class SceneEventManager : MonoBehaviour
         if (firstCutscene)
         {
             StartCoroutine(FirstCutscene());
+            dObj.SetActive(true);
+            dManager.nameBox.text = "???";
+            dManager.changeCurrentDialouge(new string[] { "TED TRIANGLE!", "ITS THE FIRST OF THE MONTH!", "PAY YOUR MANDATORY TITHE" }, 0.03f, true);
             firstCutscene = false;
         }
         if (secondCutscene && taxManData != null)
@@ -41,12 +44,6 @@ public class SceneEventManager : MonoBehaviour
         cameraFollow.cameraShake = true;
         yield return new WaitForSecondsRealtime(1f);
         cameraFollow.cameraShake = false;
-        // dManager.nameBox.text = "???";
-        //dManager.dialougeBox.text = ""; 
-        dObj.SetActive(true);
-      //  yield return new WaitForEndOfFrame(); 
-        dManager.nameBox.text = "???";
-        dManager.changeCurrentDialouge(new string[] { "TED TRIANGLE!", "ITS THE FIRST OF THE MONTH!", "PAY YOUR MANDATORY TITHE" }, 0.03f, true);
 
     }
     private IEnumerator SecondCutscene()

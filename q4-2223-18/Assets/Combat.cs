@@ -96,6 +96,10 @@ public class Combat : MonoBehaviour
     private void Update()
     {
         updateHealthValues(); 
+        if(playerHealthValues[0] <=0 && playerHealthValues[1] <= 0 && playerHealthValues[2] <= 0)
+        {
+            Application.Quit(); 
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             playerHealthValues[0] -= EnemyAttack.getPhysicalDamageFromAttack(enemies[0].BaseAttack,enemies[0].Level);
