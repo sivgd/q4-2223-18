@@ -15,8 +15,9 @@ public class Combat : MonoBehaviour
     public Enemy[] enemies = new Enemy[3]; 
     public GameObject selectionCursor;
     public Transform[] playerPartyTransforms = new Transform[3];
-    public Transform[] enemyPartyTransforms = new Transform[3]; 
-    
+    public Transform[] enemyPartyTransforms = new Transform[3];
+    public AnimManager animManager;
+
     [Header("UI References")]
     public TMP_Text playerHealth;
     public TMP_Text playerName;
@@ -24,8 +25,9 @@ public class Combat : MonoBehaviour
     public GameObject[] combatButtons;
     public Image[] attackCards;
     public Image[] itemCards;
-    public GameObject[] attackCooldownBoxes; 
- 
+    public GameObject[] attackCooldownBoxes;
+   
+
 
 
     [Header("DEBUG")]
@@ -474,7 +476,7 @@ public class Combat : MonoBehaviour
         /// if the enter button is pressed, attack the enemy, reset attack cooldowns, and change mode back to player selection 
         if (Input.GetKeyDown(KeyCode.Return)){
             hasEnemyBeenSelected = true; 
-            PlayerAttack.attackWithStats(attackSelected, party[playerIndex], enemies[enemySelected]);
+            PlayerAttack.attackWithStats(attackSelected,enemySelected, party[playerIndex], enemies[enemySelected],animManager);
             party[playerIndex].Attacks[attackIndex].resetCoolDown();
             Debug.Log($"{party[playerIndex].name} attacked {enemies[enemySelected].name}");
             uiMode = UIMODE.none;
@@ -578,11 +580,27 @@ public enum UIMODE
     playerPartySupport,
     none
 }
-public class PlayerAttack
-{
-    public static void attackWithStats(int attack,Player player, Enemy enemy)
+public class PlayerAttack 
+{   
+    public static void attackWithStats(int attack,int enemyIndex,Player player, Enemy enemy,AnimManager aManager)
     {
+      
+        int realEnemyIndex = 0;   /// Denis Ritche, please forgive me for what I am about to do
+        switch (enemyIndex)
+        {
+            case 0:
+                realEnemyIndex = 1;
+                break;
+            case 1:
+                realEnemyIndex = 0;
+                break;
+            case 2:
+                realEnemyIndex = 2;
+                break;
+           
+        }
         AttackType aType = player.Attacks[attack].AttackType;
+        AttackAnim cAnim = player.Attacks[attack].CorrespondingAnimation; 
         HabitType pHabit = player.habit.habitType; 
         Debug.Log(player.Attacks[attack].Name); 
         double damage = (player.Attacks[attack].Damage + player.TempAttackBoost)  * player.BaseAttack;
@@ -590,7 +608,12 @@ public class PlayerAttack
         {
             damage = (damage * (1.0 + player.habit.Boost)); 
         }
-        enemy.Health -= (int)Mathf.Ceil((float)damage); 
+        enemy.Health -= (int)Mathf.Ceil((float)damage);
+        Debug.Log("Applied Damage, running corresponding animation");
+        Debug.Log($"EnemyIndex: {enemyIndex}"); 
+
+        aManager.playAttackAnim(cAnim, false, realEnemyIndex); 
+        
     }
 }
 public class EnemyAttack

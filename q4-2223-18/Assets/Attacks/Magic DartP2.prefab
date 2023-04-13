@@ -46,6 +46,7 @@ MonoBehaviour:
   defaultIcon: {fileID: 21300000, guid: d2b139a0e8b2f6946a3a15b900d364e0, type: 3}
   selectedIcon: {fileID: 21300000, guid: e3bf0b06cebe39e4c82633da2c7ce7f0, type: 3}
   maxCoolDown: 2
+  correspondingAnimation: 3
   attackType: 1
   damage: 20
   name: Magic Dart

@@ -9,6 +9,7 @@ public class CombatSceneManager : MonoBehaviour
     [Header("Scene References")]
     public SpriteRenderer[] goodGuyRenderers;
     public SpriteRenderer[] badGuyRenderers;
+    
 
     public Player[] party = new Player[3];
     public Enemy[] enemies = new Enemy[3]; 
@@ -16,8 +17,9 @@ public class CombatSceneManager : MonoBehaviour
     [Header("UI Stuff")]
     public TMP_Text tutorialText;
     public GameObject tutorialParent; 
+    [Header("UI Debug")]
     [SerializeField] private int textNum = 0;
-   [SerializeField] private bool isWriting = false;
+    [SerializeField] private bool isWriting = false;
     [SerializeField] private bool isWritingFinished = false;
     [SerializeField] private bool hasSelectedPlayer = false;
     [SerializeField] private bool hasSelectedAttack = false;

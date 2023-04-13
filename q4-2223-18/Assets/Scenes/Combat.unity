@@ -466,6 +466,7 @@ MonoBehaviour:
   - {fileID: 706248363}
   - {fileID: 1996262523}
   - {fileID: 981108249}
+  animManager: {fileID: 1597624628}
   playerHealth: {fileID: 1694754166}
   playerName: {fileID: 887526639}
   playerHabit: {fileID: 1372837556}

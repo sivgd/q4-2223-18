@@ -6,7 +6,8 @@ public class Attack : MonoBehaviour
 {
     public Sprite defaultIcon;
     public Sprite selectedIcon;
-    public int maxCoolDown; 
+    public int maxCoolDown;
+    [SerializeField] private AttackAnim correspondingAnimation; 
     [SerializeField] private AttackType attackType;
     [SerializeField] private int damage;
     [SerializeField] private string name;
@@ -27,6 +28,7 @@ public class Attack : MonoBehaviour
     public int Damage { get => damage; set => damage = value; }
     public string Name { get => name; set => name = value; }
     public int Cooldown { get => cooldown; set => cooldown = value; }
+    public AttackAnim CorrespondingAnimation { get => correspondingAnimation; set => correspondingAnimation = value; }
 }
 public enum AttackType
 {
