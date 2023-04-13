@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 using TMPro; 
 
 public class DialougeManager : MonoBehaviour
@@ -17,8 +18,14 @@ public class DialougeManager : MonoBehaviour
     [SerializeField] private int currentDialougeString = 0;
     public bool currentDialougeFinished;
     [SerializeField] private IEnumerator currentDialougeRoutine;
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name.Contains("Level1"))
+        {
+            dialouge = new string[] { "TED TRIANGLE!", "ITS THE FIRST OF THE MONTH!", "PAY YOUR MANDATORY TITHE" }; 
+        }
+    }
 
-    
 
     public void changeCurrentDialouge(int id)
     {

@@ -131,6 +131,7 @@ MonoBehaviour:
   leftKey: 97
   rightKey: 100
   moveSpeed: 200
+  canMove: 1
   up: 0
   down: 0
   left: 0

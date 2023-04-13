@@ -105,9 +105,12 @@ public class Combat : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            playerHealthValues[0] -= EnemyAttack.getPhysicalDamageFromAttack(enemies[0].BaseAttack,enemies[0].Level);
+            enemies[0].Health = 0;
+            enemies[1].Health = 0;
+            enemies[2].Health = 0;
+            updateHealthValues(); 
         }
-        if(enemyHealthValues[0] > 0 || enemyHealthValues[1] > 0 || enemyHealthValues[2] > 0)
+        if(enemyHealthValues[0] > 0 || enemyHealthValues[1] > 0 || enemyHealthValues[2] > 0 )
         {
             if (turn == Turn.player)
             {
@@ -167,6 +170,7 @@ public class Combat : MonoBehaviour
         }
         else
         {
+
             StartCoroutine( GetComponent<CombatSceneManager>().exitCombat());
             return; 
         }

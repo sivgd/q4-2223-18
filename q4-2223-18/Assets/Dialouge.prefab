@@ -117,7 +117,7 @@ MonoBehaviour:
   dialougeBox: {fileID: 9174791533788072553}
   typeWriterDelay: 0.03
   runDialouge: 1
-  freezePlayer: 1
+  freezePlayer: 0
   updateDialouge: 1
   dialouge: []
   currentDialougeString: 0

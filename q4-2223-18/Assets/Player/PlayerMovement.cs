@@ -13,11 +13,12 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode leftKey;
     public KeyCode rightKey;
     [Header("Movement Variables")]
-    public float moveSpeed = 3f; 
-   // public int moveIncrement = 1;
+    public float moveSpeed = 3f;
+    // public int moveIncrement = 1;
 
-    
+
     [Header("Debug")]
+    public bool canMove = true; 
     [SerializeField] bool up;
     [SerializeField] bool down;
     [SerializeField] bool left;
@@ -93,6 +94,13 @@ public class PlayerMovement : MonoBehaviour
     public void FixedUpdate()
     {
         if (dm.FreezePlayer)
+        {
+            up = false;
+            down = false;
+            left = false;
+            right = false;
+        }
+        else if (!canMove)
         {
             up = false;
             down = false;
