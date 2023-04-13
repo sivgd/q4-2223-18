@@ -25,6 +25,9 @@ public class AnimManager : MonoBehaviour
                     break;
                 case AttackAnim.Bash:
                     StartCoroutine(playAnim(false, recipient, "Bash", 0.45f));
+                    break;
+                default:
+                    Debug.Log("That animation has not been implimented yet :P");
                     break; 
             }
         }
