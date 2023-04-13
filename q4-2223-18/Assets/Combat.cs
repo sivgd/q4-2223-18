@@ -23,7 +23,8 @@ public class Combat : MonoBehaviour
     public TMP_Text playerHabit; 
     public GameObject[] combatButtons;
     public Image[] attackCards;
-    public Image[] itemCards; 
+    public Image[] itemCards;
+    public GameObject[] attackCooldownBoxes; 
  
 
 
@@ -360,6 +361,14 @@ public class Combat : MonoBehaviour
             if (!attackCards[i].gameObject.activeInHierarchy) ///Initializes the attack cards, the menu can only show 3 cards at a time
             {
                 attackCards[i].sprite = party[playerIndex].Attacks[i].defaultIcon;
+                if(party[playerIndex].Attacks[i].Cooldown > 0)
+                {
+                    attackCooldownBoxes[i].SetActive(true); 
+                }
+                else if (attackCooldownBoxes[i].activeInHierarchy)
+                {
+                    attackCooldownBoxes[i].SetActive(false);
+                }
                 Debug.Log($"{attackCards[i].name}");
                 attackCards[i].gameObject.SetActive(true);
             }
@@ -392,12 +401,20 @@ public class Combat : MonoBehaviour
             else if(party[playerIndex].Attacks[attackSelected].AttackType == AttackType.Healing)
             {
                 uiMode = UIMODE.playerPartySupport;
-                for (int i = 0; i < maxCardIndex; i++) attackCards[i].gameObject.SetActive(false);
+                for (int i = 0; i < maxCardIndex; i++)
+                {
+                    attackCards[i].gameObject.SetActive(false);
+                    attackCooldownBoxes[i].SetActive(false);
+                }
             }
             else 
             {
                 uiMode = UIMODE.playerAttackEnemy;
-                for (int i = 0; i < maxCardIndex; i++) attackCards[i].gameObject.SetActive(false);
+                for (int i = 0; i < maxCardIndex; i++)
+                {
+                    attackCards[i].gameObject.SetActive(false);
+                    attackCooldownBoxes[i].SetActive(false);
+                }
                 hasAttackBeenSelected = true;
             }
 
@@ -406,7 +423,11 @@ public class Combat : MonoBehaviour
         {
             uiMode = UIMODE.none;
             playerSelection = true;
-            for (int i = 0; i < maxCardIndex; i++) attackCards[i].gameObject.SetActive(false);
+            for (int i = 0; i < maxCardIndex; i++) 
+            {
+                attackCards[i].gameObject.SetActive(false);
+                attackCooldownBoxes[i].SetActive(false); 
+            }
         }
     }
     /// <summary>
