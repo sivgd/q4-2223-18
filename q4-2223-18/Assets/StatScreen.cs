@@ -10,6 +10,16 @@ public class StatScreen : MonoBehaviour
     public Player[] party; 
     [Header("UI")]
     public TMP_Text[] playerList = new TMP_Text[3];
+    public GameObject[] statTextObjs; 
+    public TMP_Text nameText;
+    public TMP_Text defText;
+    public TMP_Text attackText;
+    public TMP_Text habitName;
+    public TMP_Text habitDescription; 
+    public TMP_Text hpText;
+    public TMP_Text hpBoost;
+    public TMP_Text defenseBoost;
+    public TMP_Text attackBoost;
     public GameObject panel;
 
     [Header("Debug")]
@@ -17,35 +27,51 @@ public class StatScreen : MonoBehaviour
     [SerializeField] private bool nameSelection;
     [SerializeField] private bool showStats; 
     [SerializeField] private int maxPlayers = 0;
-    [SerializeField] private int currNameSelected = 0; 
+    [SerializeField] private int currNameSelected = 0;
+    [SerializeField] private bool panelActive = false; 
     
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab)){
-            playerMovement.canMove = !playerMovement.canMove;
-            panel.SetActive(!panel.activeInHierarchy);
+            
+            panelActive = !panelActive; 
             listNames = true;
+            showStats = false; 
             
         }
         if (listNames)
         {
             readPartyData();
             listNames = false;
-            nameSelection = true; 
+            nameSelection = true;
         }
-        else if(nameSelection)
+        else if (nameSelection)
         {
             playerNameSelection();
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 nameSelection = false;
-                showStats = true; 
+                playerList[0].gameObject.SetActive(false);
+                playerList[1].gameObject.SetActive(false);
+                playerList[2].gameObject.SetActive(false);
+                showStats = true;
             }
         }
         else if (showStats)
         {
-
+            ShowStats();
         }
+        if (!showStats) {
+            for (int i = 0; i < statTextObjs.Length; i++)
+            {
+                if (statTextObjs[i].activeInHierarchy)
+                {
+                    statTextObjs[i].SetActive(false);
+                }
+            }
+        }
+        panel.SetActive(panelActive);
+        playerMovement.canMove = !panelActive; 
     }
     private void readPartyData()
     {
@@ -117,6 +143,24 @@ public class StatScreen : MonoBehaviour
     }
     private void ShowStats()
     {
+        for(int i =0; i < statTextObjs.Length; i++)
+        {
+            if (!statTextObjs[i].activeInHierarchy)
+            {
+                statTextObjs[i].SetActive(true); 
+            }
+        }
+        Player pSelected = party[currNameSelected];
+        nameText.text = pSelected.Name;
+        hpText.text = $"HP: {pSelected.Health}/{pSelected.maxHealth}";
+        defText.text = "Defense: " + pSelected.BaseDefense;
+        attackText.text = "Attack: " + pSelected.BaseAttack;
+        habitName.text = pSelected.habit.name;
+        string habitType = (pSelected.habit.habitType == HabitType.Defender) ? "defense" : pSelected.habit.habitType.ToString() + " attacks"; 
+        habitDescription.text = pSelected.habit.explanation + "\n" + (pSelected.habit.Boost * 100) + "% boost to " + habitType;
+        hpBoost.text = "";
+        defenseBoost.text = (habitType.Contains("defense")) ? "+" + ((pSelected.BaseDefense * (1 + pSelected.habit.Boost)) - pSelected.BaseDefense) : " ";
+        attackBoost.text = (habitType.Contains("defense")) ? "" :"+" + pSelected.habit.Boost * 100 + "% to " + pSelected.habit.habitType.ToString().ToLower() + " attacks";
 
     }
 }

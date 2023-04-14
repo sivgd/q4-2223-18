@@ -16,7 +16,7 @@ MonoBehaviour:
   attacks:
   - {fileID: 4939346911045058305, guid: f42cf68cc9806be4998f7fce9cc91db4, type: 3}
   - {fileID: 5000619179442224325, guid: ff80378790838fc49a51daa5174dc037, type: 3}
-  - {fileID: 5724574516401145780, guid: 14198c8996d5acc49aa34cdb4e75965c, type: 3}
+  - {fileID: 2782049883510846192, guid: 74aca3c4334d22449a37e9f0b9f7af49, type: 3}
   items:
   - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
   - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}

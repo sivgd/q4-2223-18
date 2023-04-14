@@ -26,8 +26,20 @@ public class AnimManager : MonoBehaviour
                 case AttackAnim.Bash:
                     StartCoroutine(playAnim(false, recipient, "Bash", 0.45f));
                     break;
+                case AttackAnim.MagicDart:
+                    StartCoroutine(playAnim(false, recipient, "MDart", .52f));
+                    break; 
                 default:
                     Debug.Log("That animation has not been implimented yet :P");
+                    break; 
+            }
+        }
+        else
+        {
+            switch (anim)
+            {
+                case AttackAnim.Heal:
+                    //StartCoroutine(playAnim(true, recipient,,);
                     break; 
             }
         }
@@ -47,6 +59,7 @@ public class AnimManager : MonoBehaviour
 public enum AttackAnim
 {
     None,
+    Heal,
     Slash,
     Bash,
     MagicDart

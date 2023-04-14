@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   attacks: []
-  baseAttack: 5
+  baseAttack: 0
   level: 1
   name: RA Rookie
   sprite: {fileID: 21300000, guid: 0ce9a5bc3ac8aa34f865b35ea3e39e71, type: 3}
