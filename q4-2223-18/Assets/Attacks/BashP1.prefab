@@ -50,4 +50,4 @@ MonoBehaviour:
   attackType: 0
   damage: 5
   name: Bash
-  cooldown: -13
+  cooldown: 0

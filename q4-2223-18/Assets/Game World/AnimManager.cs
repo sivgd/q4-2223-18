@@ -6,6 +6,7 @@ public class AnimManager : MonoBehaviour
 {
     public Animator[] enemyAttacks = new Animator[3];
     public Animator[] playerAttacks = new Animator[3];
+    public AttackPlayer attacker; 
 
     private void Update()
     {
@@ -40,7 +41,43 @@ public class AnimManager : MonoBehaviour
             {
                 case AttackAnim.Heal:
                     StartCoroutine(playAnim(true, recipient,"Heal",.52f));
+                    break;
+                    
+            }
+        }
+    }
+    public void playAttackAnim(AttackAnim anim, bool player, int recipient, Transform perpetrator)
+    {
+        if (!player)
+        {
+            switch (anim)
+            {
+                case AttackAnim.Slash:
+                    StartCoroutine(playAnim(false, recipient, "Slash", 0.35f));
+                    break;
+                case AttackAnim.Bash:
+                    StartCoroutine(playAnim(false, recipient, "Bash", 0.45f));
+                    break;
+                case AttackAnim.MagicDart:
+                    StartCoroutine(playAnim(false, recipient, "MDart", .52f));
+                    break;
+                default:
+                    Debug.Log("That animation has not been implimented yet :P");
+                    break;
+            }
+        }
+        else
+        {
+            switch (anim)
+            {
+                case AttackAnim.Heal:
+                    StartCoroutine(playAnim(true, recipient, "Heal", .52f));
+                    break;
+                case AttackAnim.EnemyAttack:
+                    attacker.attackPlayerAnimation(playerAttacks[recipient].transform, perpetrator, perpetrator.gameObject.GetComponent<SpriteRenderer>().sprite);
                     break; 
+
+
             }
         }
     }
@@ -72,5 +109,6 @@ public enum AttackAnim
     Heal,
     Slash,
     Bash,
-    MagicDart
+    MagicDart,
+    EnemyAttack
 }

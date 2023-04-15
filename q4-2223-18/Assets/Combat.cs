@@ -240,6 +240,7 @@ public class Combat : MonoBehaviour
 
                     }
                     party[playerSelected].Health = Mathf.Clamp(party[playerSelected].Health + party[playerIndex].Attacks[attackIndex].Damage, 0, party[playerSelected].maxHealth); /// say goodbye to overheal :(
+                    sfxManager.playAttackAudio(4);
                     animManager.playAttackAnim(AttackAnim.Heal, true, realPlayerIndex);
                    
                     party[playerIndex].Attacks[attackIndex].resetCoolDown();
@@ -515,7 +516,7 @@ public class Combat : MonoBehaviour
         /// if the enter button is pressed, attack the enemy, reset attack cooldowns, and change mode back to player selection 
         if (Input.GetKeyDown(KeyCode.Return)){
             hasEnemyBeenSelected = true; 
-            PlayerAttack.attackWithStats(attackSelected,enemySelected, party[playerIndex], enemies[enemySelected],animManager);
+            PlayerAttack.attackWithStats(attackSelected,enemySelected, party[playerIndex], enemies[enemySelected],animManager,sfxManager);
             party[playerIndex].Attacks[attackIndex].resetCoolDown();
             Debug.Log($"{party[playerIndex].name} attacked {enemies[enemySelected].name}");
             uiMode = UIMODE.none;
@@ -626,7 +627,7 @@ public enum UIMODE
 }
 public class PlayerAttack 
 {   
-    public static void attackWithStats(int attack,int enemyIndex,Player player, Enemy enemy,AnimManager aManager)
+    public static void attackWithStats(int attack,int enemyIndex,Player player, Enemy enemy,AnimManager aManager,SFXManager sfxManager)
     {
       
         int realEnemyIndex = 0;   /// Denis Ritche, please forgive me for what I am about to do
@@ -644,7 +645,7 @@ public class PlayerAttack
            
         }
         AttackType aType = player.Attacks[attack].AttackType;
-        AttackAnim cAnim = player.Attacks[attack].CorrespondingAnimation; 
+        AttackAnim cAnim = player.Attacks[attack].CorrespondingAnimation;
         HabitType pHabit = player.habit.habitType; 
         Debug.Log(player.Attacks[attack].Name); 
         double damage = (player.Attacks[attack].Damage + player.TempAttackBoost)  * player.BaseAttack;
@@ -656,7 +657,22 @@ public class PlayerAttack
         Debug.Log("Applied Damage, running corresponding animation");
         Debug.Log($"EnemyIndex: {enemyIndex}"); 
 
-        aManager.playAttackAnim(cAnim, false, realEnemyIndex); 
+        aManager.playAttackAnim(cAnim, false, realEnemyIndex);
+        switch (cAnim)
+        {
+            case AttackAnim.Slash:
+                sfxManager.playAttackAudio(1);
+                break;
+            case AttackAnim.Bash:
+                sfxManager.playAttackAudio(2);
+                break;
+            case AttackAnim.MagicDart:
+                sfxManager.playAttackAudio(3);
+                break;
+            case AttackAnim.Heal:
+                sfxManager.playAttackAudio(4);
+                break; 
+        }
         
     }
 }
@@ -688,13 +704,13 @@ public class EnemyAttack
         int playerToAttack = getRandomPlayerToAttack(players);
         //TODO: Add defense 
         int damage = getPhysicalDamageFromAttack(baseDamage, enemyLevel); 
-        if(damage <= players[playerToAttack].BaseDefense + players[playerToAttack].TempDefenseBoost)
+        /*if(damage <= players[playerToAttack].BaseDefense + players[playerToAttack].TempDefenseBoost)
         {
             Debug.Log($"{players[playerToAttack].Name}'s armor deflected the blow!");
             return; 
-        }
-        else
-        {
+        }*/
+       // else
+        //{
             double defenseRoll = (double)(players[playerToAttack].BaseDefense + players[playerToAttack].TempDefenseBoost) / (double)damage;
             if (players[playerToAttack].habit.habitType == HabitType.Defender) defenseRoll *= (1 + players[playerToAttack].habit.Boost); 
             if (Random.value <= defenseRoll)
@@ -707,7 +723,7 @@ public class EnemyAttack
                 players[playerToAttack].Health -= damage;
                 Debug.Log($"{players[playerToAttack].Name} took damage! {damage}");
             }
-        }
+       // }
         Debug.Log($"Attacked player: {players[playerToAttack].Name}");
     }
     /// <summary>
