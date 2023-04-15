@@ -221,7 +221,23 @@ public class Combat : MonoBehaviour
             switch (party[playerIndex].Attacks[attackIndex].AttackType)
             {
                 case AttackType.Healing:
+                    int realPlayerIndex = 0;   /// Denis Ritche, please forgive me for what I am about to do
+                    switch (playerIndex)
+                    {
+                        case 0:
+                            realPlayerIndex = 1;
+                            break;
+                        case 1:
+                            realPlayerIndex = 0;
+                            break;
+                        case 2:
+                            realPlayerIndex = 2;
+                            break;
+
+                    }
                     party[playerSelected].Health = Mathf.Clamp(party[playerSelected].Health + party[playerIndex].Attacks[attackIndex].Damage, 0, party[playerSelected].maxHealth); /// say goodbye to overheal :(
+                    animManager.playAttackAnim(AttackAnim.Heal, true, realPlayerIndex);
+                   
                     party[playerIndex].Attacks[attackIndex].resetCoolDown();
                     break;
                 case AttackType.AttackBoost:

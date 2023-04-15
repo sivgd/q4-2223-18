@@ -39,7 +39,7 @@ public class AnimManager : MonoBehaviour
             switch (anim)
             {
                 case AttackAnim.Heal:
-                    //StartCoroutine(playAnim(true, recipient,,);
+                    StartCoroutine(playAnim(true, recipient,"Heal",.52f));
                     break; 
             }
         }
@@ -53,6 +53,16 @@ public class AnimManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(waitTime);
             enemyAttacks[recipient].SetBool(booleanName, false);
             enemyAttacks[recipient].gameObject.SetActive(false);
+        }
+        else
+        {
+            playerAttacks[recipient].gameObject.SetActive(true);
+            playerAttacks[recipient].SetBool(booleanName, true); 
+            yield return new WaitForSecondsRealtime(waitTime);
+            playerAttacks[recipient].SetBool(booleanName, false);
+            playerAttacks[recipient].gameObject.SetActive(false);
+
+
         }
     }
 }
