@@ -9,7 +9,7 @@ public class CombatSceneManager : MonoBehaviour
     [Header("Scene References")]
     public SpriteRenderer[] goodGuyRenderers;
     public SpriteRenderer[] badGuyRenderers;
-    
+    public SFXManager sfxManager; 
 
     public Player[] party = new Player[3];
     public Enemy[] enemies = new Enemy[3]; 
@@ -41,9 +41,11 @@ public class CombatSceneManager : MonoBehaviour
         for (int i = 0; i < party.Length; i++) goodGuySprites[i] = party[i].combatSprite;
         for (int i = 0; i < enemies.Length; i++) badGuySprites[i] = enemies[i].sprite;
         for(int i = 0; i < goodGuySprites.Length; i++) goodGuyRenderers[i].sprite = goodGuySprites[i];
-        for (int i = 0; i < badGuySprites.Length; i++) badGuyRenderers[i].sprite = badGuySprites[i]; 
+        for (int i = 0; i < badGuySprites.Length; i++) badGuyRenderers[i].sprite = badGuySprites[i];
+        
         
     }
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -57,6 +59,7 @@ public class CombatSceneManager : MonoBehaviour
             Debug.Log("combat tutorial");
             CombatTutorial(); 
         }
+        
     }
     private void CombatTutorial()
     {

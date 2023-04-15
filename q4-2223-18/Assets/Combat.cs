@@ -17,6 +17,7 @@ public class Combat : MonoBehaviour
     public Transform[] playerPartyTransforms = new Transform[3];
     public Transform[] enemyPartyTransforms = new Transform[3];
     public AnimManager animManager;
+    public SFXManager sfxManager; 
 
     [Header("UI References")]
     public TMP_Text playerHealth;
@@ -55,6 +56,7 @@ public class Combat : MonoBehaviour
 
         // enemyHealthValues[0] = 
     }
+    
     private void updateHealthValues()
     {
         playerHealthValues = new int[party.Length];
@@ -196,10 +198,12 @@ public class Combat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             playerPosSelected = Mathf.Clamp(playerPosSelected + 1, 1, 3);
+            sfxManager.playAudio(1);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             playerPosSelected = Mathf.Clamp(playerPosSelected - 1, 1, 3);
+            sfxManager.playAudio(1);
         }
         switch (playerPosSelected) /// visual cursor selection stuff
         {
@@ -249,6 +253,7 @@ public class Combat : MonoBehaviour
             uiMode = UIMODE.none;
             playerSelection = true;
             party[playerIndex].HasGoneDuringTurn = true;
+            sfxManager.playAudio(2);
         }
 
     }
@@ -271,10 +276,12 @@ public class Combat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             itemSelected = Mathf.Clamp(itemSelected - 1,0,maxIndex - 1);
+            sfxManager.playAudio(1);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             itemSelected = Mathf.Clamp(itemSelected + 1, 0, maxIndex - 1);
+            sfxManager.playAudio(1);
         }
         for(int i = 0; i < maxIndex; i++) /// changes the sprite of the item cards based on selection 
         {
@@ -306,12 +313,14 @@ public class Combat : MonoBehaviour
             uiMode = UIMODE.none;
             playerSelection = true;
             for (int i = 0; i < maxIndex; i++) itemCards[i].gameObject.SetActive(false);
+            sfxManager.playAudio(2);
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             uiMode = UIMODE.none;
             playerSelection = true;
             for (int i = 0; i < maxIndex; i++) itemCards[i].gameObject.SetActive(false);
+            sfxManager.playAudio(3);
         }
     }
     private void playerActionSelectionMode()
@@ -321,10 +330,12 @@ public class Combat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             combatButtonSelected = Mathf.Clamp(combatButtonSelected + 1, 1, 2);
+            sfxManager.playAudio(1); 
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             combatButtonSelected = Mathf.Clamp(combatButtonSelected - 1, 1, 2);
+            sfxManager.playAudio(1);
         }
         switch (combatButtonSelected)
         {
@@ -358,10 +369,12 @@ public class Combat : MonoBehaviour
                     button.SetActive(false);
                 }
             }
-            
+            sfxManager.playAudio(2);
+
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
+            sfxManager.playAudio(3); 
             uiMode = UIMODE.none;
             playerSelection = true;
             for (int i = 0; i < combatButtons.Length; i++) combatButtons[i].gameObject.SetActive(false);
@@ -397,11 +410,14 @@ public class Combat : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            attackSelected = Mathf.Clamp(attackSelected - 1,0, maxCardIndex - 1); 
+          
+            attackSelected = Mathf.Clamp(attackSelected - 1,0, maxCardIndex - 1);
+            sfxManager.playAudio(1);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             attackSelected = Mathf.Clamp(attackSelected + 1, 0, maxCardIndex - 1);
+            sfxManager.playAudio(1);
         }
         for(int i = 0; i < maxCardIndex; i++) /// changes the sprite of the card based on selection 
         {
@@ -439,7 +455,7 @@ public class Combat : MonoBehaviour
                 }
                 hasAttackBeenSelected = true;
             }
-
+            sfxManager.playAudio(2);
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -450,6 +466,7 @@ public class Combat : MonoBehaviour
                 attackCards[i].gameObject.SetActive(false);
                 attackCooldownBoxes[i].SetActive(false); 
             }
+            sfxManager.playAudio(3);
         }
     }
     /// <summary>
@@ -463,11 +480,13 @@ public class Combat : MonoBehaviour
         selectionCursor.SetActive(true);
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            enemyPosSelected = Mathf.Clamp(enemyPosSelected - 1, 0, 2); 
+            enemyPosSelected = Mathf.Clamp(enemyPosSelected - 1, 0, 2);
+            sfxManager.playAudio(1);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             enemyPosSelected = Mathf.Clamp(enemyPosSelected + 1, 0, 2);
+            sfxManager.playAudio(1);
         }
         switch (enemyPosSelected)
         {
@@ -501,13 +520,15 @@ public class Combat : MonoBehaviour
             Debug.Log($"{party[playerIndex].name} attacked {enemies[enemySelected].name}");
             uiMode = UIMODE.none;
             playerSelection = true;
-            party[playerIndex].HasGoneDuringTurn = true; 
+            party[playerIndex].HasGoneDuringTurn = true;
+            sfxManager.playAudio(2);
 
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             uiMode = UIMODE.none;
             playerSelection = true;
+            sfxManager.playAudio(3);
         }
 
     }  
@@ -522,11 +543,13 @@ public class Combat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             playerPosSelected = Mathf.Clamp(playerPosSelected + 1, 1, 3);
-           
+            sfxManager.playAudio(1);
+
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             playerPosSelected = Mathf.Clamp(playerPosSelected - 1, 1, 3);
+            sfxManager.playAudio(1);
         }
         if (Input.GetKeyDown(KeyCode.Return) && !party[PlayerSelected].HasGoneDuringTurn)
         {
@@ -546,6 +569,7 @@ public class Combat : MonoBehaviour
             playerSelection = false;
             selectionCursor.SetActive(false);
             uiMode = UIMODE.playerActionSelection;
+            sfxManager.playAudio(2);
         }
         switch (playerPosSelected) /// visual cursor selection stuff
         {

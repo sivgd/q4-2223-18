@@ -46,7 +46,7 @@ MonoBehaviour:
   defaultIcon: {fileID: 21300000, guid: 2e441fd66744cd745a82775425246432, type: 3}
   selectedIcon: {fileID: 21300000, guid: b32daff348c717f40a9a3658119b3aa4, type: 3}
   maxCoolDown: 0
-  correspondingAnimation: 2
+  correspondingAnimation: 3
   attackType: 0
   damage: 5
   name: Bash
