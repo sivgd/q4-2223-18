@@ -20,17 +20,19 @@ public class AttackPlayer : MonoBehaviour
         {
             spriteRenderer.enabled = false;
             attackReticle.SetActive(false);
+           
         }
     }
     public void attackPlayerAnimation(Transform recipientTransform, Transform attackerTransform,Sprite attackerSprite, AnimManager aManager,int recipientNum)
     {
         recipient = recipientTransform;
         attacker = attackerTransform;
+        attackerTransform.gameObject.GetComponent<SpriteRenderer>().enabled = false; 
         spriteRenderer.enabled = true;
         spriteRenderer.sprite = attackerSprite;
         attackReticle.SetActive(true);
         attackReticle.transform.position = recipientTransform.position;
-        transform.position = attackerTransform.position;
+        transform.position = attackerTransform.position;  
         animFinished = false; 
         StartCoroutine(attackPlayer(aManager,recipientNum)); 
         
@@ -50,10 +52,11 @@ public class AttackPlayer : MonoBehaviour
         aManager.playAttackAnim(AttackAnim.Slash, true, recipientNum);
         sfxManager.playAttackAudio(1); 
         yield return new WaitForSecondsRealtime(0.3f);
-        animFinished = true; 
-        
+        animFinished = true;
+        attacker.gameObject.GetComponent<SpriteRenderer>().enabled = true;
 
-        
+
+
 
     }
 }

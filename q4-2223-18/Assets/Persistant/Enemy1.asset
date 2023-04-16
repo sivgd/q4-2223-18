@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccaf30f552a8c4045b19fdd6a42cdc1b, type: 3}
-  m_Name: Enemy1
+  m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 0
   attacks: []
   baseAttack: 0
-  level: 1
-  name: RA Rookie
-  sprite: {fileID: 21300000, guid: 0ce9a5bc3ac8aa34f865b35ea3e39e71, type: 3}
+  level: 0
+  name: 
+  sprite: {fileID: 0}
