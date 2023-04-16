@@ -48,10 +48,10 @@ public class CombatSceneManager : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+      /*  if (Input.GetKeyDown(KeyCode.E))
         {
             exitCombat(); 
-        }
+        }*/
         if (partyData.isCombatTutorial)
         {
             tutorialParent.SetActive(true); 

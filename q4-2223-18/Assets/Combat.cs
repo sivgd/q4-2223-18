@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; 
+using TMPro;
+using System; 
 
 
 public class Combat : MonoBehaviour
@@ -108,10 +109,7 @@ public class Combat : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            enemies[0].Health = 0;
-            enemies[1].Health = 0;
-            enemies[2].Health = 0;
-            updateHealthValues(); 
+            party[0].BaseAttack = 100; 
         }
         if(enemyHealthValues[0] > 0 || enemyHealthValues[1] > 0 || enemyHealthValues[2] > 0 )
         {
@@ -155,39 +153,42 @@ public class Combat : MonoBehaviour
             }
             else if (turn == Turn.enemy)
             {
-                Debug.Log("enemy turn");
                 for (int i = 0; i < enemies.Length; i++)
                 {
+                    Debug.Log("cycling through enemy attacks");
                     if (enemies[i].Health > 0)
                     {
                         //EnemyAttack.getRandomPlayerToAttack(); TODO: impliment enemy attack
-                        int player =  EnemyAttack.attackRandomPlayer(party, enemies[i].BaseAttack, enemies[i].Level);
+                        int player = EnemyAttack.attackRandomPlayer(party, enemies[i].BaseAttack, enemies[i].Level);
+                        Debug.Log("applying damage to the player");
                         int translatedPlayerIndex = 0;
                         switch (player)
                         {
                             case 0:
                                 translatedPlayerIndex = 1;
-                                break; 
+                                break;
                         }
+                        Debug.Log($"Attacked player, normal index: {player}, translated index {translatedPlayerIndex}");
                         switch (i)
                         {
                             case 0:
-                                animManager.playAttackAnim(AttackAnim.EnemyAttack, true, translatedPlayerIndex, enemyPartyTransforms[1]);
+                                animManager.addToAnimationQueue(() => animManager.playAttackAnim(AttackAnim.EnemyAttack, true, translatedPlayerIndex, enemyPartyTransforms[1]));
                                 break;
                             case 1:
-                                animManager.playAttackAnim(AttackAnim.EnemyAttack, true, player, enemyPartyTransforms[0]);
+                                animManager.addToAnimationQueue(() => animManager.playAttackAnim(AttackAnim.EnemyAttack, true, translatedPlayerIndex, enemyPartyTransforms[0]));
                                 break;
                             case 2:
-                                animManager.playAttackAnim(AttackAnim.EnemyAttack, true, player, enemyPartyTransforms[2]);
+                                animManager.addToAnimationQueue(() => animManager.playAttackAnim(AttackAnim.EnemyAttack, true, translatedPlayerIndex, enemyPartyTransforms[2]));
                                 break;
                         }
 
-                    }
+                    }                                                    
                 }
+                Debug.Log("running animation queue");
+                animManager.runAnimationQueue();
                 turn = Turn.player;
                 playerSelection = true;
-                //playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
-                //enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
+
             }
             updateHealthValues();
         }
@@ -213,6 +214,16 @@ public class Combat : MonoBehaviour
           }
           else if*/
     }
+   /* private IEnumerator enemyAttackLogic()
+    {
+        Debug.Log("enemy turn");
+       
+
+        turn = Turn.player;
+        playerSelection = true;
+        //playerHealth.text = $"PlayerHealth: {playerHealthValues[0]}";
+        //enemyHealth.text = $"EnemyHealth: {enemyHealthValues[0]}";
+    }*/
     #region playerAttackLogic
     private void playerSupportMode(int playerIndex, int attackIndex)
     {
@@ -712,7 +723,7 @@ public class EnemyAttack
             int rand = 0; 
             while (!playerAttack)
             {
-                rand = Random.Range(0, players.Length - 1);
+                rand = UnityEngine.Random.Range(0, players.Length - 1);
                 if (players[rand].Health > 0) playerAttack = true;
                 else playerAttack = false; 
             }
@@ -735,7 +746,7 @@ public class EnemyAttack
         //{
             double defenseRoll = (double)(players[playerToAttack].BaseDefense + players[playerToAttack].TempDefenseBoost) / (double)damage;
             if (players[playerToAttack].habit.habitType == HabitType.Defender) defenseRoll *= (1 + players[playerToAttack].habit.Boost); 
-            if (Random.value <= defenseRoll)
+            if (UnityEngine.Random.value <= defenseRoll)
             {
                 Debug.Log($"{players[playerToAttack].Name}'s armor deflected the blow! {defenseRoll} {damage}");
                 return playerToAttack; 
@@ -757,7 +768,7 @@ public class EnemyAttack
     /// <returns></returns>
     public static int getPhysicalDamageFromAttack(int attack, int level)
     {
-        int output = attack + (attack * Random.Range(0, Mathf.Max(1,level)));
+        int output = attack + (attack * UnityEngine.Random.Range(0, Mathf.Max(1,level)));
         Debug.Log($"Damage: {output}");
         return output; 
     }

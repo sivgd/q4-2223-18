@@ -2248,7 +2248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1315544109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2734,6 +2734,7 @@ MonoBehaviour:
   - {fileID: 808361064}
   - {fileID: 1834332730}
   attacker: {fileID: 1874786058}
+  animationFinished: 0
 --- !u!1 &1694754164
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,6 +3247,7 @@ MonoBehaviour:
   attacker: {fileID: 0}
   attackReticle: {fileID: 121500021}
   sfxManager: {fileID: 1368680806}
+  animFinished: 1
 --- !u!1 &1876605176
 GameObject:
   m_ObjectHideFlags: 0

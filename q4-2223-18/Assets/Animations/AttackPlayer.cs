@@ -8,27 +8,26 @@ public class AttackPlayer : MonoBehaviour
     public Transform attacker;
     public GameObject attackReticle;
     public SFXManager sfxManager; 
-    private SpriteRenderer renderer;
-    private bool animFinished = false; 
+    private SpriteRenderer spriteRenderer;
+    public bool animFinished = true; 
     private void Start()
     {
-        renderer = GetComponent<SpriteRenderer>(); 
+        spriteRenderer = GetComponent<SpriteRenderer>(); 
     }
     private void Update()
     {
         if (animFinished)
         {
-            renderer.enabled = false;
+            spriteRenderer.enabled = false;
             attackReticle.SetActive(false);
-            animFinished = false; 
         }
     }
     public void attackPlayerAnimation(Transform recipientTransform, Transform attackerTransform,Sprite attackerSprite, AnimManager aManager,int recipientNum)
     {
         recipient = recipientTransform;
         attacker = attackerTransform;
-        renderer.enabled = true;
-        renderer.sprite = attackerSprite;
+        spriteRenderer.enabled = true;
+        spriteRenderer.sprite = attackerSprite;
         attackReticle.SetActive(true);
         attackReticle.transform.position = recipientTransform.position;
         transform.position = attackerTransform.position;
@@ -38,6 +37,7 @@ public class AttackPlayer : MonoBehaviour
     }
     private IEnumerator attackPlayer(AnimManager aManager, int recipientNum)
     {
+        Debug.Log("playing player attack animation"); 
         Vector2 endingPosition = new Vector2(recipient.position.x + 2, recipient.position.y);
         float t = 0;
         while (!transform.position.Equals(endingPosition))

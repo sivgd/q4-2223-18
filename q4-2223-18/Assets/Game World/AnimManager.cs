@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System; 
 
 public class AnimManager : MonoBehaviour
 {
     public Animator[] enemyAttacks = new Animator[3];
     public Animator[] playerAttacks = new Animator[3];
-    public AttackPlayer attacker; 
+    public AttackPlayer attacker;
+    private List<Action> animationQueue;
+    private bool playingQueue;
+    public bool animationFinished = false; 
 
+    private void Start()
+    {
+        animationQueue = new List<Action>(); 
+    }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        animationFinished = attacker.animFinished;
+        if (animationFinished)
         {
-            playAttackAnim(AttackAnim.Bash, false, 0); 
+            Debug.Log("Animation finished"); 
+        }
+        else
+        {
+            Debug.Log("Animation is not finished"); 
         }
     }
     public void playAttackAnim(AttackAnim anim,bool player ,int recipient)
@@ -87,6 +100,7 @@ public class AnimManager : MonoBehaviour
                     break;
                 case AttackAnim.EnemyAttack:
                     attacker.attackPlayerAnimation(playerAttacks[recipient].transform, perpetrator, perpetrator.gameObject.GetComponent<SpriteRenderer>().sprite,this,recipient);
+
                     break;
                 case AttackAnim.Slash:
                     StartCoroutine(playAnim(true, recipient, "Slash", 0.35f));
@@ -104,6 +118,26 @@ public class AnimManager : MonoBehaviour
 
             }
         }
+    }
+    public void addToAnimationQueue(Action a)
+    {
+        animationQueue.Add(a); 
+    }
+    public void runAnimationQueue()
+    {
+        StartCoroutine(playAnimationQueue()); 
+    }
+    private IEnumerator playAnimationQueue()
+    {
+        for(int i = 0; i < animationQueue.Count; i++)
+        {
+            animationQueue[i].Invoke();
+            yield return new WaitUntil(() => attacker.animFinished); 
+        }
+        animationQueue.Clear();
+        animationQueue.TrimExcess();
+        playingQueue = false; 
+       
     }
     private IEnumerator playAnim(bool player,int recipient,string booleanName,float waitTime)
     {
@@ -126,6 +160,7 @@ public class AnimManager : MonoBehaviour
 
         }
     }
+
 }
 public enum AttackAnim
 {
