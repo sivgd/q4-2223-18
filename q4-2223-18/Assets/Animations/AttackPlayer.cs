@@ -7,13 +7,23 @@ public class AttackPlayer : MonoBehaviour
     public Transform recipient;
     public Transform attacker;
     public GameObject attackReticle;
+    public SFXManager sfxManager; 
     private SpriteRenderer renderer;
+    private bool animFinished = false; 
     private void Start()
     {
         renderer = GetComponent<SpriteRenderer>(); 
     }
-
-   public void attackPlayerAnimation(Transform recipientTransform, Transform attackerTransform,Sprite attackerSprite)
+    private void Update()
+    {
+        if (animFinished)
+        {
+            renderer.enabled = false;
+            attackReticle.SetActive(false);
+            animFinished = false; 
+        }
+    }
+    public void attackPlayerAnimation(Transform recipientTransform, Transform attackerTransform,Sprite attackerSprite, AnimManager aManager,int recipientNum)
     {
         recipient = recipientTransform;
         attacker = attackerTransform;
@@ -21,19 +31,29 @@ public class AttackPlayer : MonoBehaviour
         renderer.sprite = attackerSprite;
         attackReticle.SetActive(true);
         attackReticle.transform.position = recipientTransform.position;
-        StartCoroutine(attackPlayer()); 
+        transform.position = attackerTransform.position;
+        animFinished = false; 
+        StartCoroutine(attackPlayer(aManager,recipientNum)); 
+        
     }
-    private IEnumerator attackPlayer()
+    private IEnumerator attackPlayer(AnimManager aManager, int recipientNum)
     {
-        Vector2 endingPosition = new Vector2(recipient.position.x + renderer.sprite.border.x, recipient.position.y);
+        Vector2 endingPosition = new Vector2(recipient.position.x + 2, recipient.position.y);
         float t = 0;
         while (!transform.position.Equals(endingPosition))
         {
             transform.position = Vector2.Lerp(attacker.position, endingPosition, t);
-            t += Time.deltaTime; 
+            t += Time.deltaTime*1.5f; 
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSecondsRealtime(5); 
+        yield return new WaitForSecondsRealtime(0.2f); 
+        aManager.playAttackAnim(AttackAnim.Slash, true, recipientNum);
+        sfxManager.playAttackAudio(1); 
+        yield return new WaitForSecondsRealtime(0.3f);
+        animFinished = true; 
+        
+
+        
 
     }
 }
