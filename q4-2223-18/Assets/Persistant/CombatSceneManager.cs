@@ -210,6 +210,10 @@ public class CombatSceneManager : MonoBehaviour
         while(tutorialText.maxVisibleCharacters != text.Length)
         {
             tutorialText.maxVisibleCharacters++;
+            if(tutorialText.maxVisibleCharacters % 3 == 0)
+            {
+                sfxManager.playAudio(6); 
+            }
             yield return new WaitForSecondsRealtime(charDelaySeconds); 
         }
         isWriting = false;

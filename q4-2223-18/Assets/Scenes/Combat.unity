@@ -406,7 +406,7 @@ MonoBehaviour:
   - {fileID: 1996262524}
   - {fileID: 706248362}
   - {fileID: 981108248}
-  sfxManager: {fileID: 0}
+  sfxManager: {fileID: 1368680806}
   party:
   - {fileID: 11400000, guid: d4f89e7c3789f8b4fbb597c0cbb6176f, type: 2}
   - {fileID: 11400000, guid: d94f1465ad0872f4a8bf0ee4aaec818b, type: 2}
@@ -3801,5 +3801,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5238846902835061666, guid: cc413d0a6d24fa8499283f300dbfb928, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cc413d0a6d24fa8499283f300dbfb928, type: 3}
