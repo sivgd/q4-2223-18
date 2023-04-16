@@ -21,7 +21,7 @@ public class FinalFight : MonoBehaviour
        
         dm.gameObject.SetActive(true);
         dm.nameBox.text = "Prince Parallelogram";
-        dm.changeCurrentDialouge(new string[] { "Ahh, so you're the polygon thats been making a fuss in my kingdom", "I have a few choice words for you", "So come! Put up your fists and lets settle this!" },0.03f, true);
+        dm.changeCurrentDialouge(new string[] { "Ahh, so you're the polygon thats been making a fuss in my kingdom", "I have a few choice words for you", "So come! Put up your fists and lets settle this!" },0.03f, true,TalkerPersonality.evil);
         yield return new WaitUntil(()=>dm.gameObject.activeInHierarchy);
         yield return new WaitWhile(()=> dm.gameObject.activeInHierarchy);
         ecm.enterCombat(new IndividualEntityData[] { bossData }, false); 

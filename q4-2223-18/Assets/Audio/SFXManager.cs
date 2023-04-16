@@ -11,13 +11,17 @@ public class SFXManager : MonoBehaviour
     public AudioSource attackSFXSource; 
     [Header("Audio Clips")]
     public AudioClip[] audioClips;
-    public AudioClip[] attackSounds; 
+    public AudioClip[] attackSounds;
 
     /// <summary>
     /// <para><b>IDS:</b></para>
     /// <para>1 = buttonHover</para>
     /// <para>2 = enterPressed</para>
     ///  <para>3 = menuExit</para>
+    ///  <para>4 = talking_Dumb</para>
+    ///  <para>5 = talking_Evil</para>
+    ///  <para>6 = talking_Narrator</para>
+    ///  <para>7 = talking_Friend</para>
     /// </summary>
     /// <param name="id"></param>
     public void playAudio(int id)

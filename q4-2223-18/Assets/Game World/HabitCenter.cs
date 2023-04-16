@@ -11,7 +11,7 @@ public class HabitCenter : MonoBehaviour
     public int attackBoost;
     public int defenseBoost;
     [TextArea]
-    public string[] dialouge = { "You look upon this default unity cube sprite.", "Suddenly you are reminded that you should", "get back to work", "(get to work dummy)", "your stats have increased!" };
+    public string[] dialouge = { "You look upon this default unity cube sprite.", "Suddenly you are reminded that you should", "get back to work", "(get to work dummy)", "your stats have increased!"};
     [SerializeField] private bool hasEntered = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,7 +19,7 @@ public class HabitCenter : MonoBehaviour
         {
             dm.nameBox.text = "";
             dm.gameObject.SetActive(true);
-            dm.changeCurrentDialouge(dialouge,0.05f,true);
+            dm.changeCurrentDialouge(dialouge, 0.05f, true, TalkerPersonality.narrator);
              for(int i = 0; i < playerParty.Length; i++)
              {
                 playerParty[i].maxHealth += healthBoost;

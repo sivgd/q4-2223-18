@@ -32,7 +32,7 @@ public class KeyPrompt : MonoBehaviour
             {
                 dm.nameBox.text = "";
                 dm.gameObject.SetActive(true); 
-                dm.changeCurrentDialouge(errorDialouge,0.03f,true);
+                dm.changeCurrentDialouge(errorDialouge,0.03f,true,TalkerPersonality.narrator);
             }
         }
     }

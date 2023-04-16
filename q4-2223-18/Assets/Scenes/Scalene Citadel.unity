@@ -6150,6 +6150,7 @@ MonoBehaviour:
   - {fileID: 139258356}
   currentDialouge: 1
   dm: {fileID: 694569831}
+  tPersonality: 3
   name: Horace Hexagon
 --- !u!1 &1276936445
 GameObject:
@@ -9028,7 +9029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8218800913997334012, guid: b2415918fba7878488b141b7ec5204ca, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2415918fba7878488b141b7ec5204ca, type: 3}

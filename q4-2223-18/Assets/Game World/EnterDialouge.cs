@@ -16,6 +16,7 @@ public class EnterDialouge : MonoBehaviour
    // public bool[] additionalBooleans; 
     public int currentDialouge = 1; 
     public DialougeManager dm;
+    public TalkerPersonality tPersonality; 
     public string name; 
   //  public TMP_Text dialougeBox;
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,14 +28,14 @@ public class EnterDialouge : MonoBehaviour
                 case 1:
                     dialougeUI.SetActive(true);
                     dm.nameBox.text = name;
-                    dm.changeCurrentDialouge(dialouge, 0.03f, true);
+                    dm.changeCurrentDialouge(dialouge, 0.03f, true,tPersonality);
                     if (hasSecondaryDialouge == false) StartCoroutine(destoryGameObjects());
                     //currentDialouge++;
                     break;
                 case 2:
                     dialougeUI.SetActive(true);
                     dm.nameBox.text = "";
-                    dm.changeCurrentDialouge(secondDialouge, 0.03f, true);
+                    dm.changeCurrentDialouge(secondDialouge, 0.03f, true,tPersonality);
                     StartCoroutine(destoryGameObjects()); 
                     break; 
             }

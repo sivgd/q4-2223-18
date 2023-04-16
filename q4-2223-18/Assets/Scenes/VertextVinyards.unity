@@ -48250,6 +48250,7 @@ MonoBehaviour:
   - {fileID: 1333808191}
   currentDialouge: 1
   dm: {fileID: 1973272911}
+  tPersonality: 3
   name: Tangent Terrance
 --- !u!61 &1450155822
 BoxCollider2D:
@@ -48642,6 +48643,7 @@ MonoBehaviour:
   - {fileID: 0}
   currentDialouge: 1
   dm: {fileID: 1973272911}
+  tPersonality: 0
   name: 
 --- !u!61 &1553983543
 BoxCollider2D:

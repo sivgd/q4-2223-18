@@ -55,6 +55,7 @@ public class TrackPartyData : MonoBehaviour
         partyData.PlayerPosition = worldPos;
         partyData.PlayerRotation = wordRot;
     }
+   
 
 
 

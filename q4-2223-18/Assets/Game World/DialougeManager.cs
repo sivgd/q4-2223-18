@@ -16,10 +16,14 @@ public class DialougeManager : MonoBehaviour
     [SerializeField] private bool updateDialouge; 
     [SerializeField] private string[] dialouge;
     [SerializeField] private int currentDialougeString = 0;
+    [SerializeField] private TalkerPersonality talkerPersonality;
+    private SFXManager sfxManager; 
     public bool currentDialougeFinished;
     [SerializeField] private IEnumerator currentDialougeRoutine;
+
     private void Start()
     {
+        sfxManager = FindObjectOfType<SFXManager>(); 
         if (SceneManager.GetActiveScene().name.Contains("Level1"))
         {
             dialouge = new string[] { "TED TRIANGLE!", "ITS THE FIRST OF THE MONTH!", "PAY YOUR MANDATORY TITHE" }; 
@@ -39,9 +43,10 @@ public class DialougeManager : MonoBehaviour
         updateDialouge = true; 
         currentDialougeRoutine = scrollingDialouge(dialouge[currentDialougeString],typeWriterDelay);
     }
-    public void changeCurrentDialouge(string[] dialougeList,float charDelay,bool freezePlayer)
+    public void changeCurrentDialouge(string[] dialougeList,float charDelay,bool freezePlayer,TalkerPersonality talkerPersonality)
     {
-        this.freezePlayer = freezePlayer; 
+        this.freezePlayer = freezePlayer;
+        this.talkerPersonality = talkerPersonality; 
         Debug.Log(string.Join(", ",dialougeList)); 
         currentDialougeString = 0;
         Debug.Log("Reset the dialouge string"); 
@@ -62,12 +67,39 @@ public class DialougeManager : MonoBehaviour
         updateDialouge = false;
         dialougeBox.text = dialougeString;
         dialougeBox.maxVisibleCharacters = 0; 
-        //Debug.Log
+       
         while (dialougeBox.maxVisibleCharacters != dialougeString.Length)
         {
-
+          
             dialougeBox.maxVisibleCharacters++;
-            yield return new WaitForSecondsRealtime(charDelaySeconds); 
+            if(dialougeBox.maxVisibleCharacters % 3 == 0)
+            {
+                if (!dialougeString.Contains("[") || !dialougeString.Contains("]"))
+                {
+                    switch (talkerPersonality)
+                    {
+                        case TalkerPersonality.stupid:
+                            sfxManager.playAudio(4);
+                            break;
+                        case TalkerPersonality.evil:
+                            sfxManager.playAudio(5);
+                            break;
+                        case TalkerPersonality.narrator:
+                            sfxManager.playAudio(6);
+                            break;
+                        case TalkerPersonality.friend:
+                            sfxManager.playAudio(7);
+                            break;
+                    }
+                }
+                else
+                {
+                    sfxManager.playAudio(6);
+                }
+            }
+           
+
+          yield return new WaitForSecondsRealtime(charDelaySeconds); 
         }
         currentDialougeFinished = true;
          
@@ -104,6 +136,13 @@ public class DialougeManager : MonoBehaviour
     }
     public bool FreezePlayer { get => freezePlayer; set => freezePlayer = value; }
     public int CurrentDialougeString { get => currentDialougeString; set => currentDialougeString = value; }
+}
+public enum TalkerPersonality
+{
+    stupid,
+    evil,
+    narrator,
+    friend
 }
 class DialougeManifest
 {
