@@ -167,6 +167,12 @@ public class Combat : MonoBehaviour
                             case 0:
                                 translatedPlayerIndex = 1;
                                 break;
+                            case 1:
+                                translatedPlayerIndex = 2;
+                                break;
+                            case 2:
+                                translatedPlayerIndex = 0;
+                                break; 
                         }
                         Debug.Log($"Attacked player, normal index: {player}, translated index {translatedPlayerIndex}");
                         switch (i)

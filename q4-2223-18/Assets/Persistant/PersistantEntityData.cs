@@ -5,7 +5,9 @@ using UnityEngine;
 public class PersistantEntityData : ScriptableObject
 {
     [SerializeField] private List<int> entitysToDelete = new List<int>();
+    public float musicPos; 
     private void OnEnable() => hideFlags = HideFlags.DontUnloadUnusedAsset;
+    
 
     private void OnValidate()
     {

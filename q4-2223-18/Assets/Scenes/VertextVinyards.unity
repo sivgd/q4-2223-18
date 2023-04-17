@@ -46734,6 +46734,7 @@ MonoBehaviour:
   closedDoor: {fileID: 0}
   openDoor: {fileID: 0}
   keyGiver: {fileID: 1333808191}
+  pData: {fileID: 11400000, guid: 60d85625856b93146a20f7652dc7aa5a, type: 2}
   dm: {fileID: 1973272911}
   errorDialouge:
   - As you look at the door, you see a comically large golden padlock.
@@ -47431,7 +47432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0651fd854d2c410418ebcf091b4f7c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatSprite: {fileID: 21300000, guid: 0ce9a5bc3ac8aa34f865b35ea3e39e71, type: 3}
+  combatSprite: {fileID: 21300000, guid: b92d641a0e0cf7d41bbe37cf829f012d, type: 3}
   eData: {fileID: 11400000, guid: 0fe43040625e8ee42a056f1247e45ace, type: 2}
   name: RA Rookie
   id: -1
@@ -48179,6 +48180,133 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088ebd9778962d34085f13721565d73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1449952826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1449952827}
+  - component: {fileID: 1449952828}
+  m_Layer: 0
+  m_Name: Jutebox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1449952827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449952826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 230309247515689963}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1449952828
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449952826}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0fe432634f2ce3d49ae5e6c47e33f7f9, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1450155819
 GameObject:
   m_ObjectHideFlags: 0
@@ -48724,6 +48852,7 @@ MonoBehaviour:
   ecm: {fileID: 1486522899}
   eData: {fileID: 11400000, guid: 0fe43040625e8ee42a056f1247e45ace, type: 2}
   ed: {fileID: 1450155821}
+  soundTrack: {fileID: 1449952828}
 --- !u!61 &1565115078
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -52855,6 +52984,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4699e4057a4c1f6499a1c79d89ba4c14, type: 3}
+--- !u!4 &230309247515689963 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 230309246305334139, guid: 4699e4057a4c1f6499a1c79d89ba4c14, type: 3}
+  m_PrefabInstance: {fileID: 230309247515689962}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3888355554716606636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52931,6 +53065,10 @@ PrefabInstance:
       propertyPath: dManager
       value: 
       objectReference: {fileID: 1973272911}
+    - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
+      propertyPath: soundtrack
+      value: 
+      objectReference: {fileID: 1449952828}
     - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
       propertyPath: taxManData
       value: 

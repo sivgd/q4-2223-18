@@ -13,6 +13,7 @@ public class FlibberFlabberFight : MonoBehaviour
     public EnterCombatManager ecm;
     public PersistantEntityData eData;
     public EnterDialouge ed;
+    public AudioSource soundTrack;
 
     private void Start()
     {
@@ -26,13 +27,15 @@ public class FlibberFlabberFight : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            eData.addEntity(id); 
+            eData.addEntity(id);
+            if(soundTrack !=null) eData.musicPos = soundTrack.time;
             ecm.enterCombat(enemies,false);
         }
     }
     private void OnDestroy()
     {
         ed.currentDialouge = 2;
+       if(soundTrack != null) soundTrack.time = eData.musicPos; 
         Destroy(parent);
     }
 }

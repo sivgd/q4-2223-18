@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0050661b224c6724bb0944feb0a930e0, type: 3}
   m_Name: Player2
   m_EditorClassIdentifier: 
-  health: 0
-  attacks: []
+  health: 85
+  attacks:
+  - {fileID: 3112459210943103028, guid: d7522e3cbd42c9b4daa476af5bb66ed8, type: 3}
+  - {fileID: 2782049883510846192, guid: 74aca3c4334d22449a37e9f0b9f7af49, type: 3}
+  - {fileID: 939227001099353645, guid: 41d0c64a07a89ac4181cfe18a8670f66, type: 3}
   items: []
-  baseAttack: 0
-  habit: {fileID: 0}
-  maxHealth: 0
-  combatSprite: {fileID: 0}
-  topDownSprite: {fileID: 0}
-  baseDefense: 0
+  baseAttack: 1
+  habit: {fileID: 4402348544277925026, guid: ccc2a259837bef4419ceb6679fb8cb5f, type: 3}
+  maxHealth: 100
+  combatSprite: {fileID: 21300000, guid: ad3491115e50ed04297f0680da0c0bfe, type: 3}
+  topDownSprite: {fileID: 21300000, guid: ad3491115e50ed04297f0680da0c0bfe, type: 3}
+  baseDefense: 5
   tempDefenseBoost: 0
-  name: 
+  name: Tangent Terrance
   tempAttackBoost: 0
   hasGoneDuringTurn: 0

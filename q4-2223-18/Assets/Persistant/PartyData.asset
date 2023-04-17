@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PartyData
   m_EditorClassIdentifier: 
   isCombatTutorial: 0
+  loadPreviousPos: 1
   previousSceneName: Scalene Citadel
   playerMoveSpeed: 0
   playerPosition: {x: 0, y: 0}

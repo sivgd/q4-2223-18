@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TrackPartyData : MonoBehaviour
 {
+   
     [Header("S.O. References")]
     public Player[] party = new Player[3];
     public PersistantPartyData partyData;
@@ -19,16 +20,17 @@ public class TrackPartyData : MonoBehaviour
     public Sprite[] combatSprites; 
     private void Start()
     {
-        if (!partyData.PreviousSceneName.Equals(SceneManager.GetActiveScene().name))
-        {
-            partyData.PlayerPosition = Vector2.zero;
-            partyData.PreviousSceneName = SceneManager.GetActiveScene().name;
-        }
-        else
+      
+        if(partyData.loadPreviousPos)
         {
             partyData.PreviousSceneName = SceneManager.GetActiveScene().name;
             transform.position = partyData.PlayerPosition;
             transform.rotation = partyData.PlayerRotation;
+            //partyData.PlayerPosition = Vector2.zero;
+        }
+        else
+        {
+            partyData.loadPreviousPos = true; 
         }
         for(int i = 0; i < party.Length; i++)
         {

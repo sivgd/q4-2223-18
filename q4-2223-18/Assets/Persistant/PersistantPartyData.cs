@@ -6,7 +6,8 @@ public class PersistantPartyData : ScriptableObject
 {
     //for the future, when creating party members, have seperate template prefabs for each party member, then load data from this script to modify said templates 
     // [SerializeField] private int numMembers;
-    public bool isCombatTutorial; 
+    public bool isCombatTutorial;
+    public bool loadPreviousPos; 
     [SerializeField] private string previousSceneName; 
     [Header("Player Data")]
     [SerializeField] private float playerMoveSpeed;
