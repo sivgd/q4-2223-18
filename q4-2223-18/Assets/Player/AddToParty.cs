@@ -11,6 +11,7 @@ public class AddToParty : MonoBehaviour
     public int baseDefense;
     public int baseAttack;
     public Attack[] attacks;
+    public TrackPartyData tPartyData; 
     [Header("Unique identifiers")]
     public Sprite sprite;
     public Habit habit;
@@ -36,12 +37,15 @@ public class AddToParty : MonoBehaviour
                     player.habit = habit;
                     player.Name = name;
                     Debug.Log($"Say hello to {name}");
-                    return;
+                    tPartyData.loadPreviousData(); 
+                    return; 
                 }
                 else if (player.Name == name)
                 {
                     return;
                 }
+               
+                
             }
         }
     }

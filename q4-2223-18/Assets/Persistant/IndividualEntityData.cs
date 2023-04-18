@@ -12,6 +12,7 @@ public class IndividualEntityData : MonoBehaviour
     public int health;
     public float attack;
     public int level;
+    public bool markedForDeath; 
 
     public IndividualEntityData(Sprite combatSprite, PersistantEntityData eData, string name, int id, int health, float attack, int level)
     {
@@ -32,20 +33,13 @@ public class IndividualEntityData : MonoBehaviour
             {
                 Debug.Log($"destroyed {name}"); 
                 Destroy(gameObject);
+            
             }
+            else
+            {
+                markedForDeath = true; 
+            }
+            
         }
     }
-    private IEnumerator prologueCutscene()
-    {
-        DialougeManager dm = FindObjectOfType<DialougeManager>(); 
-        dm.gameObject.SetActive(true);
-        dm.nameBox.text = "Prince Parallelogram";
-        dm.changeCurrentDialouge(new string[] { "Thus concludes the life and times of Prince Parallelogram", "A fitting end, to reign defined by overbearing tyranny.", "Doomed, from the very start.", "And I don't regret a SECOND of it!" }, 0.03f, true,TalkerPersonality.evil);
-        yield return new WaitUntil(() => dm.gameObject.activeInHierarchy);
-        yield return new WaitWhile(() => dm.gameObject.activeInHierarchy);
-        SceneManager.LoadScene("TitleCard"); 
-
-    }
-
-
 }

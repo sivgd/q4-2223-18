@@ -47627,6 +47627,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1127546128 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8858385715656073525, guid: 4699e4057a4c1f6499a1c79d89ba4c14, type: 3}
+  m_PrefabInstance: {fileID: 230309247515689962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228ed92689506434e91c98792d01fde4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1161289302
 GameObject:
   m_ObjectHideFlags: 0
@@ -47942,6 +47953,7 @@ MonoBehaviour:
   - {fileID: 3112459210943103028, guid: d7522e3cbd42c9b4daa476af5bb66ed8, type: 3}
   - {fileID: 2782049883510846192, guid: 74aca3c4334d22449a37e9f0b9f7af49, type: 3}
   - {fileID: 939227001099353645, guid: 41d0c64a07a89ac4181cfe18a8670f66, type: 3}
+  tPartyData: {fileID: 457935128}
   sprite: {fileID: 21300000, guid: ad3491115e50ed04297f0680da0c0bfe, type: 3}
   habit: {fileID: 4402348544277925026, guid: ccc2a259837bef4419ceb6679fb8cb5f, type: 3}
   name: Tangent Terrance
@@ -52913,6 +52925,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8218800913997334001, guid: b2415918fba7878488b141b7ec5204ca, type: 3}
+      propertyPath: sfx
+      value: 
+      objectReference: {fileID: 1127546128}
     - target: {fileID: 8218800913997334001, guid: b2415918fba7878488b141b7ec5204ca, type: 3}
       propertyPath: playerMovement
       value: 

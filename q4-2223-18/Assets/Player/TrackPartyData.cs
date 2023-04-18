@@ -20,12 +20,13 @@ public class TrackPartyData : MonoBehaviour
     public Sprite[] combatSprites; 
     private void Start()
     {
-      
-        if(partyData.loadPreviousPos)
+        loadPreviousData();
+        if (partyData.loadPreviousPos)
         {
             partyData.PreviousSceneName = SceneManager.GetActiveScene().name;
             transform.position = partyData.PlayerPosition;
             transform.rotation = partyData.PlayerRotation;
+          
             //partyData.PlayerPosition = Vector2.zero;
         }
         else
@@ -41,6 +42,14 @@ public class TrackPartyData : MonoBehaviour
            // topDownSprites[i] = party[i].topDownSprite;
            // combatSprites[i] = party[i].combatSprite; 
         }*/
+    }
+    public void loadPreviousData()
+    {
+        for(int i = 0; i < topDownSprites.Length; i++)
+        {
+            topDownSprites[i] = party[i].topDownSprite;
+            combatSprites[i] = party[i].combatSprite; 
+        }
     }
     public void savePartyData()
     {

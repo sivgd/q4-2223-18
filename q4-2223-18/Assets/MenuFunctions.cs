@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
+ 
 
 public class MenuFunctions : MonoBehaviour
 {
-
+   
     [SerializeField] private GameObject nonCreditButtons;
-    [SerializeField] private GameObject creditStuff; 
-
+    [SerializeField] private GameObject creditStuff;
+    
+   
     public void LoadL1()
     {
         SceneManager.LoadScene("Level1"); 

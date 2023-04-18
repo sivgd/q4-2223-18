@@ -7,7 +7,8 @@ public class StatScreen : MonoBehaviour
 {
     [Header("External References")]
     public PlayerMovement playerMovement;
-    public Player[] party; 
+    public Player[] party;
+    public SFXManager sfx; 
     [Header("UI")]
     public TMP_Text[] playerList = new TMP_Text[3];
     public GameObject[] statTextObjs; 
@@ -36,8 +37,16 @@ public class StatScreen : MonoBehaviour
             
             panelActive = !panelActive; 
             listNames = true;
-            showStats = false; 
-            
+            showStats = false;
+            if (panelActive) sfx.playAudio(2);
+            else sfx.playAudio(3);            
+        }
+        if (!panelActive)
+        {
+            Debug.Log("Panel not active"); 
+            listNames = false;
+            showStats = false;
+            nameSelection = false; 
         }
         if (listNames)
         {
@@ -55,6 +64,7 @@ public class StatScreen : MonoBehaviour
                 playerList[1].gameObject.SetActive(false);
                 playerList[2].gameObject.SetActive(false);
                 showStats = true;
+                sfx.playAudio(2); 
             }
         }
         else if (showStats)
@@ -111,16 +121,19 @@ public class StatScreen : MonoBehaviour
             currNameSelected = Mathf.Clamp(currNameSelected - 1, 0, maxPlayers);
             if (!playerList[currNameSelected].gameObject.activeInHierarchy)
             {
-                currNameSelected += 1; 
+                currNameSelected += 1;              
             }
+            sfx.playAudio(1);
+
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             currNameSelected = Mathf.Clamp(currNameSelected + 1, 0, maxPlayers);
             if (!playerList[currNameSelected].gameObject.activeInHierarchy)
             {
-                currNameSelected -= 1;
+                currNameSelected -= 1;     
             }
+            sfx.playAudio(1);
         }
         switch (currNameSelected)
         {
