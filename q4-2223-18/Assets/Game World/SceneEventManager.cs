@@ -53,7 +53,7 @@ public class SceneEventManager : MonoBehaviour
         soundtrack.enabled = false; 
         //yield return new WaitUntil(() => dObj.activeInHierarchy);
         dManager.nameBox.text = "Right Angle Rookie";
-        dManager.changeCurrentDialouge(new string[] { "Ahhh, so you finally decided to be reasonable!", "As you know, the monthly tithe compunds daily.", "So, with an interest rate of 1.5, according to my paper here...", "You owe around ten thousand gold pieces", "Now, pay up!" }, 0.03f, true,TalkerPersonality.stupid);
+        dManager.changeCurrentDialouge(new string[] { "Ahhh, so you finally decided to be reasonable!", "As you know, the monthly tithe compounds daily.", "So, with an interest rate of 1.5, according to my paper here...", "You owe around ten thousand gold pieces", "Now, pay up!" }, 0.03f, true,TalkerPersonality.stupid);
         yield return new WaitUntil(() => !dManager.isActiveAndEnabled);
         secondCutscenePrompt.SetActive(true);
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.P));
