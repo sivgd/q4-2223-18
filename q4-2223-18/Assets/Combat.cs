@@ -159,7 +159,8 @@ public class Combat : MonoBehaviour
                     if (enemies[i].Health > 0)
                     {
                         //EnemyAttack.getRandomPlayerToAttack(); TODO: impliment enemy attack
-                        int player = EnemyAttack.attackRandomPlayer(party, enemies[i].BaseAttack, enemies[i].Level);
+                        bool successful = false; 
+                        int player = EnemyAttack.attackRandomPlayer(party, enemies[i].BaseAttack, enemies[i].Level,ref successful);
                         Debug.Log("applying damage to the player");
                         int translatedPlayerIndex = 0;
                         switch (player)
@@ -178,13 +179,13 @@ public class Combat : MonoBehaviour
                         switch (i)
                         {
                             case 0:
-                                animManager.addToAnimationQueue(() => animManager.playAttackAnim(AttackAnim.EnemyAttack, true, translatedPlayerIndex, enemyPartyTransforms[1]));
+                                animManager.addToAnimationQueue(() => animManager.playAttackAnim(AttackAnim.EnemyAttack, true, translatedPlayerIndex, enemyPartyTransforms[1],successful));
                                 break;
                             case 1:
-                                animManager.addToAnimationQueue(() => animManager.playAttackAnim(AttackAnim.EnemyAttack, true, translatedPlayerIndex, enemyPartyTransforms[0]));
+                                animManager.addToAnimationQueue(() => animManager.playAttackAnim(AttackAnim.EnemyAttack, true, translatedPlayerIndex, enemyPartyTransforms[0], successful));
                                 break;
                             case 2:
-                                animManager.addToAnimationQueue(() => animManager.playAttackAnim(AttackAnim.EnemyAttack, true, translatedPlayerIndex, enemyPartyTransforms[2]));
+                                animManager.addToAnimationQueue(() => animManager.playAttackAnim(AttackAnim.EnemyAttack, true, translatedPlayerIndex, enemyPartyTransforms[2], successful));
                                 break;
                         }
 
@@ -738,7 +739,7 @@ public class EnemyAttack
        }
         
     }
-    public static int attackRandomPlayer(Player[] players, int baseDamage, int enemyLevel)
+    public static int attackRandomPlayer(Player[] players, int baseDamage, int enemyLevel,ref bool successful)
     {
         int playerToAttack = getRandomPlayerToAttack(players);
         //TODO: Add defense 
@@ -755,10 +756,12 @@ public class EnemyAttack
             if (UnityEngine.Random.value <= defenseRoll)
             {
                 Debug.Log($"{players[playerToAttack].Name}'s armor deflected the blow! {defenseRoll} {damage}");
+                successful = false; 
                 return playerToAttack; 
             }
             else
             {
+                successful = true;
                 players[playerToAttack].Health -= damage;
                 Debug.Log($"{players[playerToAttack].Name} took damage! {damage}");
             }

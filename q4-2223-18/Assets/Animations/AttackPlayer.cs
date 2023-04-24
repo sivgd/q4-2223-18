@@ -23,7 +23,7 @@ public class AttackPlayer : MonoBehaviour
            
         }
     }
-    public void attackPlayerAnimation(Transform recipientTransform, Transform attackerTransform,Sprite attackerSprite, AnimManager aManager,int recipientNum)
+    public void attackPlayerAnimation(Transform recipientTransform, Transform attackerTransform,Sprite attackerSprite, AnimManager aManager,int recipientNum,bool successful)
     {
         recipient = recipientTransform;
         attacker = attackerTransform;
@@ -34,10 +34,10 @@ public class AttackPlayer : MonoBehaviour
         attackReticle.transform.position = recipientTransform.position;
         transform.position = attackerTransform.position;  
         animFinished = false; 
-        StartCoroutine(attackPlayer(aManager,recipientNum)); 
+        StartCoroutine(attackPlayer(aManager,recipientNum,successful)); 
         
     }
-    private IEnumerator attackPlayer(AnimManager aManager, int recipientNum)
+    private IEnumerator attackPlayer(AnimManager aManager, int recipientNum,bool succesful)
     {
         Debug.Log("playing player attack animation"); 
         Vector2 endingPosition = new Vector2(recipient.position.x + 2, recipient.position.y);
@@ -48,9 +48,16 @@ public class AttackPlayer : MonoBehaviour
             t += Time.deltaTime*1.5f; 
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSecondsRealtime(0.2f); 
-        aManager.playAttackAnim(AttackAnim.Slash, true, recipientNum);
-        sfxManager.playAttackAudio(1); 
+        yield return new WaitForSecondsRealtime(0.2f);
+        if (succesful)
+        {
+            aManager.playAttackAnim(AttackAnim.Slash, true, recipientNum);
+            sfxManager.playAttackAudio(1);
+        }
+        else
+        {
+            aManager.playAttackAnim(AttackAnim.Miss, true, recipientNum); 
+        }
         yield return new WaitForSecondsRealtime(0.3f);
         animFinished = true;
         attacker.gameObject.GetComponent<SpriteRenderer>().enabled = true;

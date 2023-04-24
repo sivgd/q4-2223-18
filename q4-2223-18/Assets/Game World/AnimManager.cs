@@ -54,6 +54,7 @@ public class AnimManager : MonoBehaviour
             {
                 case AttackAnim.Heal:
                     StartCoroutine(playAnim(true, recipient,"Heal",.52f));
+
                     break;
                 case AttackAnim.Slash:
                     StartCoroutine(playAnim(true, recipient, "Slash", 0.35f));
@@ -64,14 +65,18 @@ public class AnimManager : MonoBehaviour
                 case AttackAnim.MagicDart:
                     StartCoroutine(playAnim(true, recipient, "MDart", .52f));
                     break;
+                case AttackAnim.Miss:
+                    StartCoroutine(playAnim(true, recipient, "Miss", 0.26f));
+                    break; 
                 default:
                     Debug.Log("That animation has not been implimented yet :P");
                     break;
 
             }
+            Debug.Log($"Recipient: {recipient} ");
         }
     }
-    public void playAttackAnim(AttackAnim anim, bool player, int recipient, Transform perpetrator)
+    public void playAttackAnim(AttackAnim anim, bool player, int recipient, Transform perpetrator,bool successful)
     {
         if (!player)
         {
@@ -97,9 +102,11 @@ public class AnimManager : MonoBehaviour
             {
                 case AttackAnim.Heal:
                     StartCoroutine(playAnim(true, recipient, "Heal", .52f));
+                    Debug.Log($"Recipient: {recipient} "); 
                     break;
                 case AttackAnim.EnemyAttack:
-                    attacker.attackPlayerAnimation(playerAttacks[recipient].transform, perpetrator, perpetrator.gameObject.GetComponent<SpriteRenderer>().sprite,this,recipient);
+                   
+                    attacker.attackPlayerAnimation(playerAttacks[recipient].transform, perpetrator, perpetrator.gameObject.GetComponent<SpriteRenderer>().sprite,this,recipient,successful);
 
                     break;
                 case AttackAnim.Slash:
@@ -169,5 +176,7 @@ public enum AttackAnim
     Slash,
     Bash,
     MagicDart,
+    Miss,
+    Block,
     EnemyAttack
 }

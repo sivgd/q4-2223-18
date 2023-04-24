@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0050661b224c6724bb0944feb0a930e0, type: 3}
   m_Name: Player1
   m_EditorClassIdentifier: 
-  health: 120
+  health: 100
   attacks:
   - {fileID: 4939346911045058305, guid: f42cf68cc9806be4998f7fce9cc91db4, type: 3}
   - {fileID: 5000619179442224325, guid: ff80378790838fc49a51daa5174dc037, type: 3}
@@ -20,13 +20,12 @@ MonoBehaviour:
   items:
   - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
   - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
-  - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
-  baseAttack: 104
+  baseAttack: 1
   habit: {fileID: 8303190023911595340, guid: 6e8ebdf2a5025d0468d2710d12b9a5d3, type: 3}
-  maxHealth: 120
+  maxHealth: 100
   combatSprite: {fileID: 21300000, guid: 29f57bfdf60317941bec489867fe8080, type: 3}
   topDownSprite: {fileID: 21300000, guid: 29f57bfdf60317941bec489867fe8080, type: 3}
-  baseDefense: 11
+  baseDefense: 5
   tempDefenseBoost: 0
   name: Ted Triangle
   tempAttackBoost: 0

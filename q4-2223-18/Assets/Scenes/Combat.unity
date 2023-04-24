@@ -2894,9 +2894,9 @@ MonoBehaviour:
   - {fileID: 1566390278}
   - {fileID: 1815470935}
   playerAttacks:
-  - {fileID: 1927263558}
-  - {fileID: 808361064}
   - {fileID: 1834332730}
+  - {fileID: 808361064}
+  - {fileID: 1927263558}
   attacker: {fileID: 1874786058}
   animationFinished: 0
 --- !u!1 &1694754164
@@ -3306,7 +3306,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.71875, y: 0.71875}
+  m_Size: {x: 1.09375, y: 1.09375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
