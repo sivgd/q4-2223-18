@@ -197,9 +197,10 @@ public class CombatSceneManager : MonoBehaviour
         textNum = 0; 
         tutorialText.text = "";
         isWritingFinished = false; 
-        StartCoroutine(typeWriterText("You defeated the enemy!\n[Press LMB to continue]", 0.03f));
-        yield return new WaitUntil(()=>isWritingFinished);
+        //StartCoroutine(typeWriterText("You defeated the enemy!\n[Press LMB to continue]", 0.03f));
+        //yield return new WaitUntil(()=>isWritingFinished);
         SceneManager.LoadScene(partyData.PreviousSceneName);
+        yield return null; 
        
        
     }
