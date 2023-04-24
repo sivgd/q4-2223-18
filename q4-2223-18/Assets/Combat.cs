@@ -55,7 +55,14 @@ public class Combat : MonoBehaviour
     private void Start()
     {
         updateHealthValues(); 
-
+        for(int p = 0; p < party.Length; p++)
+        {
+            party[p].HasGoneDuringTurn = false; 
+            for(int a = 0; a < party[p].Attacks.Length; a++)
+            {
+                party[p].Attacks[a].Cooldown = 0; 
+            }
+        }
         // enemyHealthValues[0] = 
     }
     
