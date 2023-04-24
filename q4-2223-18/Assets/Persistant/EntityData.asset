@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: EntityData
   m_EditorClassIdentifier: 
   entitysToDelete: 
+  musicPos: 0
