@@ -148,6 +148,7 @@ public class AnimManager : MonoBehaviour
     }
     private IEnumerator playAnim(bool player,int recipient,string booleanName,float waitTime)
     {
+        Debug.Log($"playing {booleanName}"); 
         if (!player)
         {
             enemyAttacks[recipient].gameObject.SetActive(true);

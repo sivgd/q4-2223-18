@@ -653,7 +653,7 @@ MonoBehaviour:
   - {fileID: 895736699}
   - {fileID: 1695917772}
   - {fileID: 336394454}
-  playerSelection: 0
+  playerSelection: 1
   playerPosSelected: 2
   playerSelected: 0
   combatButtonSelected: 2
@@ -662,7 +662,7 @@ MonoBehaviour:
   enemyPosSelected: 0
   attackSelected: 0
   turn: 0
-  uiMode: 4
+  uiMode: 5
   playerHasBeenSelected: 0
   hasAttackBeenSelected: 0
   hasEnemyBeenSelected: 0
