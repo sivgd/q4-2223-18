@@ -56,7 +56,8 @@ public class AttackPlayer : MonoBehaviour
         }
         else
         {
-            aManager.playAttackAnim(AttackAnim.Miss, true, recipientNum); 
+            aManager.playAttackAnim(AttackAnim.Miss, true, recipientNum);
+            sfxManager.playAttackAudio(5); 
         }
         yield return new WaitForSecondsRealtime(0.3f);
         animFinished = true;

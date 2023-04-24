@@ -39,6 +39,7 @@ public class SFXManager : MonoBehaviour
     /// <para>2 = Bash</para>
     /// <para>3 = Magic Dart</para>
     /// <para>4 = Heal</para>
+    /// <para>4 = Miss</para>
     /// </summary>
     /// <param name="id"></param>
     public void playAttackAudio(int id)
