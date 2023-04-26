@@ -48,6 +48,6 @@ MonoBehaviour:
   maxCoolDown: 0
   correspondingAnimation: 3
   attackType: 0
-  damage: 5
+  damage: 10
   name: Bash
-  cooldown: 0
+  cooldown: -1

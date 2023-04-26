@@ -48,6 +48,6 @@ MonoBehaviour:
   maxCoolDown: 2
   correspondingAnimation: 2
   attackType: 0
-  damage: 10
+  damage: 20
   name: Slash
-  cooldown: 0
+  cooldown: 2
