@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8713554702748096451
+--- !u!1 &1645930504510218194
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8713554702748096453}
-  - component: {fileID: 8713554702748096452}
+  - component: {fileID: 1645930504510218195}
+  - component: {fileID: 1645930504510218220}
   m_Layer: 0
-  m_Name: HealP3
+  m_Name: GreatHealP3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8713554702748096453
+--- !u!4 &1645930504510218195
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8713554702748096451}
+  m_GameObject: {fileID: 1645930504510218194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.148554, y: -18.40511, z: -91.99773}
+  m_LocalPosition: {x: 3.032311, y: -3.023276, z: -3.576175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8713554702748096452
+--- !u!114 &1645930504510218220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8713554702748096451}
+  m_GameObject: {fileID: 1645930504510218194}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90a78c1396b83414ea175095fcc07a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultIcon: {fileID: 21300000, guid: 22cf8cbb634a96943b0549f2eac7a9c9, type: 3}
-  selectedIcon: {fileID: 21300000, guid: cb837a71b787d7a48afe8bbd1244fa6a, type: 3}
-  maxCoolDown: 0
+  defaultIcon: {fileID: 21300000, guid: f129a963df1c57e4b8a0cdd77b1b632d, type: 3}
+  selectedIcon: {fileID: 21300000, guid: a96a36836f47d9b49adc38ca32ed83f6, type: 3}
+  maxCoolDown: 3
   correspondingAnimation: 1
   attackType: 2
-  damage: 20
-  name: Heal
+  damage: 100
+  name: Great Heal
   cooldown: 0

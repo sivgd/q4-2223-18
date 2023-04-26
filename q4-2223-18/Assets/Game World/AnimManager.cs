@@ -54,7 +54,9 @@ public class AnimManager : MonoBehaviour
             {
                 case AttackAnim.Heal:
                     StartCoroutine(playAnim(true, recipient,"Heal",.52f));
-
+                    break;
+                case AttackAnim.AttackBoost:
+                    StartCoroutine(playAnim(true, recipient, "Rally", .23f));
                     break;
                 case AttackAnim.Slash:
                     StartCoroutine(playAnim(true, recipient, "Slash", 0.35f));
@@ -104,6 +106,9 @@ public class AnimManager : MonoBehaviour
                     StartCoroutine(playAnim(true, recipient, "Heal", .52f));
                     Debug.Log($"Recipient: {recipient} "); 
                     break;
+                case AttackAnim.AttackBoost:
+                    StartCoroutine(playAnim(true, recipient, "Rally", .23f));
+                    break; 
                 case AttackAnim.EnemyAttack:
                    
                     attacker.attackPlayerAnimation(playerAttacks[recipient].transform, perpetrator, perpetrator.gameObject.GetComponent<SpriteRenderer>().sprite,this,recipient,successful);
@@ -179,5 +184,6 @@ public enum AttackAnim
     MagicDart,
     Miss,
     Block,
-    EnemyAttack
+    EnemyAttack,
+    AttackBoost
 }

@@ -23,7 +23,7 @@ MonoBehaviour:
   maxHealth: 100
   combatSprite: {fileID: 21300000, guid: 29f57bfdf60317941bec489867fe8080, type: 3}
   topDownSprite: {fileID: 21300000, guid: 29f57bfdf60317941bec489867fe8080, type: 3}
-  baseDefense: 3
+  baseDefense: 5
   tempDefenseBoost: 0
   name: Ted Triangle
   tempAttackBoost: 0

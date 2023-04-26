@@ -89,7 +89,7 @@ public class Combat : MonoBehaviour
         for (int i = 0; i < party.Length; i++)
         {
             party[i].HasGoneDuringTurn = false;
-            party[i].TempAttackBoost = 0; 
+           // party[i].TempAttackBoost = 0; 
             for(int a = 0; a < party[i].Attacks.Length; a++)
             {
                 party[i].Attacks[a].Cooldown -= 1; 
@@ -287,13 +287,18 @@ public class Combat : MonoBehaviour
 
                     }
                     party[playerSelected].Health = Mathf.Clamp(party[playerSelected].Health + party[playerIndex].Attacks[attackIndex].Damage, 0, party[playerSelected].maxHealth); /// say goodbye to overheal :(
-                    this.sfxManager.playAttackAudio(4);
+                    sfxManager.playAttackAudio(4);
                     animManager.playAttackAnim(AttackAnim.Heal, true, realPlayerIndex);
                    
                     party[playerIndex].Attacks[attackIndex].resetCoolDown();
                     break;
                 case AttackType.AttackBoost:
-                    party[playerSelected].TempAttackBoost = Mathf.Clamp(party[playerSelected].Health + party[playerIndex].Attacks[attackIndex].Damage, 0, party[playerSelected].maxHealth); /// say goodbye to overheal :(
+                    for (int i = 0; i < party.Length; i++) 
+                    {
+                        party[i].TempAttackBoost = party[playerIndex].Attacks[attackIndex].Damage;
+                        sfxManager.playAttackAudio(4);
+                        animManager.playAttackAnim(AttackAnim.AttackBoost, true, i);
+                    }
                     party[playerIndex].Attacks[attackIndex].resetCoolDown();
                     break;
             }
@@ -301,7 +306,7 @@ public class Combat : MonoBehaviour
             uiMode = UIMODE.none;
             playerSelection = true;
             party[playerIndex].HasGoneDuringTurn = true;
-            this.sfxManager.playAudio(2);
+            sfxManager.playAudio(2);
         }
 
     }
@@ -484,7 +489,7 @@ public class Combat : MonoBehaviour
             {
                 Debug.Log("Attack needs to cooldown!"); 
             }
-            else if(party[playerIndex].Attacks[attackSelected].AttackType == AttackType.Healing)
+            else if(party[playerIndex].Attacks[attackSelected].AttackType == AttackType.Healing || party[playerIndex].Attacks[attackSelected].AttackType == AttackType.AttackBoost )
             {
                 uiMode = UIMODE.playerPartySupport;
                 for (int i = 0; i < maxCardIndex; i++)
@@ -565,6 +570,7 @@ public class Combat : MonoBehaviour
             hasEnemyBeenSelected = true; 
             PlayerAttack.attackWithStats(attackSelected,enemySelected, party[playerIndex], enemies[enemySelected],animManager,sfxManager);
             party[playerIndex].Attacks[attackIndex].resetCoolDown();
+            party[playerIndex].TempAttackBoost = 0; 
             Debug.Log($"{party[playerIndex].name} attacked {enemies[enemySelected].name}");
             uiMode = UIMODE.none;
             playerSelection = true;

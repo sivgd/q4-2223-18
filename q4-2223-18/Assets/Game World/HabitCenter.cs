@@ -19,7 +19,7 @@ public class HabitCenter : MonoBehaviour
         {
             dm.nameBox.text = "";
             dm.gameObject.SetActive(true);
-            dm.changeCurrentDialouge(dialouge, 0.05f, true, TalkerPersonality.narrator);
+            dm.changeCurrentDialouge(dialouge, 0.02f, true, TalkerPersonality.narrator);
              for(int i = 0; i < playerParty.Length; i++)
              {
                 playerParty[i].maxHealth += healthBoost;

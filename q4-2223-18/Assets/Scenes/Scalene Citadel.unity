@@ -225,6 +225,8 @@ MonoBehaviour:
   baseAttack: 1
   attacks:
   - {fileID: 8713554702748096452, guid: 17573927e964d3740bf128d858eb993b, type: 3}
+  - {fileID: 1645930504510218220, guid: f8f7e4adbf1c9d642b15da6f20722465, type: 3}
+  - {fileID: 5629416973854540994, guid: 8b9db556ae602f447af3cd6c89d70034, type: 3}
   tPartyData: {fileID: 543248465}
   sprite: {fileID: 21300000, guid: 7d3702c07ef766c408fec891c03fc406, type: 3}
   habit: {fileID: 8526001852654208827, guid: 5d6930cf6ebce784d91cac1992148a37, type: 3}
