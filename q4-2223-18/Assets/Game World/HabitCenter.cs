@@ -13,20 +13,26 @@ public class HabitCenter : MonoBehaviour
     [TextArea]
     public string[] dialouge = { "You look upon this default unity cube sprite.", "Suddenly you are reminded that you should", "get back to work", "(get to work dummy)", "your stats have increased!"};
     [SerializeField] private bool hasEntered = false;
+    [SerializeField] private bool changeSprite;
+    [SerializeField] private Sprite newSprite; 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!hasEntered)
         {
             dm.nameBox.text = "";
             dm.gameObject.SetActive(true);
-            dm.changeCurrentDialouge(dialouge, 0.02f, true, TalkerPersonality.narrator);
+            dm.changeCurrentDialouge(dialouge, 0.03f, true, TalkerPersonality.narrator);
              for(int i = 0; i < playerParty.Length; i++)
              {
                 playerParty[i].maxHealth += healthBoost;
                 playerParty[i].BaseAttack += attackBoost;
                 playerParty[i].BaseDefense += defenseBoost; 
              }
-            hasEntered = true; 
+            hasEntered = true;
+            if (changeSprite)
+            {
+                GetComponent<SpriteRenderer>().sprite = newSprite; 
+            }
         }
     }
 }

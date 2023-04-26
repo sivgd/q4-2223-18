@@ -47957,6 +47957,10 @@ MonoBehaviour:
   - {fileID: 3112459210943103028, guid: d7522e3cbd42c9b4daa476af5bb66ed8, type: 3}
   - {fileID: 2782049883510846192, guid: 74aca3c4334d22449a37e9f0b9f7af49, type: 3}
   - {fileID: 939227001099353645, guid: 41d0c64a07a89ac4181cfe18a8670f66, type: 3}
+  items:
+  - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
+  - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
+  - {fileID: 8651751607198139085, guid: 094c6ed97cec6da4f921560ff612785a, type: 3}
   tPartyData: {fileID: 457935128}
   sprite: {fileID: 21300000, guid: ad3491115e50ed04297f0680da0c0bfe, type: 3}
   habit: {fileID: 4402348544277925026, guid: ccc2a259837bef4419ceb6679fb8cb5f, type: 3}
@@ -48677,6 +48681,8 @@ MonoBehaviour:
 
     + 10 to max HP. +2 to Attack. + 3 to Defense '
   hasEntered: 0
+  changeSprite: 0
+  newSprite: {fileID: 0}
 --- !u!1 &1553983539
 GameObject:
   m_ObjectHideFlags: 0

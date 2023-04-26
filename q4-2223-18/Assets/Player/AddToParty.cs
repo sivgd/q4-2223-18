@@ -11,6 +11,7 @@ public class AddToParty : MonoBehaviour
     public int baseDefense;
     public int baseAttack;
     public Attack[] attacks;
+    public List<Item> items; 
     public TrackPartyData tPartyData; 
     [Header("Unique identifiers")]
     public Sprite sprite;
@@ -32,6 +33,7 @@ public class AddToParty : MonoBehaviour
                     player.BaseDefense = baseDefense;
                     player.BaseAttack = baseAttack; 
                     player.Attacks = attacks;
+                    player.Items = items; 
                     player.topDownSprite = sprite;
                     player.combatSprite = sprite;
                     player.habit = habit;
