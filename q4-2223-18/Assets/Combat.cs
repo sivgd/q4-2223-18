@@ -18,10 +18,12 @@ public class Combat : MonoBehaviour
     public Transform[] playerPartyTransforms = new Transform[3];
     public Transform[] enemyPartyTransforms = new Transform[3];
     public AnimManager animManager;
-    public SFXManager sfxManager; 
-   
+    public SFXManager sfxManager;
+
 
     [Header("UI References")]
+    public TMP_Text[] pHealthText;
+    public TMP_Text[] eHealthText;
     public TMP_Text playerHealth;
     public TMP_Text playerName;
     public TMP_Text playerHabit; 
@@ -73,13 +75,25 @@ public class Combat : MonoBehaviour
         for (int i = 0; i < playerHealthValues.Length; i++)
         {
             playerHealthValues[i] = party[i].Health;
+            pHealthText[i].text = "HP: " + party[i].Health; 
+            if(party[i].Health > 0)
+            {
+                pHealthText[i].gameObject.SetActive(true); 
+            }
+            else
+            {
+                pHealthText[i].gameObject.SetActive(false);
+            }
         }
         for (int i = 0; i < enemyHealthValues.Length; i++)
         {
             enemyHealthValues[i] = enemies[i].Health;
-            if(enemyHealthValues[i] <= 0)
+            eHealthText[i].text = "HP: " + enemies[i].Health;
+            eHealthText[i].gameObject.SetActive(true);
+            if (enemyHealthValues[i] <= 0)
             {
-                GetComponent<CombatSceneManager>().badGuyRenderers[i].sprite = null; 
+                GetComponent<CombatSceneManager>().badGuyRenderers[i].sprite = null;
+                eHealthText[i].gameObject.SetActive(false); 
             }
         }
     }
@@ -110,6 +124,7 @@ public class Combat : MonoBehaviour
     private void Update()
     {
         updateHealthValues(); 
+        
         if(playerHealthValues[0] <=0 && playerHealthValues[1] <= 0 && playerHealthValues[2] <= 0)
         {
             Application.Quit(); 

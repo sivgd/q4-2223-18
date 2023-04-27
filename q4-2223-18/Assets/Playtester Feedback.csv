@@ -3,10 +3,11 @@ Bug, After winning first battle previous text loops, 1
 Bug, Restarting game after beating it leads to character being in black void, 2
 Bug , Attacking wrong enemy crashes game , 1
 Lack of Feedback , Battles end abruptly , 1
-Lack of Feedback , Show player's health at all times , 1
+Lack of Feedback , Show player's health at all times , 1, Fixed
 Bug , After fighting crops RA text from beginning repeats, 3, Fixed?
 Bug , Invisible enemies (top and bottom) , 1
 Bug , Character Selection broken (cannot select more than two players in battle), 1
 Bug , Can skip tutorial, 1, Fixed
 Bug , After combat player can reuse habit centers infinitely , 1, Fixed
 Lack of Feedback, When the player dies the game crashes, everyone lol, TBD
+Gameplay Changes, Stop player from attacking when enemy is attacking, 1
