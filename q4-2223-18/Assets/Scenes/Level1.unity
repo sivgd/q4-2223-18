@@ -2634,13 +2634,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9174791533000124013, guid: a574ac119444b55479a0417aea6dd88e, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174791533000124013, guid: a574ac119444b55479a0417aea6dd88e, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174791533000124013, guid: a574ac119444b55479a0417aea6dd88e, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9174791533000124015, guid: a574ac119444b55479a0417aea6dd88e, type: 3}
       propertyPath: m_Name
       value: Dialouge
       objectReference: {fileID: 0}
     - target: {fileID: 9174791533000124015, guid: a574ac119444b55479a0417aea6dd88e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9174791533000124016, guid: a574ac119444b55479a0417aea6dd88e, type: 3}
       propertyPath: dialouge.Array.size
@@ -2931,6 +2943,7 @@ MonoBehaviour:
   secondCutscenePrompt: {fileID: 0}
   combatManager: {fileID: 0}
   pData: {fileID: 0}
+  soundtrack: {fileID: 0}
 --- !u!1 &1892092687 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9174791533000124015, guid: a574ac119444b55479a0417aea6dd88e, type: 3}
