@@ -31,7 +31,7 @@ public class Combat : MonoBehaviour
     public GameObject[] attackCooldownBoxes;
    
 
-
+    [Header("Preferences")]
 
     [Header("DEBUG")]
    // [SerializeField] private int turn = 1;

@@ -7,14 +7,23 @@ public class HabitCenter : MonoBehaviour
    
     public Player[] playerParty;
     public DialougeManager dm;
+    public PersistantEntityData eData; 
     public int healthBoost;
     public int attackBoost;
     public int defenseBoost;
+    [SerializeField] private int id; 
     [TextArea]
     public string[] dialouge = { "You look upon this default unity cube sprite.", "Suddenly you are reminded that you should", "get back to work", "(get to work dummy)", "your stats have increased!"};
     [SerializeField] private bool hasEntered = false;
     [SerializeField] private bool changeSprite;
-    [SerializeField] private Sprite newSprite; 
+    [SerializeField] private Sprite newSprite;
+    private void Start()
+    {
+        if (eData.hasEntity(id))
+        {
+            hasEntered = true; 
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!hasEntered)
@@ -33,6 +42,7 @@ public class HabitCenter : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().sprite = newSprite; 
             }
+            eData.addEntity(id); 
         }
     }
 }

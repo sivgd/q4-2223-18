@@ -6395,9 +6395,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d94f1465ad0872f4a8bf0ee4aaec818b, type: 2}
   - {fileID: 11400000, guid: c4f36b4ce42cfeb4f833db84d7c2a593, type: 2}
   dm: {fileID: 694569831}
+  eData: {fileID: 11400000, guid: 0fe43040625e8ee42a056f1247e45ace, type: 2}
   healthBoost: 10
   attackBoost: 2
   defenseBoost: 3
+  id: 42069
   dialouge:
   - 'As you look upon this pile of books strewn across the floor you are reminded
     of your family''s proud tradition of bookkeeping. '

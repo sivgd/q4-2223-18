@@ -77,10 +77,10 @@ public class PlayerMovement : MonoBehaviour
             left = false;
             right = false;
         }
-        if(!up && !down && !left && !right)
+       /* if(!up && !down && !left && !right)
         {
             //direction = dir.none; 
-        }
+        }*/
         /* debugRay.origin = transform.position; 
          Debug.DrawRay(debugRay.origin, debugRay.direction * moveIncrement, Color.red);
          if (checkForValidPath(direction))
@@ -93,14 +93,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        if (dm.FreezePlayer)
-        {
-            up = false;
-            down = false;
-            left = false;
-            right = false;
-        }
-        else if (!canMove)
+       
+        if (!canMove || dm.FreezePlayer)
         {
             up = false;
             down = false;

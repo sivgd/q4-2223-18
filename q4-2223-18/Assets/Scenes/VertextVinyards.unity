@@ -47351,7 +47351,7 @@ GameObject:
   - component: {fileID: 1052958037}
   m_Layer: 0
   m_Name: TaxMan
-  m_TagString: Untagged
+  m_TagString: TaxMan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48160,7 +48160,7 @@ PrefabInstance:
       objectReference: {fileID: 1973272911}
     - target: {fileID: 3110176821767392397, guid: 582395838d836d84a9f80580fc4e2342, type: 3}
       propertyPath: canMove
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3110176821767392398, guid: 582395838d836d84a9f80580fc4e2342, type: 3}
       propertyPath: m_Name
@@ -48669,9 +48669,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d94f1465ad0872f4a8bf0ee4aaec818b, type: 2}
   - {fileID: 11400000, guid: c4f36b4ce42cfeb4f833db84d7c2a593, type: 2}
   dm: {fileID: 1973272911}
+  eData: {fileID: 11400000, guid: 0fe43040625e8ee42a056f1247e45ace, type: 2}
   healthBoost: 10
   attackBoost: 2
   defenseBoost: 3
+  id: 1337
   dialouge:
   - As you sit on the dock, you notice the fish swimming beneath the water.
   - As you study the fish, you begin to understand the complex battle tactics that
@@ -53204,6 +53206,10 @@ PrefabInstance:
       propertyPath: combatManager
       value: 
       objectReference: {fileID: 1486522899}
+    - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 1432414983}
     - target: {fileID: 4708670598313088517, guid: 082f3216e92012942acaeec6aa4bdfb5, type: 3}
       propertyPath: secondCutscene
       value: 1

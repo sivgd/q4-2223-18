@@ -76,7 +76,7 @@ public class CombatSceneManager : MonoBehaviour
                 case 1:
                     StopAllCoroutines();
                     tutorialText.text = "";           
-                    StartCoroutine(typeWriterText("Before we get started you need to select a player.\nYou can do so using the arrow keys to move the cursor, and pressing enter on the player you want to select.", 0.03f));
+                    StartCoroutine(typeWriterText("Before we get started you need to select a player.\nYou can do so using the arrow keys to move the cursor, and pressing enter on the player you want to select.\n[Select a player to continue]", 0.03f));
                     isWriting = true;
                     break;
                 case 2:
@@ -101,13 +101,13 @@ public class CombatSceneManager : MonoBehaviour
                 case 5:
                     StopAllCoroutines();
                     tutorialText.text = "";
-                    StartCoroutine(typeWriterText("Try attacking an enemy. You can do so by entering the combat menu and selecting what attack you want to use.", 0.03f));
+                    StartCoroutine(typeWriterText("Try attacking an enemy. You can do so by entering the attack menu and selecting what attack you want to use.\n[Select an attack to continue]", 0.03f));
                     isWriting = true;
                     break;
                 case 6:
                     StopAllCoroutines();
                     tutorialText.text = "";
-                    StartCoroutine(typeWriterText("Now select what enemy you would like to attack by using the arrow keys, and hit enter when you are ready to perform your attack", 0.03f));
+                    StartCoroutine(typeWriterText("Now select what enemy you would like to attack by using the arrow keys, and hit enter when you are ready to perform your attack.\n[Attack an enemy to continue]", 0.03f));
                     isWriting = true;
                     break;
                 case 7:

@@ -38,8 +38,11 @@ public class StatScreen : MonoBehaviour
             panelActive = !panelActive; 
             listNames = true;
             showStats = false;
+            panel.SetActive(panelActive);
+            playerMovement.canMove = !panelActive;
             if (panelActive) sfx.playAudio(2);
-            else sfx.playAudio(3);            
+            else sfx.playAudio(3);      
+            
         }
         if (!panelActive)
         {
@@ -80,8 +83,7 @@ public class StatScreen : MonoBehaviour
                 }
             }
         }
-        panel.SetActive(panelActive);
-        playerMovement.canMove = !panelActive; 
+        
     }
     private void readPartyData()
     {
