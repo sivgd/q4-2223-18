@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PartyData
   m_EditorClassIdentifier: 
   isCombatTutorial: 0
-  loadPreviousPos: 0
-  previousSceneName: 
+  loadPreviousPos: 1
+  defeatedTaxMan: 0
+  previousSceneName: VertextVinyards
   playerMoveSpeed: 0
   playerPosition: {x: 0, y: 0}
   playerRotation: {x: 0, y: 0, z: 0, w: 0}

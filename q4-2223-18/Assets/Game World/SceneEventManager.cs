@@ -41,7 +41,7 @@ public class SceneEventManager : MonoBehaviour
             dManager.changeCurrentDialouge(new string[] { "TED TRIANGLE!", "ITS THE FIRST OF THE MONTH!", "PAY YOUR MANDATORY TITHE" }, 0.03f, true,TalkerPersonality.stupid);
             firstCutscene = false;
         }
-        if (secondCutscene && taxManData != null)
+        if (secondCutscene && taxManData != null && !pData.defeatedTaxMan)
         {
             StartCoroutine(SecondCutscene());
             canPlayerMove = false;
@@ -59,6 +59,7 @@ public class SceneEventManager : MonoBehaviour
     private IEnumerator SecondCutscene()
     {
         dObj.SetActive(true);
+       
         secondCutscene = false; 
         soundtrack.enabled = false;
         //yield return new WaitUntil(() => dObj.activeInHierarchy);
@@ -74,6 +75,7 @@ public class SceneEventManager : MonoBehaviour
         Debug.Log("Enter combat tutorial");
         pData.isCombatTutorial = true;
         soundtrack.enabled = true;
+        pData.defeatedTaxMan = true;
         playerMovement.canMove = true; 
         combatManager.enterCombat(new IndividualEntityData[] { taxManData }, true);
 
