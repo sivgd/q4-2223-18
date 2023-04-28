@@ -10,7 +10,8 @@ public class AnimManager : MonoBehaviour
     public AttackPlayer attacker;
     private List<Action> animationQueue;
     private bool playingQueue;
-    public bool animationFinished = false; 
+    public bool animationFinished = false;
+   // public bool queueEmpty = true; 
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class AnimManager : MonoBehaviour
     private void Update()
     {
         animationFinished = attacker.animFinished;
+       
         if (animationFinished)
         {
             Debug.Log("Animation finished"); 

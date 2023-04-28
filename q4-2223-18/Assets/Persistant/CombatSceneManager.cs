@@ -220,4 +220,8 @@ public class CombatSceneManager : MonoBehaviour
         isWriting = false;
         isWritingFinished = true; 
     }
+    public static void loadDeathScene() 
+    {
+        SceneManager.LoadScene("DeathScreen"); 
+    }
 }

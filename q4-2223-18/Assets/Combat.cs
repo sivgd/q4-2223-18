@@ -127,15 +127,19 @@ public class Combat : MonoBehaviour
         
         if(playerHealthValues[0] <=0 && playerHealthValues[1] <= 0 && playerHealthValues[2] <= 0)
         {
-            Application.Quit(); 
+            CombatSceneManager.loadDeathScene(); 
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Keypad0))
         {
             party[0].BaseAttack = 100; 
         }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            enemies[0].BaseAttack = 100; 
+        }
         if(enemyHealthValues[0] > 0 || enemyHealthValues[1] > 0 || enemyHealthValues[2] > 0 )
         {
-            if (turn == Turn.player)
+            if (turn == Turn.player && animManager.animationFinished)
             {
                 /// if all players have gone during the turn then progress the turn
                 if ((party[0].HasGoneDuringTurn || party[0].Health <= 0) && (party[1].HasGoneDuringTurn || party[1].Health <= 0) && (party[2].HasGoneDuringTurn || party[2].Health <= 0))

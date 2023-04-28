@@ -30,4 +30,8 @@ public class MenuFunctions : MonoBehaviour
         creditStuff.SetActive(false);
         nonCreditButtons.SetActive(true); 
     }
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("TitleCard");
+    }
 }
