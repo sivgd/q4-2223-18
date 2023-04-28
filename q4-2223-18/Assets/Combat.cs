@@ -129,13 +129,17 @@ public class Combat : MonoBehaviour
         {
             CombatSceneManager.loadDeathScene(); 
         }
-        if (Input.GetKeyDown(KeyCode.Keypad0))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             party[0].BaseAttack = 100; 
         }
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            enemies[0].BaseAttack = 100; 
+            for(int i = 0; i < party.Length; i++)
+            {
+                enemies[0].BaseAttack = 100; 
+            }
+           // updateHealthValues(); 
         }
         if(enemyHealthValues[0] > 0 || enemyHealthValues[1] > 0 || enemyHealthValues[2] > 0 )
         {
