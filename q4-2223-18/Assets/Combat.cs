@@ -328,7 +328,7 @@ public class Combat : MonoBehaviour
                 case AttackType.TeamHeal:
                     for (int i = 0; i < party.Length; i++)
                     {
-                        party[i].TempAttackBoost = party[playerIndex].Attacks[attackIndex].Damage;
+                        party[i].Health = Mathf.Clamp(party[i].Health+ party[playerIndex].Attacks[attackIndex].Damage,0,party[i].maxHealth);
                         sfxManager.playAttackAudio(4);
                         animManager.playAttackAnim(AttackAnim.Heal, true, i);
                     }
