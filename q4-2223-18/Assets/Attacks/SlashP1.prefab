@@ -50,4 +50,4 @@ MonoBehaviour:
   attackType: 0
   damage: 20
   name: Slash
-  cooldown: 2
+  cooldown: 0

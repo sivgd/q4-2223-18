@@ -35,5 +35,6 @@ public enum AttackType
     Physical,
     Magic,
     Healing,
-    AttackBoost
+    AttackBoost,
+    TeamHeal
 }

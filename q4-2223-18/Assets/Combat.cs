@@ -312,7 +312,7 @@ public class Combat : MonoBehaviour
                     party[playerSelected].Health = Mathf.Clamp(party[playerSelected].Health + party[playerIndex].Attacks[attackIndex].Damage, 0, party[playerSelected].maxHealth); /// say goodbye to overheal :(
                     sfxManager.playAttackAudio(4);
                     animManager.playAttackAnim(AttackAnim.Heal, true, realPlayerIndex);
-                   
+                    party[playerIndex].HasGoneDuringTurn = true;
                     party[playerIndex].Attacks[attackIndex].resetCoolDown();
                     break;
                 case AttackType.AttackBoost:
@@ -323,12 +323,22 @@ public class Combat : MonoBehaviour
                         animManager.playAttackAnim(AttackAnim.AttackBoost, true, i);
                     }
                     party[playerIndex].Attacks[attackIndex].resetCoolDown();
+                    party[playerIndex].HasGoneDuringTurn = true;
+                    break;
+                case AttackType.TeamHeal:
+                    for (int i = 0; i < party.Length; i++)
+                    {
+                        party[i].TempAttackBoost = party[playerIndex].Attacks[attackIndex].Damage;
+                        sfxManager.playAttackAudio(4);
+                        animManager.playAttackAnim(AttackAnim.Heal, true, i);
+                    }
+                    party[playerIndex].Attacks[attackIndex].resetCoolDown();
+                    party[playerIndex].HasGoneDuringTurn = true;
                     break;
             }
             Debug.Log($"{party[playerSelected].Name} was healed by {party[playerIndex].Name}");
             uiMode = UIMODE.none;
-            playerSelection = true;
-            party[playerIndex].HasGoneDuringTurn = true;
+            playerSelection = true; 
             sfxManager.playAudio(2);
         }
 
