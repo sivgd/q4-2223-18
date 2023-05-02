@@ -5690,7 +5690,7 @@ MonoBehaviour:
   eData: {fileID: 11400000, guid: 0fe43040625e8ee42a056f1247e45ace, type: 2}
   name: Right Angle Guard
   id: 3264
-  health: 100
+  health: 200
   attack: 15
   level: 1
   markedForDeath: 0
@@ -5821,8 +5821,8 @@ MonoBehaviour:
   eData: {fileID: 11400000, guid: 0fe43040625e8ee42a056f1247e45ace, type: 2}
   name: Prince Parallelogram
   id: 10101
-  health: 200
-  attack: 5
+  health: 400
+  attack: 15
   level: 2
   markedForDeath: 0
 --- !u!61 &995873943

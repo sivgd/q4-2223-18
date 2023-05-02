@@ -174,7 +174,7 @@ public class StatScreen : MonoBehaviour
         string habitType = (pSelected.habit.habitType == HabitType.Defender) ? "defense" : pSelected.habit.habitType.ToString() + " attacks"; 
         habitDescription.text = pSelected.habit.explanation + "\n" + (pSelected.habit.Boost * 100) + "% boost to " + habitType;
         hpBoost.text = "";
-        defenseBoost.text = (habitType.Contains("defense")) ? "+" + ((pSelected.BaseDefense * (1 + pSelected.habit.Boost)) - pSelected.BaseDefense) : " ";
+        defenseBoost.text = (habitType.Contains("defense")) ? "+" + (pSelected.habit.Boost * 100) + "% boost to Defense" : " ";
         attackBoost.text = (habitType.Contains("defense")) ? "" :"+" + pSelected.habit.Boost * 100 + "% to " + pSelected.habit.habitType.ToString().ToLower() + " attacks";
 
     }
