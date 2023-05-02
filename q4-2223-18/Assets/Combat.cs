@@ -43,13 +43,13 @@ public class Combat : MonoBehaviour
     [SerializeField] private int combatButtonSelected = 2;
     [SerializeField] private int itemSelected = 0; 
     [SerializeField] private int enemySelected = 0; 
-    [SerializeField] private int enemyPosSelected = 0; 
+    [SerializeField] private int enemyPosSelected = 1; 
     [SerializeField] private int attackSelected = 0;
     [SerializeField] private Turn turn = Turn.player; 
     [SerializeField] private UIMODE uiMode = UIMODE.none;
     public bool playerHasBeenSelected = false;
     public bool hasAttackBeenSelected = false;
-    public bool hasEnemyBeenSelected = false; 
+    public bool hasEnemyBeenSelected = true; 
 
     public UIMODE UiMode { get => uiMode; set => uiMode = value; }
     public int PlayerSelected { get => playerSelected; set => playerSelected = value; }
@@ -552,17 +552,7 @@ public class Combat : MonoBehaviour
     /// <param name="attackIndex"></param> the index of the attack that the player is performing 
     private void playerAttackEnemyMode(int playerIndex, int attackIndex)
     {
-        if (hasEnemyBeenSelected)
-        {
-            for(int i = 0; i < enemyPartyTransforms.Length; i++)
-            {
-                if (enemyPartyTransforms[i].GetComponent<SpriteRenderer>().sprite != null)
-                {
-                    enemyPosSelected = i;
-                    break; 
-                }
-            }
-        }
+       
         hasEnemyBeenSelected = false; 
         selectionCursor.SetActive(true);
         
