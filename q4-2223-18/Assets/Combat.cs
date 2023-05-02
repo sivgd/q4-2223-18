@@ -556,13 +556,28 @@ public class Combat : MonoBehaviour
         selectionCursor.SetActive(true);
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            enemyPosSelected = Mathf.Clamp(enemyPosSelected - 1, 0, 2);
-            sfxManager.playAudio(1);
+            if(enemyPartyTransforms[Mathf.Clamp(enemyPosSelected - 1, 0, 2)].GetComponent<SpriteRenderer>().sprite != null)
+            {
+                enemyPosSelected = Mathf.Clamp(enemyPosSelected - 1, 0, 2);
+                sfxManager.playAudio(1);
+            }
+            else
+            {
+                sfxManager.playAudio(3); 
+            }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            enemyPosSelected = Mathf.Clamp(enemyPosSelected + 1, 0, 2);
-            this.sfxManager.playAudio(1);
+            if (enemyPartyTransforms[Mathf.Clamp(enemyPosSelected + 1, 0, 2)].GetComponent<SpriteRenderer>().sprite != null)
+            {
+                enemyPosSelected = Mathf.Clamp(enemyPosSelected + 1, 0, 2);
+                sfxManager.playAudio(1);
+            }
+            else
+            {
+                sfxManager.playAudio(3);
+            }
+            
         }
         switch (enemyPosSelected)
         {
