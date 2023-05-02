@@ -522,7 +522,7 @@ public class Combat : MonoBehaviour
             {
                 Debug.Log("Attack needs to cooldown!"); 
             }
-            else if(party[playerIndex].Attacks[attackSelected].AttackType == AttackType.Healing || party[playerIndex].Attacks[attackSelected].AttackType == AttackType.AttackBoost )
+            else if(party[playerIndex].Attacks[attackSelected].AttackType == AttackType.Healing || party[playerIndex].Attacks[attackSelected].AttackType == AttackType.AttackBoost || party[playerIndex].Attacks[attackSelected].AttackType == AttackType.TeamHeal)
             {
                 uiMode = UIMODE.playerPartySupport;
                 for (int i = 0; i < maxCardIndex; i++)
