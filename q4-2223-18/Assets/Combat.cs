@@ -552,8 +552,20 @@ public class Combat : MonoBehaviour
     /// <param name="attackIndex"></param> the index of the attack that the player is performing 
     private void playerAttackEnemyMode(int playerIndex, int attackIndex)
     {
+        if (hasEnemyBeenSelected)
+        {
+            for(int i = 0; i < enemyPartyTransforms.Length; i++)
+            {
+                if (enemyPartyTransforms[i].GetComponent<SpriteRenderer>().sprite != null)
+                {
+                    enemyPosSelected = i;
+                    break; 
+                }
+            }
+        }
         hasEnemyBeenSelected = false; 
         selectionCursor.SetActive(true);
+        
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if(enemyPartyTransforms[Mathf.Clamp(enemyPosSelected - 1, 0, 2)].GetComponent<SpriteRenderer>().sprite != null)
