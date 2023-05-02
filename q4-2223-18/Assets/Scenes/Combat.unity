@@ -635,8 +635,8 @@ MonoBehaviour:
   sfxManager: {fileID: 1368680806}
   pHealthText:
   - {fileID: 336265232}
-  - {fileID: 1369407789}
   - {fileID: 217306949}
+  - {fileID: 1369407789}
   eHealthText:
   - {fileID: 645601557}
   - {fileID: 1758183403}
